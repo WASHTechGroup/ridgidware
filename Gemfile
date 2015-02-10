@@ -32,6 +32,8 @@ gem 'bootstrap-will_paginate', '0.0.9'
 # User authentication for the site that uses the 
 gem 'devise', github: 'plataformatec/devise'
 gem 'devise_cas_authenticatable'
+# friendly_id is an awesom gem to slug objects in the database
+gem 'friendly_id', '~> 5.1.0'
 
 
 # Use ActiveModel has_secure_password

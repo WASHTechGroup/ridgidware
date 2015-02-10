@@ -110,6 +110,8 @@ GEM
       railties (>= 3.0.0)
     ffi (1.9.6)
     ffi (1.9.6-x64-mingw32)
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
     globalid (0.3.2)
@@ -241,6 +243,7 @@ DEPENDENCIES
   devise!
   devise_cas_authenticatable
   factory_girl_rails (= 4.2.0)
+  friendly_id (~> 5.1.0)
   jbuilder (~> 2.0)
   jquery-rails
   libnotify (= 0.8.0)
