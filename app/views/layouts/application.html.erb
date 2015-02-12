@@ -5,10 +5,19 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= render "layouts/shim" %>
 </head>
 <body>
 
-<%= yield %>
+	<!-- The header for the main site -->
+	<%= render "layouts/header" %>
+	
+	<div class="container"> 
+		<%= yield %>
+	</div>
+
+	<!-- The footer for the main site -->
+	<%= render "layouts/footer" %>
 
 </body>
 </html>
