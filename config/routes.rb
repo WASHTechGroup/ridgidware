@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :parts
+
   devise_for :users
   # Routes the to the homepage
   resources :users

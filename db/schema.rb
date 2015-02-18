@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212192342) do
+ActiveRecord::Schema.define(version: 20150218191706) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20150212192342) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "parts", force: :cascade do |t|
+    t.integer  "part_no",         limit: 4,   null: false
+    t.string   "description",     limit: 255
+    t.float    "price",           limit: 24
+    t.float    "cost",            limit: 24
+    t.string   "defaultsupplier", limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",       limit: 255
