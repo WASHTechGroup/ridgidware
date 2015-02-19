@@ -1,0 +1,31 @@
+<% provide(:title, "Edit User") %>
+<h1>Update your Profile</h1>
+
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<%= form_for(@user) do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
+
+				<%= f.label :firstname %>
+				<%= f.text_field :firstname, :class => "form-control", :value => @user.firstname %>
+
+				<%= f.label :lastname %>
+				<%= f.text_field :lastname, :class => "form-control", :value => @user.firstname %>
+
+				<%= f.label :email %>
+				<%= f.text_field :email, :class => "form-control", :value => @user.email %>
+
+				<%= f.label :phonenumber %>
+				<%= f.text_field :phonenumber, :class => "form-control", :value => @user.phonenumber %>
+
+				<%= f.label :major %>
+				<%= f.collection_select(:major, Program.all, :id, :name, :class => "form-control") %>
+				<br>
+				<%= f.label :year %>
+				<%= f.text_field :year, :class => "form-control" %>
+
+				<%= f.submit "Save Changes", :class => "btn btn-large btn-primary" %>
+		<% end %>
+		<%= link_to 'Back', @user, :class => "btn btn-large btn-danger" %>
+	</div>
+</div>
