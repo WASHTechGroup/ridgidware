@@ -18,9 +18,25 @@ class User < ActiveRecord::Base
 
   before_create :set_default_role
 
+  def self.student?
+    self.role == Role.find_by_name('Student')
+  end
+
+  def self.admin?
+    self.role == Role.find_by_name('Admin')
+  end
+
+  def self.staff?
+    self.role == Role.find_by_name('Staff')
+  end
+
+  def self.manager?
+    self.role == Role.find_by_name('Manager')
+  end
+
   private
 
-  def set_default_role 
-  	self.role ||= Role.find_by_name('Student') 
-  end
+    def set_default_role 
+    	self.role ||= Role.find_by_name('Student') 
+    end
 end
