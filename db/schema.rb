@@ -27,10 +27,11 @@ ActiveRecord::Schema.define(version: 20150218215620) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "inventories", force: :cascade do |t|
-    t.integer  "part_no",      limit: 4, null: false
+    t.integer  "part_id",      limit: 4, null: false
     t.integer  "on_hand",      limit: 4
     t.integer  "on_order",     limit: 4
     t.integer  "on_hold",      limit: 4
+    t.integer  "available",    limit: 4
     t.integer  "inv_position", limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -38,7 +39,7 @@ ActiveRecord::Schema.define(version: 20150218215620) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "order_no",             limit: 4
-    t.integer  "part_no",              limit: 4
+    t.string   "part_number",          limit: 255
     t.integer  "order_quantity",       limit: 4
     t.float    "unit_cost",            limit: 24
     t.float    "cost",                 limit: 24
@@ -47,19 +48,21 @@ ActiveRecord::Schema.define(version: 20150218215620) do
     t.float    "total",                limit: 24
     t.integer  "quantity_received",    limit: 4
     t.integer  "quantity_backordered", limit: 4
-    t.string   "comment",              limit: 255
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.text     "comment",              limit: 65535
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "parts", force: :cascade do |t|
-    t.integer  "part_no",         limit: 4,   null: false
-    t.string   "description",     limit: 255
-    t.float    "price",           limit: 24
-    t.float    "cost",            limit: 24
-    t.string   "defaultsupplier", limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "part_number",      limit: 255,   null: false
+    t.text     "description",      limit: 65535
+    t.string   "manufacturer",     limit: 255
+    t.string   "mfg_part_no",      limit: 255
+    t.float    "price",            limit: 24
+    t.float    "cost",             limit: 24
+    t.string   "default_supplier", limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "roles", force: :cascade do |t|
