@@ -46,8 +46,9 @@ ActiveRecord::Schema.define(version: 20150215214316) do
     t.string  "lastname",    limit: 255
     t.string  "email",       limit: 255
     t.string  "phonenumber", limit: 255
-    t.integer "major",       limit: 4
-    t.string  "year",        limit: 255
+    t.integer "program",     limit: 4
+    t.string  "term",        limit: 255
+    t.integer "year",        limit: 4
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
