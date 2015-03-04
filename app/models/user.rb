@@ -32,8 +32,16 @@ class User < ActiveRecord::Base
     self.role == Role.find_by_name('Admin')
   end
 
+  def ordering_officer?
+    self.role == Role.find_by_name('Ordering Officer')
+  end
+
   def staff?
     self.role == Role.find_by_name('Staff')
+  end
+
+  def vpfin?
+    self.role == Role.find_by_name('VPFin')
   end
 
   def manager?
