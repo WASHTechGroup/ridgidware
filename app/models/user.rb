@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   YEAR_REGEX = /\A[1-4][A-B]\Z/
   PHONE_REGEX = /\A[0-9]{10}|([0-9]{3})-[0-9]{3}-[0-9]{4}|\Z/
 
+  validates :username, presence: true 
   validates :term,  allow_nil: true,
                     length: { maximum: 2 }, 
                     format: { with: YEAR_REGEX }
@@ -23,19 +24,27 @@ class User < ActiveRecord::Base
                           length: { maximum: 10 },
                           format: { with: PHONE_REGEX }
 
-  def self.student?
+  def student?
     self.role == Role.find_by_name('Student')
   end
 
-  def self.admin?
+  def admin?
     self.role == Role.find_by_name('Admin')
   end
 
-  def self.staff?
+  def ordering_officer?
+    self.role == Role.find_by_name('Ordering Officer')
+  end
+
+  def staff?
     self.role == Role.find_by_name('Staff')
   end
 
-  def self.manager?
+  def vpfin?
+    self.role == Role.find_by_name('VPFin')
+  end
+
+  def manager?
     self.role == Role.find_by_name('Manager')
   end
 

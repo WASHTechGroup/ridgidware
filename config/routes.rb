@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
+  # User resources and 
   devise_for :users
-  # Routes the to the homepage
   resources :users
+  match '/users/add_user',    to: 'users#add_user',    via: 'post', as: 'add_user'
+  match '/users/remove_user', to: 'users#remove_user', via: 'post', as: 'remove_user'
+  match '/users/update_role', to: 'users#update_role', via: 'post', as: 'update_role'
+
+  # Routes the to the homepage and static pages
   root 'static_pages#home'
   match '/help',    to: 'static_pages#help',    via: 'get'
   match '/about',   to: 'static_pages#about',   via: 'get'
+
+  # Routing for the admin  pages
+  match '/admin', to: 'admin#index', via: 'get', as: 'admin'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
