@@ -1,0 +1,103 @@
+<div class="row">
+	<div class="col-sm-6">
+		<div calss="row">
+			<div class="col-sm-8">
+				<div class="panel panel-default">
+					<div class="panel-heading"><h3>Reports</h3></div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-xs-6">
+								<div id="daily-sales-button" class="button-frame vert-space">
+									Daily Sales
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div id="weekly-sales-button" class="button-frame vert-space">
+									Weekly Sales
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div id="monthly-sales-button" class="button-frame vert-space">
+									Monthly Sales
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div id="quarterly-sales-button" class="button-frame vert-space">
+									Quarterly Sales
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div id="annual-sales-button" class="button-frame vert-space">
+									Annual Sales 
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div id="audit-button" class="button-frame vert-space">
+									Audit
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div id="PO-button" class="button-frame vert-space">
+									PO
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div id="inventory-button" class="button-frame vert-space">
+									Inventory
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div id="add-sku-button" class="button-frame vert-space">
+					Add SKU
+				</div>
+				<div id="remove-sku-button" class="button-frame vert-space">
+					Remove SKU
+				</div>
+				<div id="manage-users-button" class="button-frame vert-space" onclick="goto('<%= users_path%>')">
+					Manage Users
+				</div>
+				<div id="pos-button" class="button-frame vert-space">
+					POS
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	<div class="col-sm-6">
+		<div id="catalog">
+			<!-- Partial for the catalog -->
+		</div>
+		<div>
+
+			<div class="row">
+				<div class="col-sm-3">
+					<div id="manage-suppliers-button" class="button-frame">
+						Manage Supplier
+					</div>
+				</div> 
+				<div id="recive-order-button" class="col-xs-3">
+					<div class="button-frame">
+						Recive Order
+					</div>
+				</div> 
+				<div id="place-order-button" class="col-xs-3">
+					<div class="button-frame">
+						Place Order
+					</div>
+				</div> 
+				<div id="manage-order-button" class="col-xs-3">
+					<div class="button-frame">
+						Manage Order
+					</div>
+				</div> 
+
+			</div>
+		</div>
+	</div>
+</div>

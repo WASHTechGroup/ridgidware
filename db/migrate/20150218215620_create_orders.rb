@@ -11,7 +11,7 @@ class CreateOrders < ActiveRecord::Migration
     	t.float		:total
     	t.integer	:quantity_received
     	t.integer	:quantity_backordered
-    	t.text	:comment
+    	t.string	:comment
       t.timestamps null: false
     end
   end

@@ -7,5 +7,4 @@ class Part < ActiveRecord::Base
 	validates :default_supplier, presence: true
 
 	has_one :inventory
-	
 end
