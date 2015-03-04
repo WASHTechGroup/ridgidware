@@ -5,8 +5,8 @@ class CreateParts < ActiveRecord::Migration
     	t.text :description
       t.string :manufacturer
       t.string :mfg_part_no
+      t.string :category
     	t.float :price
-    	t.float :cost
     	t.string :default_supplier
       t.timestamps null: false
     end
