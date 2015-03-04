@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150215214316) do
+ActiveRecord::Schema.define(version: 20150219162948) do
+
+  create_table "carts", force: :cascade do |t|
+    t.string   "owner",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false
@@ -26,6 +32,58 @@ ActiveRecord::Schema.define(version: 20150215214316) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "holds", force: :cascade do |t|
+    t.integer  "cart_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.boolean  "paid",       limit: 1
+    t.boolean  "void",       limit: 1
+  end
+
+  create_table "inventories", force: :cascade do |t|
+    t.integer  "part_no",      limit: 4, null: false
+    t.integer  "on_hand",      limit: 4
+    t.integer  "on_order",     limit: 4
+    t.integer  "on_hold",      limit: 4
+    t.integer  "inv_position", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "order_no",             limit: 4
+    t.integer  "part_no",              limit: 4
+    t.integer  "order_quantity",       limit: 4
+    t.float    "unit_cost",            limit: 24
+    t.float    "cost",                 limit: 24
+    t.float    "subtotal",             limit: 24
+    t.float    "tax",                  limit: 24
+    t.float    "total",                limit: 24
+    t.integer  "quantity_received",    limit: 4
+    t.integer  "quantity_backordered", limit: 4
+    t.string   "comment",              limit: 255
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  create_table "parts", force: :cascade do |t|
+    t.integer  "part_no",         limit: 4,   null: false
+    t.string   "description",     limit: 255
+    t.float    "price",           limit: 24
+    t.float    "cost",            limit: 24
+    t.string   "defaultsupplier", limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  create_table "parts_in_carts", force: :cascade do |t|
+    t.integer  "cart_id",            limit: 4, null: false
+    t.integer  "part_id",            limit: 4, null: false
+    t.integer  "quantity_requested", limit: 4, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
   create_table "programs", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
@@ -36,6 +94,17 @@ ActiveRecord::Schema.define(version: 20150215214316) do
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "cart_id",      limit: 4,                null: false
+    t.decimal  "subtotal",               precision: 10
+    t.decimal  "tax",                    precision: 10
+    t.decimal  "total",                  precision: 10
+    t.decimal  "amount_given",           precision: 10
+    t.decimal  "change",                 precision: 10
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   create_table "users", force: :cascade do |t|

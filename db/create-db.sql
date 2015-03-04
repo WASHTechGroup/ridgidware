@@ -1,0 +1,3 @@
+CREATE DATABASE ridgidware_development;
+CREATE DATABASE ridgidware_production;
+CREATE DATABASE ridgidware_test;
