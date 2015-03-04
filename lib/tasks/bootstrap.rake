@@ -21,7 +21,7 @@ namespace :bootstrap do
 
 	desc "Add default roles"
 	task :load_roles => :environment do
-		['Admin', 'Manager', 'Staff', 'Student'].each do |r|
+		['Admin', 'Manager', 'Staff', "Ordering Officer", "VPFin", 'Student'].each do |r|
 			Role.find_or_create_by({name: r})
 		end		
 	end
