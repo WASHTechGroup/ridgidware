@@ -30,8 +30,9 @@ class TransactionsController < ApplicationController
       part = Part.find_by(inCart.part_id)
       @subtotal += (inCart.quantity_requested*part.price)
     end
-    @tax = @subtotal*0.15
+    @tax = @subtotal*0.13
     @total = @subtotal+@tax
+    ## Round to the nearest 5 cents 
   end
 
   # PATCH/PUT /transactions/1
