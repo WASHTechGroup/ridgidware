@@ -1,0 +1,34 @@
+<% provide(:title, "Edit User") %>
+<!--h1>Update your Profile</h1-->
+
+<div class="row">
+	<div class="col-md-6">
+		<%= form_for @user do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
+				<div>
+					<%= f.label :firstname%>
+					<%= f.text_field :firstname, :value => @user.firstname %><br>
+					<%= f.label :lastname, :class => "" %>
+					<%= f.text_field :lastname, :value => @user.lastname %><br>
+					<%= f.label :email, :class => "" %>
+					<%= f.text_field :email, :value => @user.email %><br>
+					<%= f.label :phonenumber%>
+					<%= f.text_field :phonenumber, :value => @user.phonenumber %><br>
+					<%= f.label :program, :class => "" %>
+					<%= f.collection_select(:program, Program.all, :id, :name) %><br>
+					<%= f.label :term, :class => "" %>
+					<%= f.select(:term, options_for_select(["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"], @user.term)) %><br>
+					<%= f.label :year, :class => "" %>
+					<%= f.select(:year, options_for_select(((Time.now.year - 20)..(Time.now.year + 20)).to_a, @user.year)) %><br>
+					
+
+					<div style="padding: 10px;">
+						<div class="">
+							<%= f.submit "Save Changes", :class => "btn btn-large btn-primary" %>
+							<%= link_to 'Back', @user, :class => "btn btn-large btn-danger" %>
+						</div>
+					</div>
+				</div>
+		<% end %>
+	</div>
+</div>

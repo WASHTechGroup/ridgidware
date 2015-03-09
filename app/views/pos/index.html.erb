@@ -1,0 +1,50 @@
+<!--This is the HTML for the POS system-->
+<div class "row">
+
+	<!--this is the left 1/2 of the screen-->
+	<div class="col-sm-6">
+		<div class ="cart_partial">
+			<%=render "carts/cart"%>
+		</div>
+		<!--display the left side of the options below cart-->
+		<div class ="complete.transaction">
+			<table>
+				<tr>
+					<!--change back to text later-->
+					<td><button class = "btn" id="total" onclick = "get_total()">Total</button></td>
+					<td id="show_total"></td>
+				</tr>
+				<tr>
+					<td><button class = "btn">Tendered</button></td>
+					<td>XX.XX</td>
+				</tr>
+				<tr>
+					<td>Change due</td>
+					<td>XX.XX</td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td><button class = "btn">Print Reciept</button></td>
+					<td><button class = "btn">Finish</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!--this is the right 1/2 of the screen-->
+	<div class="col-sm-6">
+		<div class ="catalog_partial">
+			<%=render "inventories/catalog"%>
+		</div>
+		<div class ="POS_admin_buttons">
+			<table>
+				<tr>
+					<td><button class = "btn1">Place Order</button></td>
+					<td><button class = "btn1">Return</button></td>
+					<td><button class = "btn1">Place holder</button></td>
+					<td><button class = "btn1">Place holder</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,4 +1,5 @@
 class TransactionsController < ApplicationController
+  protect_from_forgery except: [:get_totals,:get_cart]
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
   # GET /transactions
@@ -26,14 +27,32 @@ class TransactionsController < ApplicationController
   def get_totals
     cart = Cart.find_by(params[:cart_id])
     @subtotal = 0
-    cart.parts_in_cart.each do pipe |inCart|
+    cart.parts_in_cart.each do |inCart|
       part = Part.find_by(inCart.part_id)
       @subtotal += (inCart.quantity_requested*part.price)
     end
     @tax = @subtotal*0.13
     @total = @subtotal+@tax
-    ## Round to the nearest 5 cents 
+    @total = (@total*100).round/100
+    respond_to do |format| # in this logic, going to respond with HTML or JSON  
+        format.json{render :tally, status: 200}
+    end
   end
+
+
+ ## basically get negative money totals, pulling up a cart
+  def return
+    @cart = Cart.new
+  end
+
+ def get_transaction_for_return
+    @transaction = Transaction.find_by(params[:transaction_id])
+    @cart_id = @transaction.cart_id
+    @parts_in_cart = Cart.find_by(@cart_id).parts_in_cart
+    respond_to do |format|
+      format.json{render :get_cart, status: 200}
+    end
+ end
 
   # PATCH/PUT /transactions/1
   # PATCH/PUT /transactions/1.json
@@ -57,6 +76,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params[:transaction]
+      params.require[:transactions].permit[:transaction_id, :cart_id, :subtotal, :total, :tax, :amount_given, :change]
     end
 end
