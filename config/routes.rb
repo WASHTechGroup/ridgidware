@@ -20,8 +20,16 @@ Rails.application.routes.draw do
   # Routing for the admin  pages
   match '/admin', to: 'admin#index', via: 'get', as: 'admin'
 
+  #Routing for POS
+  match '/pos', to: 'pos#index', via: 'get', as: 'pos'
+  match '/pos/returns', to: 'pos#returns', via: 'get', as: 'returns'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+
+  #Routing for transactions
+  #
+  match '/transactions/get_totals', to: 'transactions#get_totals', via: 'post', as: 'get_totals'
+  match '/transactions/get_cart', to: 'transactions#get_cart', via: 'post', as: 'get_cart'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

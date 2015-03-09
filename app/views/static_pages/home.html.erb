@@ -1,11 +1,31 @@
 <div class="row">
-	<div class="col-3-md">
+	<div class="col-sm-6">
+		<h2>My Orders and Hold</h2>
+		<div class ="holds">
+			<table>
+				<!--Placeholder values to be filled with JS-->
+				<tr class="borders">
+					<td>photo</td>
+					<td>
+						<table>
+						<tr>
+							<td>Item name</td>
+						</tr>
+						<tr>
+							<td>on order</td>
+						</tr>
+					</table>
+					</td>
+					<td>pick up date</td>
+				</tr>
+			</table>
+		</div>
 	</div>
-
-	<div class="col-6-md">
-		<h1>Home Page</h1>
+	<div class="col-sm-6">
+		<h2>Profile</h2>
+		<!--add in error handling eg. email and phone number-->
+		<div class="container">
+		<%=render "users/editProfile"%>
 	</div>
-
-	<div class="col-3-md">
 	</div>
 </div>

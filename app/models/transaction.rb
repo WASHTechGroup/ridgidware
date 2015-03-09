@@ -5,7 +5,7 @@ class Transaction < ActiveRecord::Base
 
 	validates :cart_id, presence: true
 	validates :subtotal, presence: true
-	vaidates :tax, presence: true
+	validates :tax, presence: true
 	validates :total, presence: true
 	validates :amount_given, presence: true
 	validates :change, presence: true
