@@ -1,0 +1,16 @@
+<div class="cart">
+	<table>
+		<tbody>
+			<% @parts_in_cart.each do |part| %>
+				<tr class = 'borders' id='part_<%= part.part_id %>'>
+					<td><%= Part.find(part.part_id).part_number %></td>" +
+					<td><%= Part.find(part.part_id).price %></td>
+					<td><%= Part.find(part.part_id).description %></td>
+					"<td><button type='button' class = 'btn-default btn-xs' onclick='add_to_cart(<%= part.cart_id %>,<%= part.part_id%>)'>+</button></td>	
+					<td class='amount'><b><%= part.quantity_requested %></b></td >
+					"<td><button type='button' class = 'btn-default btn-xs' onclick='remove_from_cart(<%= part.cart_id %>,<%= part.part_id%>)'>-</button></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>>
+</div>
