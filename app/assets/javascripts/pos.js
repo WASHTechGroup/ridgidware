@@ -34,3 +34,4 @@ function calc_change(){
 	console.log(change.toFixed(2))
 	$('#change').text(change.toFixed(2));
 }
+
