@@ -25,7 +25,7 @@ class TransactionsController < ApplicationController
   end
 
   def get_totals
-    cart = Cart.find_by(params[:cart_id])
+    cart = Cart.find(params[:cart_id])
     @subtotal = 0
     cart.parts_in_cart.each do |inCart|
       part = Part.find(inCart.part_id)
@@ -41,11 +41,18 @@ class TransactionsController < ApplicationController
 
   # The checkout api
   def checkout
-    @transaction = Transaction.new(params[:transactions])
+    @transaction = Transaction.new
+    @transaction.cart_id = current_user.cart.id
+    @transaction.total = params[:transaction][:total]
+    @transaction.subtotal = params[:transaction][:subtotal]
+    @transaction.tax = params[:transaction][:tax]
+    @transaction.amount_given = params[:transaction][:amount_given]
+    @transaction.change = params[:transaction][:change]
+    @transaction.save!
     @cart = current_user.cart
     @cart.owner = params[:owners]
-    @cart.user_id = nil
     current_user.cart = Cart.new
+    current_user.save!
     respond_to do |format|
       if @transaction.save
         format.html { redirect_to :back, notice: 'Transaction was successfully created.' }
@@ -94,6 +101,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      # params.require[:transactions].permit[:transaction_id, :cart_id, :subtotal, :total, :tax, :amount_given, :change]
+      params.require[:transactions].permit[:transaction_id, :cart_id, :subtotal, :total, :tax, :amount_given, :change]
     end
 end

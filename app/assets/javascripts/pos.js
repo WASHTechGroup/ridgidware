@@ -1,4 +1,4 @@
-$(document).ready(get_total())
+// $(document).ready(get_total())
 
 
 function get_total(cart_id){
@@ -8,14 +8,15 @@ function get_total(cart_id){
 }
 
 function checkout(cart_id) {
+	calc_change();
 	$.post("/transactions/get_totals.json", {cart_id: cart_id}).done(function(data){
 		json = {owner: $('#watiam').val(),
-				transactions: {
+				transaction: {
 					cart_id: parseInt(cart_id), 
 					subtotal: parseFloat(data["subtotal"]), 
 					total: parseFloat(data["total"]), 
 					tax: parseFloat(data["tax"]), 
-					amount_given: parseFloat($("#tendered").text()), 
+					amount_given: parseFloat($("#tendered").val()), 
 					change: parseFloat($("#change").text())
 				  }
 				};

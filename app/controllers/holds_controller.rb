@@ -15,6 +15,7 @@ class HoldsController < ApplicationController
   # GET /holds/new
   def new
     @hold = Hold.new
+    @cart = Cart.new
   end
 
   # GET /holds/1/edit

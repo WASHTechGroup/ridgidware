@@ -1,7 +1,7 @@
 class Transaction < ActiveRecord::Base
 	has_one :cart
 
-	before_save :calculate_chage
+	before_save :calculate_change
 
 	validates :cart_id, presence: true
 	validates :subtotal, presence: true
@@ -12,6 +12,6 @@ class Transaction < ActiveRecord::Base
 
 	private
 		def calculate_change
-			self.change = self.amount_given - self.total
+			self.change ||= self.amount_given - self.total
 		end
 end
