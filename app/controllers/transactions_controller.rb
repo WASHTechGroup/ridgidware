@@ -28,14 +28,32 @@ class TransactionsController < ApplicationController
     cart = Cart.find_by(params[:cart_id])
     @subtotal = 0
     cart.parts_in_cart.each do |inCart|
-      part = Part.find_by(inCart.part_id)
+      part = Part.find(inCart.part_id)
       @subtotal += (inCart.quantity_requested*part.price)
     end
     @tax = @subtotal*0.13
     @total = @subtotal+@tax
-    @total = (@total*100).round/100
+    @total = @total.round(2)
     respond_to do |format| # in this logic, going to respond with HTML or JSON  
         format.json{render :tally, status: 200}
+    end
+  end
+
+  # The checkout api
+  def checkout
+    @transaction = Transaction.new(params[:transactions])
+    @cart = current_user.cart
+    @cart.owner = params[:owners]
+    @cart.user_id = nil
+    current_user.cart = Cart.new
+    respond_to do |format|
+      if @transaction.save
+        format.html { redirect_to :back, notice: 'Transaction was successfully created.' }
+        format.json { render :show, status: :created, location: @transaction }
+      else
+        format.html { render :new }
+        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -76,6 +94,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require[:transactions].permit[:transaction_id, :cart_id, :subtotal, :total, :tax, :amount_given, :change]
+      # params.require[:transactions].permit[:transaction_id, :cart_id, :subtotal, :total, :tax, :amount_given, :change]
     end
 end

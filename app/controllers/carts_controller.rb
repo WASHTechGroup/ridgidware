@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery except: [:add_part,:update_part, :remove_part]
 
   # GET /carts/1
   # GET /carts/1.json
@@ -36,33 +37,63 @@ class CartsController < ApplicationController
     end
   end
 
-def add_item_to_cart
-  part = Part.find_by(params[:part_id])
-  cart = Cart.find_by(params[:cart_id])
-  cart.Parts << part.save
-  cart.save 
-end
+  def part_in_cart 
+    respond_to do |format|
+      cart = Cart.find_by(params[:cart_id])
+      if cart
 
-def update_item_count
-  part = Part.find_by(params[:part_id])
-  cart = Cart.find_by(params[:cart_id])
-  inCart = PartsInCart.where("part_id = ?, cart_id = ?", part.id, cart.id)
-  inCart.quantity_requested = (params[:quantity_requested].2_i)
-  if quantity_requested == 0
-    inCart.destroy
-  else
-    inCart.save
+      else 
+        msg = { :status => "error", :message => "fail"}
+        format { render json: msg }
+      end
+    end
+
   end
-  cart.save
-end
 
-def delete_item_from_cart
-  part = Part.find_by(params[:part_id])
-  cart = Cart.find_by(params[:cart_id])
-  inCart = PartsInCart.where("part_id = ?, cart_id = ?", part.id, cart)
-  inCart.destroy
-  cart.save
-end
+  def add_part
+    part = Part.find(params[:part_id])
+    cart = Cart.find(params[:cart_id]) 
+    if !cart.parts.include?part
+      cart.parts << part 
+    else 
+      inCart = PartsInCart.where("part_id = ?, cart_id = ?", part.id, cart.id)
+      inCart.quantity_requested += 1
+    end
+    respond_to do |format|
+      msg = { :status => "ok", :message => "Success!"}
+      format.json { render json: msg }
+    end
+  end
+
+  def update_part
+    part = Part.find(params[:part_id])
+    cart = Cart.find(params[:cart_id])
+    inCart = PartsInCart.find_by({part_id: part.id, cart_id: cart.id})
+    quant = params[:quantity_requested].to_i
+    inCart.quantity_requested = quant
+    if quant == 0
+      inCart.destroy
+    else
+      inCart.save
+    end
+
+    respond_to do |format|
+      msg = { :status => "ok", :message => "Success!"}
+      format.json { render json: msg }
+    end
+  end
+
+  def remove_part
+    part = Part.find(params[:part_id])
+    cart = Cart.find(params[:cart_id])
+    inCart = PartsInCart.find_by({part_id: part.id,  cart_id: cart})
+    inCart.destroy
+    respond_to do |format|
+      msg = { :status => "ok", :message => "Success!"}
+      format.json { render json: msg }
+    end
+  end
+
   # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy

@@ -22,10 +22,14 @@
 		</div>
 	</div>
 	<div class="col-sm-6">
-		<h2>Profile</h2>
-		<!--add in error handling eg. email and phone number-->
-		<div class="container">
-		<%=render "users/editProfile"%>
+		<!-- Only show this if the user is logged in-->
+		<% if current_user %>
+			<h2>Profile</h2>
+			<!--add in error handling eg. email and phone number-->
+			<div class="container">
+		
+			<%=render "users/editProfile"%>
+		<% end %>
 	</div>
 	</div>
 </div>

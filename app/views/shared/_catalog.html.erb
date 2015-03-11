@@ -1,0 +1,21 @@
+<div class "catalog">
+	<table>
+		<!-- The header to the table -->
+		<tr class = "borders">
+			<th><%= sortable "part_number", "Part \#" %></th>
+			<th><%= sortable "description", "Desc." %></th>
+			<th><%= sortable "price", "Price" %></th>
+			<th class="span-1"></th>
+		</tr>
+		<!-- Itterate through the parts in the databae -->
+		<% @parts.each do |part| %>
+			<tr class = "borders">
+				<td><%= part.part_number %></td>
+				<td><%= part.description %></td>
+				<td><%= part.price %></td>
+				<td><button type="button" class="btn-default btn-xs" onclick="add_to_cart(<%= @cart.id %>,<%= part.id %>)">+</button></td>
+			</tr>
+		<% end %>
+	</table>
+	<%= will_paginate @parts%>
+</div>

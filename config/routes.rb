@@ -1,9 +1,19 @@
 Rails.application.routes.draw do
+  # 
   resources :orders
 
+  # inventores
   resources :inventories
 
+  # Parts resources
   resources :parts
+  match '/catalog', to: 'parts#catalog', via: 'get', as: 'catalog'
+
+  # 
+  match '/add_part', to: 'carts#add_part', via: 'post', as: 'add_part'
+  match '/remove_part', to: 'carts#remove_part', via: 'post', as: 'remove_part'
+  match '/update_part', to: 'carts#update_part', via: 'post', as: 'update_part'
+
 
   # User resources and 
   devise_for :users
@@ -27,9 +37,9 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   #Routing for transactions
-  #
   match '/transactions/get_totals', to: 'transactions#get_totals', via: 'post', as: 'get_totals'
   match '/transactions/get_cart', to: 'transactions#get_cart', via: 'post', as: 'get_cart'
+  match '/checkout', to: 'transactions#checkout', via: 'post', as: 'checkout'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

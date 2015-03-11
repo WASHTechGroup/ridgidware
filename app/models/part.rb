@@ -6,5 +6,21 @@ class Part < ActiveRecord::Base
 	## check part is assigned to a supplier to allow for ordering of this part
 	validates :default_supplier, presence: true
 
-	has_one :inventory
+	has_one :inventory, dependent: :destroy, autosave: true
+
+	before_create :create_inventory
+
+	def self.search(search)
+		if search
+			where('name LIKE ?', "%#{search}%")
+		else
+			where(nil)
+		end
+	end
+
+	private 
+
+		def create_inventory
+			self.inventory = Inventory.new
+		end
 end

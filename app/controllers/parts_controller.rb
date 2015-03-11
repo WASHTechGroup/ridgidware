@@ -1,5 +1,6 @@
 class PartsController < ApplicationController
   before_action :set_part, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   # GET /parts
   # GET /parts.json
@@ -19,6 +20,14 @@ class PartsController < ApplicationController
 
   # GET /parts/1/edit
   def edit
+  end
+
+  # GET /catalog
+  def catalog
+    @parts = Part.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:id])
+    respond_to do |format|
+      format.html { render :catalog, :layout => nil }
+    end
   end
 
   # POST /parts
@@ -70,5 +79,13 @@ class PartsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def part_params
       params[:part]
+    end
+
+    def sort_column 
+      %w[part_number description price].include?(params[:sort]) ? params[:sort] : "part_number"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc" 
     end
 end

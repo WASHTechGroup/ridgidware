@@ -1,6 +1,7 @@
 class Inventory < ActiveRecord::Base
 	belongs_to :part
 
+	after_initialize  :set_zeros
 	before_save :calc_position
 	before_save :calc_available
 
@@ -15,5 +16,13 @@ class Inventory < ActiveRecord::Base
 		end    	
 		def calc_available
 			self.available = self.on_hand - self.on_hold
+		end
+
+		def set_zeros
+			self.on_hold = 0
+			self.on_order = 0
+			self.on_hand = 0
+			self.available = 0
+			self.inv_position = 0
 		end
 end

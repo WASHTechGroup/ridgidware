@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219162948) do
+ActiveRecord::Schema.define(version: 20150311150531) do
 
   create_table "carts", force: :cascade do |t|
     t.string   "owner",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "costings", force: :cascade do |t|
+    t.string   "part_no",    limit: 255
+    t.integer  "count",      limit: 4
+    t.float    "price_per",  limit: 24
+    t.float    "price_ext",  limit: 24
+    t.string   "supplier",   limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -121,6 +131,7 @@ ActiveRecord::Schema.define(version: 20150219162948) do
     t.integer "program",     limit: 4
     t.string  "term",        limit: 255
     t.integer "year",        limit: 4
+    t.integer "cart_id",     limit: 4
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree

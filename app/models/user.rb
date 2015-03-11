@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   friendly_id :username, use: :slugged
   
   belongs_to :role
+  belongs_to :cart, autosave: true
 
   before_create :set_default_role
   before_save :set_default_email
