@@ -12,8 +12,6 @@
  *
  *= require bootstrap-responsive
  *= require twitter/bootstrap
- *= require bootstrap-modal-bs3patch
- *= require bootstrap-modal
  *= require_tree .
  *= require_self
  */
