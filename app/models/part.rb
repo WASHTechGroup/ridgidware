@@ -7,7 +7,7 @@ class Part < ActiveRecord::Base
 	has_one :inventory, dependent: :destroy, autosave: true
 
 
-	before_create :create_inventory
+	# before_create :create_inventory
 
 	def self.search(search)
 		if search
@@ -17,29 +17,29 @@ class Part < ActiveRecord::Base
 		end
 	end
 
-	def self.on_hold
-		self.inventory.on_hold
+	def on_hold
+		inventory.on_hold
 	end
 
-	def self.on_order
-		self.inventory.on_order
+	def on_order
+		inventory.on_order
 	end
 
-	def self.on_hand
-		self.inventory.on_hand
+	def on_hand
+		inventory.on_hand
 	end
 
-	def self.available
-		self.inventory.available
+	def available
+		inventory.available
 	end
 
-	def self.inv_position
-		self.inventory.inv_position
+	def inv_position
+		inventory.inv_position
 	end
 
 	private 
 
 		def create_inventory
-			self.inventory = Inventory.new
+			inventory ||= Inventory.new
 		end
 end

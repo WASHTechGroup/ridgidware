@@ -5,6 +5,10 @@
 <table>
   <thead>
     <tr>
+      <th><%= sortable "part_number", "Part \#." %></th>
+      <th><%= sortable "description",  "Descriptions" %></th>
+      <th><%= sortable "price", "Price" %></th>
+      <th><%= sortable "available", "Available" %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +16,10 @@
   <tbody>
     <% @parts.each do |part| %>
       <tr>
+        <td><%= part.part_number %>
+        <td><%= part.description %>
+        <td>$<%= part.price.round(2) %>
+        <td><%= part.available %>
         <td><%= link_to 'Show', part %></td>
         <td><%= link_to 'Edit', edit_part_path(part) %></td>
         <td><%= link_to 'Destroy', part, method: :delete, data: { confirm: 'Are you sure?' } %></td>
