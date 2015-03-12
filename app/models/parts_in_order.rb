@@ -1,4 +1,11 @@
 class PartsInOrder < ActiveRecord::Base
-	has_one :order
-	has_many :parts
+	belongs_to :order
+	belongs_to :parts
+
+	before_create :default_order
+
+	private
+		def default_order
+			self.amount = 1
+		end
 end

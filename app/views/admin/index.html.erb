@@ -54,7 +54,7 @@
 			</div>
 
 			<div class="col-sm-4">
-				<div id="add-sku-button" class="button-frame vert-space">
+				<div id="add-sku-button" class="button-frame vert-space" onclick="goto('<%= parts_path%>')">
 					Add SKU
 				</div>
 				<div id="remove-sku-button" class="button-frame vert-space">
@@ -89,12 +89,12 @@
 					</div>
 				</div> 
 				<div id="place-order-button" class="col-xs-3">
-					<div class="button-frame">
+					<div class="button-frame" >
 						Place Order
 					</div>
 				</div> 
 				<div id="manage-order-button" class="col-xs-3">
-					<div class="button-frame">
+					<div class="button-frame" onclick="goto('<%= orders_path%>')">
 						Manage Order
 					</div>
 				</div> 
