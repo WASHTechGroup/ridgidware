@@ -7,30 +7,30 @@
 			<%=render "carts/cart"%>
 		</div>
 		<!--display the left side of the options below cart-->
-		<div class="complete.transaction">
-			<table>
-				<tr>
+		<div class="complete transaction">
+			<table class="finish" cellspacing="10">
+				<col align="left">
+  				<col align="right">
+				<tr class="finish">
 					<!--change back to text later-->
-					<td><button class = "btn" id="total" onclick = "get_total(<%= @cart.id %>)">Total</button></td>
-					<td id="show_total">0.00</td>
+					<td><button class = "btn2" id="total" onclick = "get_total(<%= @cart.id %>)">Total</button></td>
+					<td class="label" id="show_total"><div class="sizing">0.00</div></td>
 				</tr>
-				<tr>
-					<td><button class = "btn" onclick ="calc_change()">Tendered</button></td>
-					<td><input type="text" id="tendered" value="0.00"></td></td>
+				<tr class="finish">
+					<td><button  class = "btn2" onclick ="calc_change()">Tendered</button></td>
+					<td><input type="text" id="tendered" value="0.00"></td>
 				</tr>
-				<tr>
-					<td>Change due</td>
-					<td id="change">0.00</td>
+				<tr class="finish">
+					<td class="label">Change due</td>
+					<td class="label"  id="change">0.00</td>
 				</tr>
-				<tr>
-					<td>Student</td>
-					<td><input type="text" id="watiam" value=""></td></td>
+				<tr class="finish">
+					<td class="label">Student</td>
+					<td><input type="text" id="watiam" value=""></td>
 				</tr>
-			</table>
-			<table>
-				<tr>
-					<td><button class = "btn">Print Reciept</button></td>
-					<td><button class = "btn" onclick="checkout(<%= @cart.id %>)">Checkout</button></td>
+				<tr class="finish">
+					<td><button class = "btn2">Print Reciept</button></td>
+					<td><button class = "btn2" onclick="checkout(<%= @cart.id %>)">Checkout</button></td>
 				</tr>
 			</table>
 		</div>
@@ -40,8 +40,10 @@
 		<div class ="catalog_partial">
 			<%=render "shared/catalog"%>
 		</div>
+		<br>
 		<div class ="POS_admin_buttons">
-			<table>
+
+			<table class="centre">
 				<tr>
 					<td><button class = "btn1">Place Order</button></td>
 					<td><button class = "btn1">Return</button></td>
@@ -62,11 +64,16 @@
             <h4 class="modal-title" id="myModalLabel">Update Count</h4>
             </div>
             <div class="modal-body">
-                <form><>
+                <form>
+                	Quantity:<br>
+					<input type="text" name="quantity" id = "quantity">
+					<input type="hidden" name="part_id" id="part_id">
+					<br>
+                </form>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="add_quantity_manually(<%=@cart.id%>, quantity, part_id)">Done</button>
         </div>
     </div>
   </div>
