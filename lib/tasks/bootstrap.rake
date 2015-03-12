@@ -52,9 +52,10 @@ namespace :bootstrap do
 		 [ "ATMEGA328-PU-ND",  "IC MCU 8BIT 32KB FLASH 28DIP",  "ATMEGA328-PU", "Digi-Key",  4.29,  5],
 		 [ "3310R-125-103L-ND",  "POT 10K OHM 9MM SQ PLASTIC",  "3310R-125-103L", "Digi-Key",  3.12,  5]].each do |data|
 		 	puts data[0]
-		 	part = Part.find_or_create_by({part_number:data[0], description:data[1], mfg_part_no:data[2], default_supplier:data[3], price:data[4].to_f})
+		 	part = Part.find_or_create_by({part_number:data[0], description:data[1], price:data[4].to_f})
 	 		part.inventory = Inventory.new
-	 		part.inventory.on_hand = data[5] 
+	 		part.inventory.on_hand = data[5]
+	 		part.inventory.save!
 	 		part.save!
 		 end
 

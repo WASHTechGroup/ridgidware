@@ -11,12 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311150531) do
+ActiveRecord::Schema.define(version: 20150311230004) do
 
   create_table "carts", force: :cascade do |t|
     t.string   "owner",      limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.integer  "category_id",   limit: 4
+    t.string   "category_name", limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "costings", force: :cascade do |t|
@@ -27,6 +34,11 @@ ActiveRecord::Schema.define(version: 20150311150531) do
     t.string   "supplier",   limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "demand_trackers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -72,9 +84,9 @@ ActiveRecord::Schema.define(version: 20150311150531) do
     t.float    "total",                limit: 24
     t.integer  "quantity_received",    limit: 4
     t.integer  "quantity_backordered", limit: 4
-    t.string   "comment",              limit: 255
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.text     "comment",              limit: 65535
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "parts", force: :cascade do |t|
@@ -82,8 +94,8 @@ ActiveRecord::Schema.define(version: 20150311150531) do
     t.text     "description",      limit: 65535
     t.string   "manufacturer",     limit: 255
     t.string   "mfg_part_no",      limit: 255
-    t.string   "category",         limit: 255
     t.float    "price",            limit: 24
+    t.float    "cost",             limit: 24
     t.string   "default_supplier", limit: 255
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
@@ -97,10 +109,34 @@ ActiveRecord::Schema.define(version: 20150311150531) do
     t.datetime "updated_at",                   null: false
   end
 
+  create_table "parts_in_orders", force: :cascade do |t|
+    t.integer  "order_no",   limit: 4
+    t.integer  "part_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "po_payments", force: :cascade do |t|
+    t.string   "po_number",  limit: 255
+    t.integer  "order_no",   limit: 4
+    t.integer  "cheque_no",  limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "programs", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "receivings", force: :cascade do |t|
+    t.integer  "part_id",           limit: 4
+    t.integer  "quant_received",    limit: 4
+    t.integer  "quant_backordered", limit: 4
+    t.text     "comment",           limit: 65535
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "roles", force: :cascade do |t|

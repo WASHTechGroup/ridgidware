@@ -5,7 +5,7 @@ class PartsController < ApplicationController
   # GET /parts
   # GET /parts.json
   def index
-    @parts = Part.all
+    @parts = Part.joins(:inventory).search(params[:search]).order(sort_column + " " + sort_direction)
   end
 
   # GET /parts/1
@@ -16,6 +16,7 @@ class PartsController < ApplicationController
   # GET /parts/new
   def new
     @part = Part.new
+    @part.inventory= Inventory.new
   end
 
   # GET /parts/1/edit
@@ -82,7 +83,7 @@ class PartsController < ApplicationController
     end
 
     def sort_column 
-      %w[part_number description price].include?(params[:sort]) ? params[:sort] : "part_number"
+      %w[part_number description price available].include?(params[:sort]) ? params[:sort] : "part_number"
     end
 
     def sort_direction

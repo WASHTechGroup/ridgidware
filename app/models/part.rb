@@ -3,12 +3,12 @@ class Part < ActiveRecord::Base
 	validates :part_number, presence: true, uniqueness: true
 	## check that a description exists when ading new parts to the catalogue (not functional requirement, for administrator)
 	validates :description, presence: true
-	## check part is assigned to a supplier to allow for ordering of this part
-	validates :default_supplier, presence: true
 
 	has_one :inventory, dependent: :destroy, autosave: true
+	has_many :parts_in_order
+	has_many :orders, through: :parts_in_order
 
-	before_create :create_inventory
+	# before_create :create_inventory
 
 	def self.search(search)
 		if search
@@ -18,9 +18,29 @@ class Part < ActiveRecord::Base
 		end
 	end
 
+	def on_hold
+		inventory.on_hold
+	end
+
+	def on_order
+		inventory.on_order
+	end
+
+	def on_hand
+		inventory.on_hand
+	end
+
+	def available
+		inventory.available
+	end
+
+	def inv_position
+		inventory.inv_position
+	end
+
 	private 
 
 		def create_inventory
-			self.inventory = Inventory.new
+			inventory ||= Inventory.new
 		end
 end

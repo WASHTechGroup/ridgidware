@@ -19,10 +19,10 @@ class Inventory < ActiveRecord::Base
 		end
 
 		def set_zeros
-			self.on_hold = 0
-			self.on_order = 0
-			self.on_hand = 0
-			self.available = 0
-			self.inv_position = 0
+			self.on_hold ||= 0
+			self.on_order ||= 0
+			self.on_hand ||= 0
+			self.available ||= 0
+			self.inv_position ||= 0
 		end
 end

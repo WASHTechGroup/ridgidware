@@ -11,6 +11,20 @@
     </div>
   <% end %>
 
+  <%= f.label :part_number, "Supplier Part Number"%>
+  <%= f.text_field :part_number, :value => @part.part_number%><br>
+  <%= f.label :description, "Part Description"%>
+  <%= f.text_field :description, :value => @part.description%><br>
+  <%= f.label :price, "Retail Price" %>
+  <%= f.text_field :price, :value => @part.price %><br>
+  <%= form_for(@part.inventory) do |s| %>
+    <%= s.label :on_hand, "Part Quantity on hand" %>
+    <%= s.text_field :on_hand, :value => @part.inventory.on_hand %>
+    <%= s.label :on_order, "Part quantity on order from supplier" %>
+    <%= s.text_field :on_order, :value => @part.inventory.on_order %>
+
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
