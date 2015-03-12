@@ -17,6 +17,26 @@ class Part < ActiveRecord::Base
 		end
 	end
 
+	def self.on_hold
+		self.inventory.on_hold
+	end
+
+	def self.on_order
+		self.inventory.on_order
+	end
+
+	def self.on_hand
+		self.inventory.on_hand
+	end
+
+	def self.available
+		self.inventory.available
+	end
+
+	def self.inv_position
+		self.inventory.inv_position
+	end
+
 	private 
 
 		def create_inventory
