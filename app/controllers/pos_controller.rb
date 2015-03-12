@@ -9,7 +9,7 @@ class PosController < ApplicationController
 		end
 		@cart = current_user.cart
 		@parts_in_cart = @cart.parts_in_cart
-		@parts = Part.order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:id])
+		@parts = Part.order(sort_column + " " + sort_direction)
 	end
 	
 	def returns 

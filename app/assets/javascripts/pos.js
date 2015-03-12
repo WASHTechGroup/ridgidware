@@ -3,7 +3,7 @@
 
 function get_total(cart_id){
 	$.post("/transactions/get_totals.json", {cart_id: cart_id}).done(function(data){
-		$("#show_total").text(data["total"]);
+		$("#show_total .sizing").text(data["total"]);
 	});
 }
 

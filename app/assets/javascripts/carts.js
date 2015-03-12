@@ -19,9 +19,10 @@ function add_to_cart(cart_id, part_id) {
 		if($(".cart table #part_" + part_id).length) {
 			// update the count of the part
 			cur = $(".cart table #part_" + part_id + " .amount").text();
-			amount = parseInt(cur) + 1
+			amount = parseInt(cur) + 1;
+			console.log(amount);
 			$.post("update_part.json", {cart_id: cart_id, part_id: part_id, quantity_requested: amount}).done(function(){
-				$(".cart table #part_" + part_id + " .amount").text(amount);
+				$(".cart table #part_" + part_id + " .amount").html("<a href='#basicModal' role='button' class='btn' data-toggle='modal'><b>"+amount+"</a></b>");
 				get_total(cart_id);
 			});
 		}
@@ -50,7 +51,7 @@ function remove_from_cart(cart_id, part_id) {
 		// If the current amount is more than 1
 		if(amount != 0) {
 			$.post("update_part.json", {cart_id: cart_id, part_id: part_id, quantity_requested: amount}).done(function(){
-				$(".cart table #part_" + part_id + " .amount").text(amount);
+				$(".cart table #part_" + part_id + " .amount").html("<a href='#basicModal' role='button' class='btn' data-toggle='modal'><b>"+amount+"</a></b>");
 				get_total(cart_id);
 			});
 		} else {
@@ -65,16 +66,32 @@ function remove_from_cart(cart_id, part_id) {
 	get_total(cart_id);
 }
 
-function parse_table() {
-
-}
-
 function delete_item(cart_id, part_id){
 	$.post("remove_part.json", {cart_id: cart_id, part_id:part_id}).done(function(data) {
 				$(".cart table #part_" + part_id).remove();	
 			});
 }
 
-function add_quantity_manually(cart_id, part_id, quantity){
-	
+function add_quantity_manually(cart_id){
+	var part=$("#basicModal #part_id").val();
+	var quant=$("#basicModal #quantity").val();
+	part = parseInt(part);
+	quant = parseInt(quant);
+	console.log(part);
+	console.log(quant);
+	if (quant <0 || quant > 100) //change to quantity in inventory
+	{
+		alert("Invalid quantity. Please try again.");
+	}
+	else
+	{
+		$.post("update_part.json", {cart_id: cart_id, part_id: part, quantity_requested: quant}).done(function(){
+				$(".cart table #part_" + part + " .amount").html("<a href='#basicModal' role='button' class='btn' data-toggle='modal'><b>"+quant+"</a></b>");
+				get_total(cart_id);
+			});
+	}
+}
+
+function call_modal(part_id){
+	$("#basicModal #part_id").val(part_id);
 }

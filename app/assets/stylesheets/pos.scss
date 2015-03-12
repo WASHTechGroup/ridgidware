@@ -2,16 +2,44 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/ */
 
+.label{
+  font-size: 2vw;
+  font-family: Arial;
+  color: black;
+}
+
+
+
+.btn2{
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 2vw;
+  width: 20vw;
+  height:7vh;
+  text-decoration: none;
+  background: #3498db;
+}
+
+ table thead th .text {
+  position: fixed;
+ }
+
 .cart_partial{
-	height: 70%;
+	height: 50vh;
+  overflow: scroll;
+  border: 1px solid black;
 }
 
 .catalog_partial{
-	height: 70%;
+	height: 63vh;
+  overflow: scroll;;
 }
 
 .complete_transaction{
-	height: 30%;
+	height: 40vh;
 }
 
 .btn {
@@ -42,9 +70,9 @@
   border-radius: 0px;
   font-family: Arial;
   color: #ffffff;
-  font-size: 17px;
-  height: 70px;
-  width: 70px;
+  font-size: 2vw;
+  height:9vw;
+  width:9vw;
   background: #3498db;
   text-decoration: none;
 }
