@@ -1,6 +1,6 @@
 class Part < ActiveRecord::Base
 	## check part number exists and is unique when adding new part to catalogue
-	validates :part_number, presence: true, uniqueness: true
+	validates :part_number, presence: true, uniqueness: {:message => "Part Number already exists."}
 	## check that a description exists when ading new parts to the catalogue (not functional requirement, for administrator)
 	validates :description, presence: true
 
