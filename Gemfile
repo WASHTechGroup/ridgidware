@@ -27,7 +27,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 # add pagenation to any page
-gem 'will_paginate', '3.0.4'
+# gem 'will_paginate', '3.0.4'
 # pagenation with bootstrap 
 gem 'bootstrap-will_paginate', '0.0.9'
 # User authentication for the site that uses the 
@@ -48,7 +48,7 @@ gem 'friendly_id', '~> 5.1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', github: 'deivid-rodriguez/byebug'
+  # gem 'byebug', github: 'deivid-rodriguez/byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
@@ -61,10 +61,10 @@ group :development, :test do
 end
 
 group :test do
-  gem 'selenium-webdriver', '2.35.1'
-  gem 'capybara', '2.1.0'
-  gem 'factory_girl_rails', '4.2.0'
-  gem 'cucumber-rails', '1.4.0', :require => false
+  # gem 'selenium-webdriver', '2.35.1'
+  # gem 'capybara', '2.1.0'
+  # gem 'factory_girl_rails', '4.2.0'
+  # gem 'cucumber-rails', '1.4.0', :require => false
   # gem 'database_cleaner', github: 'bmabey/database_cleaner'
 
   # Uncomment this line on OS X.
