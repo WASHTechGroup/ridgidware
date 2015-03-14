@@ -12,7 +12,7 @@ function add_to_cart(cart_id, part_id) {
 					"<td>photo</td>" +
 					"<td>" + data["description"] + "</td>" +
 					"<td><button type=button' class = 'btn-default btn-xs' onclick='add_to_cart("+ cart_id +","+ part_id +")'>+</button></td>" +	
-					"<td class='amount'><button type='button' class='button-default btn-xs' data-toggle='#basicModal' data-target='modal'><b><%= part.quantity_requested %></b></td>" +
+					"<td class='amount'><button type='button' class='button-default btn-xs' data-toggle='#basicModal' data-target='modal'><b>1</b></td>" +
 					"<td><button type=button' class = 'btn-default btn-xs' onclick='remove_from_cart("+ cart_id +","+ part_id +")'>-</button></td>" +	
 			   "</tr>";
 		// If the entry is in the cart

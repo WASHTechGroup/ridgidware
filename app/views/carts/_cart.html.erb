@@ -1,6 +1,7 @@
 <div class="cart">
 	<table>
 		<tbody>
+		<tr></tr>
 			<% @parts_in_cart.each do |part| %>
 				<tr class = 'borders' id='part_<%= part.part_id %>'>
 					<td><button type='button' class = 'btn-default btn-s' id = "small" onclick = 'delete_item(<%=part.cart_id%>, <%=part.part_id%>)'>X</button></td>
@@ -8,10 +9,9 @@
 					<td><%= Part.find(part.part_id).price %></td>
 					<td><%= Part.find(part.part_id).description %></td>
 					<td><button type='button' class = 'btn-default btn-s' id = "small" onclick='add_to_cart(<%= part.cart_id %>,<%= part.part_id%>)'>+</button></td>	
-					<td class='amount'><a href="#basicModal" role="button" class="btn-default btn-s" data-toggle="modal" onclick='call_modal(<%=part.part_id%>)'><b><%=part.quantity_requested%></a></b></td>
+					<td class='amount'><a href="#basicModal" role="button" class="btn-default btn-s" data-toggle="modal" onclick='call_modal(<%=part.part_id%>)'><b><%= part.quantity_requested %></a></b></td>
 					<td><button type='button' class = 'btn-default btn-s' id='small' onclick='remove_from_cart(<%= part.cart_id %>,<%= part.part_id%>)'>-</button></td>
 				</tr>
-				<tr></tr>
 			<% end %>
 		</tbody>
 	</table>
