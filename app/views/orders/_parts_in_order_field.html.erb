@@ -1,0 +1,11 @@
+<fieldset class="fields">
+	<%= f.label :part_id, "Part \#" %>
+	<%= f.collection_select(:part_id, Part.all, :id, :part_number , {}, {class: "part_select"}) %><br>
+	<%= f.label :amount %>
+	<%= f.text_field :amount %><br>
+	<%= f.label :cost %>
+	<%= f.text_field :cost %><br>
+	<%= f.check_box :_destroy %>
+  	<%= f.label :_destroy, "Remove Part from order" %><br>
+  	<%= link_to_remove_fields "remove", f %>
+</fieldset>

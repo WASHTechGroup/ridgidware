@@ -15,10 +15,33 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @order.parts_in_order.build
   end
 
   # GET /orders/1/edit
   def edit
+  end
+
+  # 
+  def remove_item
+    part = Part.find(params[:part_id])
+    order = Order.find(params[:order_id])
+    respond_to do |format|
+      if part && order
+        list_item = PartsInOrder.find_by({part_id: part.id, order_id: order.id})
+        if list_item
+          list_item.destroy!
+          msg = { :status => "ok", :message => "Success!"}
+          format.json { render json: msg }
+        else
+          msg = { :status => "error", :message => "This Part is not in this order!"}
+        format.json { render json: msg }
+        end
+      else
+        msg = { :status => "error", :message => "Missing Part or Order in the DB!"}
+        format.json { render json: msg }
+      end
+    end
   end
 
   # POST /orders
@@ -69,6 +92,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params[:order]
+      params.require(:order).permit(:order_no, :cost, :subtotal, :tax, :total, :comment, :parts_in_order_attributes => [:part_id, :amount, :cost, :_destroy])
     end
 end

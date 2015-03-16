@@ -74,31 +74,23 @@ ActiveRecord::Schema.define(version: 20150311230004) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "order_no",             limit: 4
-    t.string   "part_number",          limit: 255
-    t.integer  "order_quantity",       limit: 4
-    t.float    "unit_cost",            limit: 24
-    t.float    "cost",                 limit: 24
-    t.float    "subtotal",             limit: 24
-    t.float    "tax",                  limit: 24
-    t.float    "total",                limit: 24
-    t.integer  "quantity_received",    limit: 4
-    t.integer  "quantity_backordered", limit: 4
-    t.text     "comment",              limit: 65535
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.integer  "order_no",   limit: 4
+    t.float    "cost",       limit: 24
+    t.float    "subtotal",   limit: 24
+    t.float    "tax",        limit: 24
+    t.float    "total",      limit: 24
+    t.text     "comment",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "parts", force: :cascade do |t|
-    t.string   "part_number",      limit: 255,   null: false
-    t.text     "description",      limit: 65535
-    t.string   "manufacturer",     limit: 255
-    t.string   "mfg_part_no",      limit: 255
-    t.float    "price",            limit: 24
-    t.float    "cost",             limit: 24
-    t.string   "default_supplier", limit: 255
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.string   "part_number", limit: 255,   null: false
+    t.text     "description", limit: 65535
+    t.string   "category",    limit: 255
+    t.float    "price",       limit: 24
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "parts_in_carts", force: :cascade do |t|
@@ -110,10 +102,12 @@ ActiveRecord::Schema.define(version: 20150311230004) do
   end
 
   create_table "parts_in_orders", force: :cascade do |t|
-    t.integer  "order_no",   limit: 4
+    t.integer  "order_id",   limit: 4
     t.integer  "part_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "amount",     limit: 4
+    t.float    "cost",       limit: 24
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "po_payments", force: :cascade do |t|

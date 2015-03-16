@@ -41,7 +41,7 @@ class CartsController < ApplicationController
     respond_to do |format|
       cart = Cart.find_by(params[:cart_id])
       if cart
-
+        
       else 
         msg = { :status => "error", :message => "fail"}
         format { render json: msg }
