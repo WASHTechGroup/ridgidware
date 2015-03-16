@@ -1,4 +1,7 @@
-// $(document).ready(get_total())
+$(document).ready(function() {
+	var id = parseInt($("input[name='cart_id']").val());
+	get_total(id);
+});
 
 
 function get_total(cart_id){

@@ -7,14 +7,14 @@ function add_to_cart(cart_id, part_id) {
 		// Variables
 		var cur = "";
 		// create the HTML of the table entry
-		html = "<tr class = 'borders' id='part_"+ part_id + "'>" +
-					"<td><button type='button' class = 'btn-default btn-s' id = 'small' onclick = 'delete_item("+ cart_id +","+ part_id +")'>X</button></td>" + 
-					"<td>" + data["part_number"] + "</td>" +
-					"<td>photo</td>" +
-					"<td>" + data["description"] + "</td>" +
-					"<td><button type=button' class = 'btn-default btn-xs' onclick='add_to_cart("+ cart_id +","+ part_id +")'>+</button></td>" +	
-					"<td class='amount'><a href='#basicModal' role='button' class='btn-default btn-s' data-toggle='modal' onclick='call_modal("+ part_id +")'><b>1</a></b></td>" + 
-					"<td><button type=button' class = 'btn-default btn-xs' onclick='remove_from_cart("+ cart_id +","+ part_id +")'>-</button></td>" +	
+		html = "<tr class = 'borders fit' id='part_"+ part_id + "'>" +
+					"<td id='c5'><button type='button' class = 'btn-default btn-s' id = 'small' onclick = 'delete_item("+ cart_id +","+ part_id +")'>X</button></td>" + 
+					"<td id='c6'>" + data["part_number"] + "</td>" +
+					"<td id='c6'>" + data["price"] + "</td>" +
+					"<td id='c8'>" + data["description"] + "</td>" +
+					"<td id='c9'><button type=button' class = 'btn-default btn-xs' onclick='add_to_cart("+ cart_id +","+ part_id +")'>+</button></td>" +	
+					"<td class='amount' id='c10'><a href='#basicModal' role='button' class='btn-default btn-s' data-toggle='modal' onclick='call_modal("+ part_id +")'><b>1</a></b></td>" + 
+					"<td id='c11'><button type=button' class = 'btn-default btn-xs' onclick='remove_from_cart("+ cart_id +","+ part_id +")'>-</button></td>" +	
 			   "</tr>";
 		// If the entry is in the cart
 		if($(".cart table #part_" + part_id).length) {
