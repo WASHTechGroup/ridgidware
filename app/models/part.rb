@@ -6,7 +6,7 @@ class Part < ActiveRecord::Base
 
 	has_one :inventory, dependent: :destroy, autosave: true
 	accepts_nested_attributes_for :inventory, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
-	belongs_to :parts_in_order
+	has_many :parts_in_order
 	has_many :orders, through: :parts_in_order
 
 	# before_create :create_inventory

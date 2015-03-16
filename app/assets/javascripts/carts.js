@@ -8,11 +8,12 @@ function add_to_cart(cart_id, part_id) {
 		var cur = "";
 		// create the HTML of the table entry
 		html = "<tr class = 'borders' id='part_"+ part_id + "'>" +
+					"<td><button type='button' class = 'btn-default btn-s' id = 'small' onclick = 'delete_item("+ cart_id +","+ part_id +")'>X</button></td>" + 
 					"<td>" + data["part_number"] + "</td>" +
 					"<td>photo</td>" +
 					"<td>" + data["description"] + "</td>" +
 					"<td><button type=button' class = 'btn-default btn-xs' onclick='add_to_cart("+ cart_id +","+ part_id +")'>+</button></td>" +	
-					"<td class='amount'><button type='button' class='button-default btn-xs' data-toggle='#basicModal' data-target='modal'><b>1</b></td>" +
+					"<td class='amount'><a href='#basicModal' role='button' class='btn-default btn-s' data-toggle='modal' onclick='call_modal("+ part_id +")'><b>1</a></b></td>" + 
 					"<td><button type=button' class = 'btn-default btn-xs' onclick='remove_from_cart("+ cart_id +","+ part_id +")'>-</button></td>" +	
 			   "</tr>";
 		// If the entry is in the cart
@@ -22,7 +23,7 @@ function add_to_cart(cart_id, part_id) {
 			amount = parseInt(cur) + 1;
 			console.log(amount);
 			$.post("update_part.json", {cart_id: cart_id, part_id: part_id, quantity_requested: amount}).done(function(){
-				$(".cart table #part_" + part_id + " .amount").html("<a href='#basicModal' role='button' class='btn' data-toggle='modal'><b>"+amount+"</a></b>");
+				$(".cart table #part_" + part_id + " .amount").html("<a href='#basicModal' role='button' class='btn-default btn-s' data-toggle='modal'><b>"+amount+"</a></b>");
 				get_total(cart_id);
 			});
 		}
@@ -51,7 +52,7 @@ function remove_from_cart(cart_id, part_id) {
 		// If the current amount is more than 1
 		if(amount != 0) {
 			$.post("update_part.json", {cart_id: cart_id, part_id: part_id, quantity_requested: amount}).done(function(){
-				$(".cart table #part_" + part_id + " .amount").html("<a href='#basicModal' role='button' class='btn' data-toggle='modal'><b>"+amount+"</a></b>");
+				$(".cart table #part_" + part_id + " .amount").html("<a href='#basicModal' role='button' class='btn-default btn-s' data-toggle='modal'><b>"+amount+"</a></b>");
 				get_total(cart_id);
 			});
 		} else {
@@ -86,7 +87,8 @@ function add_quantity_manually(cart_id){
 	else
 	{
 		$.post("update_part.json", {cart_id: cart_id, part_id: part, quantity_requested: quant}).done(function(){
-				$(".cart table #part_" + part + " .amount").html("<a href='#basicModal' role='button' class='btn' data-toggle='modal'><b>"+quant+"</a></b>");
+				$(".cart table #part_" + part + " .amount").html("<a href='#basicModal' role='button' class='btn-default btn-s' data-toggle='modal'><b>"+quant+"</a></b>");
+				location.reaload();
 				get_total(cart_id);
 			});
 	}

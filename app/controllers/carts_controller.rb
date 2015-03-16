@@ -56,7 +56,7 @@ class CartsController < ApplicationController
     if !cart.parts.include?part
       cart.parts << part 
     else 
-      inCart = PartsInCart.find({part_id: part.id, cart_id: cart.id})
+      inCart = PartsInCart.find_by({part_id: part.id, cart_id: cart.id})
       inCart.quantity_requested += 1
     end
     respond_to do |format|

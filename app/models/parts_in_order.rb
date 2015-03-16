@@ -1,6 +1,6 @@
 class PartsInOrder < ActiveRecord::Base
 	belongs_to :order
-	belongs_to :parts
+	belongs_to :part
 
 	before_create :default_order
 

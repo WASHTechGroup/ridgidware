@@ -25,7 +25,7 @@
   <%= f.text_area :comment %></br>
 
   <%= f.label :parts %>
-  <%= fields_for :parts do |builder| %>
+  <%= f.fields_for :parts do |builder| %>
     <%= render "part_field", :f => builder %>
   <% end %>
 
