@@ -1,7 +1,7 @@
 <div class "catalog">
 	<table>
 		<!-- The header to the table -->
-		<tr class = "borders">
+		<tr class = "borders fit">
 			<th><%= sortable "part_number", "Part \#" %></th>
 			<th><%= sortable "description", "Desc." %></th>
 			<th><%= sortable "price", "Price" %></th>
@@ -9,11 +9,11 @@
 		</tr>
 		<!-- Itterate through the parts in the databae -->
 		<% @parts.each do |part| %>
-			<tr class = "borders">
-				<td><%= part.part_number %></td>
-				<td><%= part.description %></td>
-				<td><%= part.price %></td>
-				<td><button type="button" class="btn-default btn-xs" onclick="add_to_cart(<%= @cart.id %>,<%= part.id %>)">+</button></td>
+			<tr class = "borders fit">
+				<td id="c4"><%= link_to part.part_number, part %></td>
+				<td id="c2"><%= part.description %></td>
+				<td id="c3"><%= part.price %></td>
+				<td id="c4"><button type="button" class="btn-default btn-xs" onclick="add_to_cart(<%= @cart.id %>,<%= part.id %>)">+</button></td>
 			</tr>
 		<% end %>
 	</table>

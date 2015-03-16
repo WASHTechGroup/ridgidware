@@ -1,14 +1,15 @@
 <!--This is the HTML for the POS system-->
+<div class="screen">
 <div class "row">
 	<!--this is the left 1/2 of the screen-->
-	<div class="col-sm-6">
+	<div class="col-sm-6 container" >
 		<div class="cart_partial">
 			<%= hidden_field_tag :cart_id, @cart.id %>
 			<%=render "carts/cart"%>
 		</div>
 		<!--display the left side of the options below cart-->
 		<div class="complete transaction">
-			<table class="finish" cellspacing="10">
+			<table class="finish fit" cellspacing="10">
 				<col align="left">
   				<col align="right">
 				<tr class="finish">
@@ -36,14 +37,14 @@
 		</div>
 	</div>
 	<!--this is the right 1/2 of the screen-->
-	<div class="col-sm-6">
+	<div class="col-sm-6 container">
 		<div class ="catalog_partial">
 			<%=render "shared/catalog"%>
 		</div>
 		<br>
 		<div class ="POS_admin_buttons">
 
-			<table class="centre">
+			<table class="centre fit">
 				<tr>
 					<td><button class = "btn1">Place Order</button></td>
 					<td><button class = "btn1">Return</button></td>
@@ -77,4 +78,5 @@
         </div>
     </div>
   </div>
+</div>
 </div>
