@@ -88,7 +88,7 @@ function add_quantity_manually(cart_id){
 	{
 		$.post("update_part.json", {cart_id: cart_id, part_id: part, quantity_requested: quant}).done(function(){
 				$(".cart table #part_" + part + " .amount").html("<a href='#basicModal' role='button' class='btn-default btn-s' data-toggle='modal'><b>"+quant+"</a></b>");
-				location.reaload();
+				location.reload();
 				get_total(cart_id);
 			});
 	}
