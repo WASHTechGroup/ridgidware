@@ -60,7 +60,7 @@ namespace :bootstrap do
 		 end
 
 
-		 desc "Add all the default data"
+		desc "Add all the default data"
 		task :all => [:load_parts, :load_roles, :load_programs]
 	end
 end

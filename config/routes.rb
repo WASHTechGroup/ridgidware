@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # Orders
   resources :orders
-  match '/reciving', to: 'orders#reciving', via: 'get', as: 'reciving'
+  match '/recieving', to: 'orders#recieving', via: 'get', as: 'recieving'
   match '/remove_item', to: 'orders#remove_item', via: 'post', as: 'remove_item'
   match '/update_values', to: 'orders#update_values', via: 'post', as: 'update_values'
 

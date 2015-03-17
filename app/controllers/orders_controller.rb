@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
   end
 
   # GET /reciving
-  def reciving
+  def recieving
     @orders = Order.all
   end
 
@@ -57,11 +57,13 @@ class OrdersController < ApplicationController
       if part && order
         list_item = PartsInOrder.find_by({part_id: part.id, order_id: order.id})
         if list_item
+          old_qr = list_item.quant_received
           list_item.quant_received = params[:quant_received]
           list_item.quant_backordered = params[:quant_backordered]
           list_item.save!
-          part.on_order = part.on_order - list_item.quant_received 
-          part.on_hand = part.on_hand + list_item.quant_received 
+          d_oro = old_qr - list_item.quant_received
+          part.on_order = part.on_order + d_oro 
+          part.on_hand = part.on_hand - d_oro
           part.save!
           msg = { :status => "ok", :message => "Success!"}
           format.json { render json: msg }

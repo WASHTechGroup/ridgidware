@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Reciving Orders</h1>
+<h1>Recieving Orders</h1>
 
 <table>
 	<% @orders.each do |order| %>
@@ -23,18 +23,21 @@
 						<th>Part #.</th>
 						<th>Cost</th>
 						<th>Ordered</th>
-						<th>Recived</th>
+						<th>Recieved</th>
 						<th>Back Ordered</th>
 					</tr>
 				</thead>
 				<tbody>
 					<% order.parts_in_order.each do |part| %>
-						<tr>
+						<tr class="part_in_order">
+							<input type="hidden" class="part_id" value="<%= part.part_id %>">
+							<input type="hidden" class="order_id" value="<%= part.order_id %>">
 							<td><%= Part.find(part.part_id).part_number %></td>
 							<td><%= part.cost %></td>
-							<td><%= part.quant_ordered %></td>
-							<td><%= part.quant_received %></td>
-							<td><%= part.quant_backordered %></td>
+							<td class="ordered"><%= part.quant_ordered %></td>
+							<td class="received"><%= part.quant_received %></td>
+							<td class="backordered"><%= part.quant_backordered %></td>
+							<td id='c11'><button href="#basicModal" data-toggle="modal" type='button' class = 'btn-default btn-s' id='small' onclick='set_modal(this)'>Update</button></td>
 						</tr>
 					<% end %>
 				</tbody>
@@ -53,17 +56,18 @@
 	            <div class="modal-body">
 	                <form>
 	                	Quantity Received:<br>
-	                	<input type="text" name="quant_received" id = "quant_received">
-						<input type="text" name="quant_backordered" id = "quant_backordered">
-						<input type="hidden" name="quant_ordered" id="quant_ordered">
-						<input type="hidden" name="part_id" id="part_id">
-						<input type="hidden" name="order_id" id="order_id">
-						<br>
+	                	<input type="text" name="quant_received" id = "quant_received"><br>
+	                	Quantity on Backorder:<br>
+										<input type="text" name="quant_backordered" id = "quant_backordered">
+										<br>
+										<input type="hidden" name="quant_ordered" id="quant_ordered">
+										<input type="hidden" name="part_id" id="part_id">
+										<input type="hidden" name="order_id" id="order_id">
 	                </form>
 
 	            </div>
 	            <div class="modal-footer">
-	                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="add_quantity_manually(<%=@cart.id%>, quantity, part_id)">Done</button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="update_values()">Done</button>
 	        </div>
 	    </div>
 	  </div>
