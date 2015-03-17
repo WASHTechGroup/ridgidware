@@ -22,7 +22,12 @@ class OrdersController < ApplicationController
   def edit
   end
 
-  # 
+  # GET /reciving
+  def reciving
+    @orders = Order.all
+  end
+
+  # POST /remove_item.json | Removes an item from the database
   def remove_item
     part = Part.find(params[:part_id])
     order = Order.find(params[:order_id])
@@ -31,6 +36,33 @@ class OrdersController < ApplicationController
         list_item = PartsInOrder.find_by({part_id: part.id, order_id: order.id})
         if list_item
           list_item.destroy!
+          msg = { :status => "ok", :message => "Success!"}
+          format.json { render json: msg }
+        else
+          msg = { :status => "error", :message => "This Part is not in this order!"}
+        format.json { render json: msg }
+        end
+      else
+        msg = { :status => "error", :message => "Missing Part or Order in the DB!"}
+        format.json { render json: msg }
+      end
+    end
+  end
+
+  # Udating the inventory levels 
+  def update_values
+    part = Part.find(params[:part_id])
+    order = Order.find(params[:order_id])
+    respond_to do |format|
+      if part && order
+        list_item = PartsInOrder.find_by({part_id: part.id, order_id: order.id})
+        if list_item
+          list_item.quant_received = params[:quant_received]
+          list_item.quant_backordered = params[:quant_backordered]
+          list_item.save!
+          part.on_order = part.on_order - list_item.quant_received 
+          part.on_hand = part.on_hand + list_item.quant_received 
+          part.save!
           msg = { :status => "ok", :message => "Success!"}
           format.json { render json: msg }
         else
@@ -92,6 +124,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:order_no, :cost, :subtotal, :tax, :total, :comment, :parts_in_order_attributes => [:part_id, :amount, :cost, :_destroy])
+      params.require(:order).permit(:order_no, :po_number, :subtotal, :tax, :total, :comment, :parts_in_order_attributes => [:part_id, :amount, :cost, :quant_ordered, :quant_received, :quant_backordered, :id])
     end
 end

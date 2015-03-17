@@ -1,6 +1,55 @@
 <p id="notice"><%= notice %></p>
 
-
+<table>
+	<tr>
+		<td><b>Order #.</b></td>
+		<td><%= @order.order_no %></td>
+	</tr>
+	<tr>
+		<td><b>Sub Total</b></td>
+		<td><%= @order.subtotal %></td>
+	</tr>
+	<tr>
+		<td><b>Tax</b></td>
+		<td><%= @order.tax %></td>
+	</tr>
+	<tr>
+		<td><b>Cost</b></td>
+		<td><%= @order.total %></td>
+	</tr>
+	<tr>
+		<td><b>PO #.</b></td>
+		<td><%= @order.po_number %></td>
+	</tr>
+	<tr>
+		<td><b>Comments</b></td>
+		<td><%= @order.comment %></td>
+	</tr>
+	<tr>
+		<table>
+			<thead>
+				<tr>
+					<th>Part #.</th>
+					<th>Cost</th>
+					<th>Ordered</th>
+					<th>Recived</th>
+					<th>Back Ordered</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @order.parts_in_order.each do |part| %>
+					<tr>
+						<td><%= Part.find(part.part_id).part_number %></td>
+						<td><%= part.cost %></td>
+						<td><%= part.quant_ordered %></td>
+						<td><%= part.quant_received %></td>
+						<td><%= part.quant_backordered %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</tr>
+</table>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>

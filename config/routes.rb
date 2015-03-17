@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  # 
+  # Orders
   resources :orders
+  match '/reciving', to: 'orders#reciving', via: 'get', as: 'reciving'
+  match '/remove_item', to: 'orders#remove_item', via: 'post', as: 'remove_item'
+  match '/update_values', to: 'orders#update_values', via: 'post', as: 'update_values'
 
-  # inventores
+  # Inventores
   resources :inventories
 
   # Parts resources
@@ -13,9 +16,6 @@ Rails.application.routes.draw do
   match '/add_part', to: 'carts#add_part', via: 'post', as: 'add_part'
   match '/remove_part', to: 'carts#remove_part', via: 'post', as: 'remove_part'
   match '/update_part', to: 'carts#update_part', via: 'post', as: 'update_part'
-
-  # APIs for the Orders interface
-  match 'remove_item', to: 'orders#remove_item', via: 'post', as: 'remove_item'
 
   # User resources and 
   devise_for :users

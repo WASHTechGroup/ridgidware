@@ -1,6 +1,9 @@
 # ridgidware
 THE MOTHER FUCKING PROJECT
 
+## Production
+https://radiant-lake-3337.herokuapp.com/
+
 ## Set up
 ```
 rake db:migrate

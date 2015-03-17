@@ -55,10 +55,7 @@
 
 			<div class="col-sm-4">
 				<div id="add-sku-button" class="button-frame vert-space" onclick="goto('<%= parts_path%>')">
-					Add SKU
-				</div>
-				<div id="remove-sku-button" class="button-frame vert-space">
-					Remove SKU
+					Manage SKUs
 				</div>
 				<div id="manage-users-button" class="button-frame vert-space" onclick="goto('<%= users_path%>')">
 					Manage Users
@@ -78,22 +75,17 @@
 		<div>
 
 			<div class="row">
-				<div class="col-sm-3">
-					<div id="manage-suppliers-button" class="button-frame">
-						Manage Supplier
-					</div>
-				</div> 
-				<div id="recive-order-button" class="col-xs-3">
+				<div id="recive-order-button" class="col-xs-4">
 					<div class="button-frame">
 						Recive Order
 					</div>
 				</div> 
-				<div id="place-order-button" class="col-xs-3">
-					<div class="button-frame" >
+				<div id="place-order-button" class="col-xs-4">
+					<div class="button-frame" onclick="goto('<%= new_order_path %>')" >
 						Place Order
 					</div>
 				</div> 
-				<div id="manage-order-button" class="col-xs-3">
+				<div id="manage-order-button" class="col-xs-4">
 					<div class="button-frame" onclick="goto('<%= orders_path%>')">
 						Manage Order
 					</div>

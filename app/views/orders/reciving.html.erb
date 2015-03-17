@@ -1,0 +1,70 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Reciving Orders</h1>
+
+<table>
+	<% @orders.each do |order| %>
+		<tr>
+			<td><b>Order #.</b></td>
+			<td><%= order.order_no %></td>
+		</tr>
+		<tr>
+			<td><b>PO #.</b></td>
+			<td><%= order.po_number %></td>
+		</tr>
+		<tr>
+			<td><b>Comments</b></td>
+			<td><%= order.comment %></td>
+		</tr>
+		<tr>
+			<table>
+				<thead>
+					<tr>
+						<th>Part #.</th>
+						<th>Cost</th>
+						<th>Ordered</th>
+						<th>Recived</th>
+						<th>Back Ordered</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% order.parts_in_order.each do |part| %>
+						<tr>
+							<td><%= Part.find(part.part_id).part_number %></td>
+							<td><%= part.cost %></td>
+							<td><%= part.quant_ordered %></td>
+							<td><%= part.quant_received %></td>
+							<td><%= part.quant_backordered %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</tr>
+	<% end %>
+</table>
+
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+	            <h4 class="modal-title" id="myModalLabel">Update Count</h4>
+	            </div>
+	            <div class="modal-body">
+	                <form>
+	                	Quantity Received:<br>
+	                	<input type="text" name="quant_received" id = "quant_received">
+						<input type="text" name="quant_backordered" id = "quant_backordered">
+						<input type="hidden" name="quant_ordered" id="quant_ordered">
+						<input type="hidden" name="part_id" id="part_id">
+						<input type="hidden" name="order_id" id="order_id">
+						<br>
+	                </form>
+
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="add_quantity_manually(<%=@cart.id%>, quantity, part_id)">Done</button>
+	        </div>
+	    </div>
+	  </div>
+	</div>

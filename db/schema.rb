@@ -75,10 +75,10 @@ ActiveRecord::Schema.define(version: 20150311230004) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "order_no",   limit: 4
-    t.float    "cost",       limit: 24
     t.float    "subtotal",   limit: 24
     t.float    "tax",        limit: 24
     t.float    "total",      limit: 24
+    t.string   "po_number",  limit: 255
     t.text     "comment",    limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
@@ -102,12 +102,14 @@ ActiveRecord::Schema.define(version: 20150311230004) do
   end
 
   create_table "parts_in_orders", force: :cascade do |t|
-    t.integer  "order_id",   limit: 4
-    t.integer  "part_id",    limit: 4
-    t.integer  "amount",     limit: 4
-    t.float    "cost",       limit: 24
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "order_id",          limit: 4
+    t.integer  "part_id",           limit: 4
+    t.integer  "quant_ordered",     limit: 4
+    t.integer  "quant_received",    limit: 4
+    t.integer  "quant_backordered", limit: 4
+    t.float    "cost",              limit: 24
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "po_payments", force: :cascade do |t|

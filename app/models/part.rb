@@ -19,6 +19,7 @@ class Part < ActiveRecord::Base
 		end
 	end
 
+	# Getter Values 
 	def on_hold
 		inventory.on_hold
 	end
@@ -37,6 +38,19 @@ class Part < ActiveRecord::Base
 
 	def inv_position
 		inventory.inv_position
+	end
+
+	# Setter Values
+	def on_hold=(value)
+		inventory.on_hold = value
+	end
+
+	def on_order=(value)
+		inventory.on_order = value
+	end
+
+	def on_hand=(value)
+		inventory.on_hand = value
 	end
 
 	private 
