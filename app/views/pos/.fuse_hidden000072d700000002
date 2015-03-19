@@ -4,21 +4,21 @@
 	<div class="col-sm-6">
 		<form>
 			Trasaction ID:
-			<input type="text" name="transaction_id" id="transaction_id" value="<%= @transaction.id unless @transaction == nil %>">
+			<input type="text" name="transaction_id" id="transaction_id">
 			<a class="" onclick="get_trans_cart()">Submit</a>
 		</form>
 		<br>
-		<div id="transaction" class ="cart_partial  cart">
+		<div class ="cart_partial  cart">
 			<% if @transaction %>
-				<%=render "carts/return_cart", f: @parts_in_cart, add: true %>
+				<%=render "carts/cart"%>
 			<% end %>
 		</div>
 
 	</div>	
 	<!--this is the right 1/2 of the screen-->
 	<div class="col-sm-6">
-		<div id="returns" class ="cart_partial cart">
-			<%=render "carts/return_cart", f: @parts_returning_cart, add: false %>
+		<div class ="cart_partial cart">
+			<%=render "carts/return_cart", f: @cart_retruning %>
 		</div>
 		<div>
 			<table>

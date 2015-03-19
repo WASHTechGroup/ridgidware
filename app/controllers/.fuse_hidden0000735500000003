@@ -33,17 +33,10 @@ class PosController < ApplicationController
 			end
 		end
 		@parts_returning_cart = @cart_retruning.parts_in_cart
-		# Delete all entries in this cart on refresh
-		@parts_returning_cart.each do |part|
-			part.destroy!
-		end
-
-		# Fill the cart with stuff
-		if @parts_in_cart 
+		@parts_returning_cart.delete()
+		if @parts_in_cart.each 
 			@parts_in_cart.each do |part|
-				pic = PartsInCart.new({part_id:part.part_id, cart_id:@cart_retruning.id})
-				pic.quantity_requested = 0
-				@parts_returning_cart << pic
+				@parts_returning_cart << PartsInCart.new({part_id:part.part_id, cart_id:@cart_retruning.id, quantity_requested:0})
 			end
 			# @parts_returning_cart.save!
 			@cart_retruning.save!

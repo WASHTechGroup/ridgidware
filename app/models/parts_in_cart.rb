@@ -3,7 +3,7 @@ class PartsInCart < ActiveRecord::Base
 
 	belongs_to :part
 
-	before_create :default_quantity
+	before_save :default_quantity
 
 	## when you find part in this cart, you can use this line to find the quantity
 
@@ -13,6 +13,6 @@ class PartsInCart < ActiveRecord::Base
 
 	private
 		def default_quantity 
-			self.quantity_requested = 1
+			self.quantity_requested ||= 1
 		end
 end

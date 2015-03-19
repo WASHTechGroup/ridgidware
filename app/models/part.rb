@@ -19,6 +19,10 @@ class Part < ActiveRecord::Base
 		end
 	end
 
+	def self.onSale
+		where('price > 0')
+	end
+
 	# Getter Values 
 	def on_hold
 		inventory.on_hold

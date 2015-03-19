@@ -6,6 +6,7 @@ function add_to_cart(cart_id, part_id) {
 	$.get("parts/"+part_id+".json").done(function(data) {
 		// Variables
 		var cur = "";
+		var max_inv = parseInt(data["on_hand"]);
 		// create the HTML of the table entry
 		html = "<tr class = 'borders fit' id='part_"+ part_id + "'>" +
 					"<td id='c5'><button type='button' class = 'btn-default btn-s' id = 'small' onclick = 'delete_item("+ cart_id +","+ part_id +")'>X</button></td>" + 
@@ -20,12 +21,14 @@ function add_to_cart(cart_id, part_id) {
 		if($(".cart table #part_" + part_id).length) {
 			// update the count of the part
 			cur = $(".cart table #part_" + part_id + " .amount").text();
-			amount = parseInt(cur) + 1;
-			console.log(amount);
-			$.post("update_part.json", {cart_id: cart_id, part_id: part_id, quantity_requested: amount}).done(function(){
-				$(".cart table #part_" + part_id + " .amount").html("<a href='#basicModal' role='button' class='btn-default btn-s' data-toggle='modal'><b>"+amount+"</a></b>");
-				get_total(cart_id);
-			});
+			if (max_inv > cur) {
+				amount = parseInt(cur) + 1;
+				console.log(amount);
+				$.post("update_part.json", {cart_id: cart_id, part_id: part_id, quantity_requested: amount}).done(function(){
+					$(".cart table #part_" + part_id + " .amount").html("<a href='#basicModal' role='button' class='btn-default btn-s' data-toggle='modal'><b>"+amount+"</a></b>");
+					get_total(cart_id);
+				});
+			}
 		}
 		// If it is not in the cart 
 		else {

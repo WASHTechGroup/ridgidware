@@ -52,6 +52,7 @@ class TransactionsController < ApplicationController
     @cart = current_user.cart
     @cart.owner = params[:owners]
     current_user.cart = Cart.new
+    current_user.cart.owner = current_user.username;
     current_user.save!
     respond_to do |format|
       if @transaction.save

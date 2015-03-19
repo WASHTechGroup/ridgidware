@@ -1,0 +1,23 @@
+<div class "catalog">
+	<table class "borders">
+		<!-- The header to the table -->
+		<tr class = "borders">
+			<th><%= sortable "part_number", "Part \#" %></th>
+			<th><%= sortable "description", "Desc." %></th>
+			<th><%= sortable "price", "Price" %></th>
+			<th><%= sortable "on_hand", "In stock" %></th>
+			<th><%= sortable "on_order", "On order" %></th>
+			<th class="span-1"></th>
+		</tr>
+		<!-- Itterate through the parts in the databae -->
+		<% @parts.each do |part| %>
+			<tr class = "borders">
+				<td id="col1"><%= link_to part.part_number, part %></td>
+				<td id="col2"><%= part.description %></td>
+				<td id="col3"><%= part.price.round(2) %></td>
+				<td id="col4"><%= part.on_hand%></td>
+				<td id="col5"><%= part.on_order%></td>
+			</tr>
+		<% end %>
+	</table>
+</div>

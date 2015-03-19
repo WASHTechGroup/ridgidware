@@ -1,0 +1,19 @@
+<div class="cart">
+	<table>
+		<tbody>
+		<tr></tr>
+			<% f.each do |part| %>
+				<tr class = 'borders fit' id='part_<%= part.part_id %>'>
+					<input type="hidden" id="part_id" >
+					<td id='c5'><button type='button' class = 'btn-default btn-s' id = "small" onclick = 'switch_cart(<%= add %>, <%=part.cart_id%>, <%=part.part_id%>, <%= part.quantity_requested %>, <%= part.quantity_requested %>)'>X</button></td>
+					<% part_info = Part.find(part.part_id) %>
+					<td id='c6'><%= part_info.part_number %></td>
+					<td id='c7'><%= part_info.price %></td>
+					<td id='c8'><%= part_info.description %></td>	
+					<td class='amount' id='c10'><b><%= part.quantity_requested %></b></td>
+					<td id='c11'><button type='button' class = 'btn-default btn-s' id='small' onclick='switch_cart(<%= add %>, <%= part.cart_id %>, <%= part.part_id%>, 1, <%= part.quantity_requested %>)'>-</button></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
