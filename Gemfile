@@ -31,13 +31,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # add pagenation to any page
 # gem 'will_paginate', '3.0.4'
 # pagenation with bootstrap 
-gem 'bootstrap-will_paginate', '0.0.9'
+# gem 'bootstrap-will_paginate', '0.0.9'
 # User authentication for the site that uses the 
 gem 'devise', github: 'plataformatec/devise'
 gem 'devise_cas_authenticatable'
 # friendly_id is an awesom gem to slug objects in the database
 gem 'friendly_id', '~> 5.1.0'
-
+# Converts HTML to PDF
+gem 'wicked_pdf'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

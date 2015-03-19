@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Transaction Data">
+    <Table>
+      <% @transactions.each do |trans| %>
+        <Row>
+          <Cell><Data ss:Type="String">Transactions</Data></Cell>
+        </Row>
+        <Row>
+          <Cell><Data ss:Type="String">Transaction #</Data></Cell>
+          <Cell><Data ss:Type="String">Date</Data></Cell>
+          <Cell><Data ss:Type="String">Subtotal</Data></Cell>
+          <Cell><Data ss:Type="String">Taxs</Data></Cell>
+          <Cell><Data ss:Type="String">Total</Data></Cell>
+          <Cell><Data ss:Type="String">Amount Recieved</Data></Cell>
+          <Cell><Data ss:Type="String">Change</Data></Cell>
+        </Row>
+        <Row>
+          <Cell><Data ss:Type="String"><%= trans.id %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= trans.created_at %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= trans.subtotal %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= trans.tax %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= trans.total %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= trans.amount_given %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= trans.change %></Data></Cell>
+        </Row>
+        <Row>
+        </Row>
+        <Row>
+          <Cell><Data ss:Type="String">Part #</Data></Cell>
+          <Cell><Data ss:Type="String">Description</Data></Cell>
+          <Cell><Data ss:Type="String">Release Date</Data></Cell>
+          <Cell><Data ss:Type="String">Price</Data></Cell>
+        </Row>
+      <% trans.parts_in_cart.each do |part| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= Part.find(part.pat_id).part_number %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= part.quantity_requested %></Data></Cell>
+          <Cell><Data ss:Type="Number"><%= part.price %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= part.quantity_requested * part.price %></Data></Cell>
+        </Row>
+      <% end %>
+      <Row>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

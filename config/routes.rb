@@ -43,6 +43,16 @@ Rails.application.routes.draw do
   match '/transactions/get_cart', to: 'transactions#get_cart', via: 'post', as: 'get_cart'
   match '/checkout', to: 'transactions#checkout', via: 'post', as: 'checkout'
 
+  # Reporting APIs
+  match '/reports/daily', to: 'reports#daily', via: 'get', as: 'daily_report'
+  match '/reports/weekly', to: 'reports#weekly', via: 'get', as: 'weekly_report'
+  match '/reports/monthly', to: 'reports#monthly', via: 'get', as: 'monthly_report'
+  match '/reports/quarterly', to: 'reports#quarterly', via: 'get', as: 'quarterly_report'
+  match '/reports/yearly', to: 'reports#yearly', via: 'get', as: 'yearly_report'
+  match '/reports/audit', to: 'reports#audit', via: 'get', as: 'audit_report'
+  match '/reports/po', to: 'reports#po_report', via: 'get', as: 'po_report'
+  match '/reports/inventory', to: 'reports#inventory', via: 'get', as: 'inventory_report'
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
