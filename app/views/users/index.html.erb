@@ -1,5 +1,7 @@
 <div class="row">
-	<div class="col-md-8"> 
+	<div class="col-sm-1">
+	</div>
+	<div class="col-sm-4 container"> 
 		<div class="table-responsive"> 
 			<table class="table">
 				<tr>
@@ -7,48 +9,23 @@
 					<th>Last Name</th>
 					<th>WatIAM ID</th>
 					<th>Role</th>
-					<th>Program</th>
-					<th>Term</th>
-					<th>Year of Graduation</th>
 					<th>Email</th>
 				</tr>
 				<% @users.each do |user| %>
-					<tr class="user_row clickable-row" id="user_<%= user.username %>" data="<%= user.username %>" onclick="inputusername('<%= user.username %>');">
+					<tr class="user_row clickable-row onhover" id="user_<%= user.username %>" data="<%= user.username %>" onclick="inputusername('<%= user.username %>');">
 						<td><%= user.firstname %></td>
 						<td><%= user.lastname %></td>
 						<td><%= user.username %></td>
 						<td><%= user.role.name %></td>
-						<% if user.program %>
-							<td><%= Program.find_by_id(user.program).name %></td>
-						<% else %>
-							<td></td>
-						<% end %> 
-						<td><%= user.term %></td>
-						<td><%= user.year %></td>
 						<td><%= user.email %></td>
 					</tr>		
 				<% end %>
 			</table>
 		</div>
 	</div>
-	<div class="col-md-4">	
-		<div class="row">
-			<div class="col-xs-4">
-				<div id="add-user-button" class="button-frame vert-space" onclick="showadd()">
-					Add Users
-				</div>
-			</div>
-			<div class="col-xs-4">
-				<div id="remove-user-button" class="button-frame vert-space" onclick="showremove()">
-					Remove User
-				</div>
-			</div>
-			<div class="col-xs-4">
-				<div id="change-roles-button" class="button-frame vert-space" onclick="showroles()">
-					Change Role
-				</div>
-			</div>
-		</div>
+	<div class="col-sm-4">
+		
+
 		<div class="panel">
 			<div id="add-user-panel" class="container">
 				<h3>Add Users</h3>
@@ -112,5 +89,13 @@
 				<% end %>
 			</div>
 		</div>
+
+		<table class="finish centre">
+			<tr>
+				<td><button class = "btn1" id="user" onclick="showadd()">Add</button></td>
+				<td><button class = "btn1" id="user" onclick="showremove()">Remove</button></td>
+				<td><button class = "btn1" id="user" onclick="showroles()">Update</button></td>
+			</tr>
+		</table>
 	</div>
 </div>
