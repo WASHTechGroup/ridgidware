@@ -11,7 +11,7 @@ function remove_fields(link) {
 function add_fields(link) {
   var time = new Date().getTime();
   var regexp = new RegExp($(link).data('id'), 'g');
-  $(link).before($(link).data('fields').replace(regexp, time))
+  $(link).before($(link).data('fields').replace(regexp, time));
 }
 
 function remove_item(part_id, order_id) {
