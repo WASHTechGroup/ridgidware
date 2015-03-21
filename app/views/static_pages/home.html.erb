@@ -1,10 +1,10 @@
-`<div class="row">
+<!--<div class="row">
 	<div class="col-sm-6">
 		<h2>My Orders and Hold</h2>
 		<div class ="holds">
-			<table>
+			<table>-->
 				<!--Placeholder values to be filled with JS-->
-				<tr class="borders">
+				<!--<tr class="borders">
 					<td>photo</td>
 					<td>
 						<table>
@@ -20,8 +20,7 @@
 				</tr>
 			</table>
 		</div>
-	</div>
-	<div class="col-sm-6">
+	</div>-->
 		<!-- Only show this if the user is logged in-->
 		<% if current_user %>
 			<h2>Profile</h2>
@@ -29,7 +28,8 @@
 			<div class="container">
 		
 			<%=render "users/editProfile"%>
-		<% end %>
+		<% else %>
+			<center><%=image_tag("logo.png", size: "500x500")%>
+				<h1>Welcome</h1></center>
+		<%end %>
 	</div>
-	</div>
-</div>
