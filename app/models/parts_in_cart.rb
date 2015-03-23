@@ -11,6 +11,10 @@ class PartsInCart < ActiveRecord::Base
 		write_attribute(:quantity_requested, value)
 	end
 
+	def copy_to(value)
+		
+	end
+
 	private
 		def default_quantity 
 			self.quantity_requested ||= 1

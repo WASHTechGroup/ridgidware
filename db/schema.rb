@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311230004) do
+ActiveRecord::Schema.define(version: 20150323003056) do
 
   create_table "carts", force: :cascade do |t|
     t.string   "owner",      limit: 255
@@ -63,6 +63,17 @@ ActiveRecord::Schema.define(version: 20150311230004) do
   end
 
   create_table "inventories", force: :cascade do |t|
+    t.integer  "part_id",      limit: 4, null: false
+    t.integer  "on_hand",      limit: 4
+    t.integer  "on_order",     limit: 4
+    t.integer  "on_hold",      limit: 4
+    t.integer  "available",    limit: 4
+    t.integer  "inv_position", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "inventory_histories", force: :cascade do |t|
     t.integer  "part_id",      limit: 4, null: false
     t.integer  "on_hand",      limit: 4
     t.integer  "on_order",     limit: 4

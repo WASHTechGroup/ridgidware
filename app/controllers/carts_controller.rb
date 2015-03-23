@@ -83,6 +83,20 @@ class CartsController < ApplicationController
     end
   end
 
+  def update_part_keep
+    part = Part.find(params[:part_id])
+    cart = Cart.find(params[:cart_id])
+    inCart = PartsInCart.find_by({part_id: part.id, cart_id: cart.id})
+    quant = params[:quantity_requested].to_i
+    inCart.quantity_requested = quant
+    inCart.save
+
+    respond_to do |format|
+      msg = { :status => "ok", :message => "Success!"}
+      format.json { render json: msg }
+    end
+  end
+
   def remove_part
     part = Part.find(params[:part_id])
     cart = Cart.find(params[:cart_id])
@@ -93,30 +107,6 @@ class CartsController < ApplicationController
       format.json { render json: msg }
     end
   end
-=begin
-  def swap_parts
-    part = Part.find(params[:part_id])
-    to = Cart.find(params[:to_id])
-    from = Cart.find(params[:from_id])
-    quant = params[:quant].to_i
-    # Get the parts in cart entries to change
-    moveTo = PartsInCart.find_by({part_id: part.id, cart_id: to.id})
-    moveFrom = PartsInCart.find_by({part_id: part.id, cart_id: from.id})
-    moveTo ||= PartInCart.new({part_id: part.id, cart_id: to.id. quantity_requested: 0})
-    moveFrom ||= PartInCart.new({part_id: part.id, cart_id: from.id. quantity_requested: 0})
-    respond_to do |format|
-      if quant == moveFrom.quantity_requested 
-        moveFrom.destroy
-        moveTo.quantity_requested = quant
-      else 
-         moveFrom.quantity_requested += quant
-         moveTo.quantity_requested += 
-      end
-      format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-=end
 
   # DELETE /carts/1
   # DELETE /carts/1.json

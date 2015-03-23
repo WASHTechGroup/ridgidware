@@ -6,6 +6,7 @@ class Part < ActiveRecord::Base
 
 	has_one :inventory, dependent: :destroy, autosave: true
 	accepts_nested_attributes_for :inventory, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
+	has_many :inventory_history
 	has_many :parts_in_order
 	has_many :orders, through: :parts_in_order
 
@@ -20,6 +21,7 @@ class Part < ActiveRecord::Base
 	end
 
 	def self.onSale
+		# joins(:inventory).where('price > 0 AND on_hand > 0')
 		where('price > 0')
 	end
 
@@ -46,14 +48,17 @@ class Part < ActiveRecord::Base
 
 	# Setter Values
 	def on_hold=(value)
+		record_history
 		inventory.on_hold = value
 	end
 
 	def on_order=(value)
+		record_history
 		inventory.on_order = value
 	end
 
 	def on_hand=(value)
+		record_history
 		inventory.on_hand = value
 	end
 
@@ -61,5 +66,15 @@ class Part < ActiveRecord::Base
 
 		def create_inventory
 			inventory ||= Inventory.new
+		end
+
+		def record_history
+			temp =  InventoryHistory.new
+			temp.part_id = id
+			temp.on_hand = on_hand
+			temp.on_order = on_order
+			temp.on_hold = on_hold
+			temp.save!
+			inventory_history << temp
 		end
 end

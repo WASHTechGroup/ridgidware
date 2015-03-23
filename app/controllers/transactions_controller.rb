@@ -49,6 +49,7 @@ class TransactionsController < ApplicationController
     @transaction.amount_given = params[:transaction][:amount_given]
     @transaction.change = params[:transaction][:change]
     @transaction.save!
+    @transaction.checkout
     @cart = current_user.cart
     @cart.owner = params[:owners]
     current_user.cart = Cart.new
@@ -68,7 +69,30 @@ class TransactionsController < ApplicationController
 
  ## basically get negative money totals, pulling up a cart
   def return
-    @cart = Cart.new
+    @transaction = Transaction.new
+    @transaction.cart_id = current_user.cart.id
+    @transaction.total = params[:transaction][:total]
+    @transaction.subtotal = params[:transaction][:subtotal]
+    @transaction.tax = params[:transaction][:tax]
+    @transaction.amount_given = params[:transaction][:amount_given]
+    @transaction.change = params[:transaction][:change]
+    @transaction.save!
+    @transaction.return
+    @cart_retruning = Cart.find_by({owner: "#{current_user.username}_returns"})
+    @cart_retruning.owner = ""
+    @cart_retruning = Cart.new
+    @cart_retruning.owner = "#{current_user.username}_returns"
+    @cart_retruning.save!
+    session[:returns_cart] = @cart_retruning.id 
+    respond_to do |format|
+      if @transaction.save
+        format.html { redirect_to :back, notice: 'Transaction was successfully created.' }
+        format.json { render :show, status: :created, location: @transaction }
+      else
+        format.html { render :new }
+        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
  def get_transaction_for_return

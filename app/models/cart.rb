@@ -1,5 +1,5 @@
 class Cart < ActiveRecord::Base
-	belongs_to :transactions
+	has_one :transactions
 	belongs_to :holds
 	has_one :user
 	has_many :parts_in_cart

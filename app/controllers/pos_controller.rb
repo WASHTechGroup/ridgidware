@@ -22,7 +22,7 @@ class PosController < ApplicationController
 		@cart_retruning = nil
 		if session[:returns_cart]
 			@cart_retruning = Cart.find(session[:returns_cart])
-			puts "Parts In Cart : #{@cart_retruning.parts_in_cart}"
+			puts "Parts In Cart : #{@cart_retruning.id}"
 		else
 			@cart_retruning = Cart.find_by({owner: "#{current_user.username}_returns"})
 			if !@cart_retruning 
@@ -35,17 +35,21 @@ class PosController < ApplicationController
 		@parts_returning_cart = @cart_retruning.parts_in_cart
 		# Delete all entries in this cart on refresh
 		@parts_returning_cart.each do |part|
-			part.destroy!
-		end
+		part.destroy!
+	end
 
-		# Fill the cart with stuff
-		if @parts_in_cart 
+		if @parts_in_cart && @parts_returning_cart.length != @parts_in_cart.length
+=begin
+			@parts_returning_cart.each do |part|
+				part.destroy!
+			end
+=end			
+			# Fill the cart with stuff
 			@parts_in_cart.each do |part|
 				pic = PartsInCart.new({part_id:part.part_id, cart_id:@cart_retruning.id})
 				pic.quantity_requested = 0
 				@parts_returning_cart << pic
 			end
-			# @parts_returning_cart.save!
 			@cart_retruning.save!
 		end
  	end

@@ -1,5 +1,5 @@
 class Transaction < ActiveRecord::Base
-	has_one :cart
+	belongs_to :cart
 
 	before_save :calculate_change
 
@@ -9,6 +9,26 @@ class Transaction < ActiveRecord::Base
 	validates :total, presence: true
 	validates :amount_given, presence: true
 	validates :change, presence: true
+
+	def checkout
+		# cart = Cart.find(cart_id)
+		cpic = cart.parts_in_cart
+		cpic.each do |in_cart|
+			part = Part.find(in_cart.part_id)
+			part.on_hand = part.on_hand - in_cart.quantity_requested
+			part.save!
+		end
+	end
+
+	def return
+		cart = Cart.find(cart_id)
+		cpic = cart.parts_in_cart
+		cpic.each do |in_cart|
+			part = Part.find(in_cart.part_id)
+			part.on_hand = part.on_hand - in_cart.quantity_requested
+			part.save!
+		end
+	end
 
 	private
 		def calculate_change
