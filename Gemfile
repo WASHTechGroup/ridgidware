@@ -39,6 +39,8 @@ gem 'devise_cas_authenticatable'
 gem 'friendly_id', '~> 5.1.0'
 # Converts HTML to PDF
 gem 'wicked_pdf'
+#
+gem 'rails_12factor'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -64,7 +66,7 @@ group :development, :test do
 end
 
 group :test do
-  # gem 'selenium-webdriver', '2.35.1'
+  gem 'selenium-webdriver', '2.35.1'
   # gem 'capybara', '2.1.0'
   # gem 'factory_girl_rails', '4.2.0'
   # gem 'cucumber-rails', '1.4.0', :require => false
