@@ -12,33 +12,6 @@ function get_total(cart_id){
 	}
 }
 
-function switch_cart(add, cart_id, part_id, quant, max) {
-	var rcur = parseInt($("#returns .cart table #part_" + part_id+ " .amount").text());
-	var ccur = parseInt($("#transaction .cart table #part_" + part_id+ " .amount").text());
-	if (max < 1) max = parseInt($("#transaction .cart table #part_" + part_id+ " #max").val());
-	// If you are going to add parts to the returns 
-	if (add) {
-			rcur = rcur - quant;
-			ccur = ccur + quant;
-			if(rcur < 0) rcur = 0;
-			if(ccur > max) ccur = max;
-			$.post("/update_part_keep.json", {cart_id: cart_id, part_id: part_id, quantity_requested: rcur}).done(function(){
-				$("#returns .cart table #part_" + part_id + " .amount").html("<b>"+rcur+"</b>");
-				$("#transaction .cart table #part_" + part_id + " .amount").html("<b>"+ccur+"</b>");
-			});
-	// If you made a mistake and added too many
-	} else {
-			rcur = rcur + quant;
-			ccur = ccur - quant;
-			if(ccur < 0) ccur = 0;
-			if(rcur > max) rcur = max;
-			$.post("/update_part_keep.json", {cart_id: cart_id, part_id: part_id, quantity_requested: rcur}).done(function(){
-				$("#returns .cart table #part_" + part_id + " .amount").html("<b>"+rcur+"</b>");
-				$("#transaction .cart table #part_" + part_id + " .amount").html("<b>"+ccur+"</b>");
-			});
-	}
-}
-
 function checkout(cart_id) {
 	calc_change();
 	$.post("/transactions/get_totals.json", {cart_id: cart_id}).done(function(data){
@@ -72,7 +45,8 @@ function returns(cart_id) {
 				  }
 				};
 		$.post("/return", json).done(function() {
-			location.reload(true);
+			// location.reload(true);
+			window.location="/pos/returns";
 		});
 	});
 }

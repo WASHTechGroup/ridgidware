@@ -39,6 +39,7 @@ gem 'devise_cas_authenticatable'
 gem 'friendly_id', '~> 5.1.0'
 # Converts HTML to PDF
 gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 #
 gem 'rails_12factor'
 

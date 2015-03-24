@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   
   belongs_to :role
   belongs_to :cart, autosave: true
+  has_many :transactions
 
   before_create :set_default_role
   before_save :set_default_email
@@ -47,6 +48,10 @@ class User < ActiveRecord::Base
 
   def manager?
     self.role == Role.find_by_name('Manager')
+  end
+
+  def full_name
+    "#{firstname} #{lastname}"
   end
 
   private

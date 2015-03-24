@@ -13,7 +13,7 @@
 			<tr class = "borders fit">
 				<td id="c4"><%= link_to part.part_number, part %></td>
 				<td id="c2"><%= part.description %></td>
-				<td id="c3"><%= part.price %></td>
+				<td id="c3"><%= part.price.round(2) %></td>
 				<td id="c3"><%= part.on_hand %></td>
 				<td id="c4"><button type="button" class="btn-default btn-xs" onclick="add_to_cart(<%= @cart.id %>,<%= part.id %>)">+</button></td>
 			</tr>

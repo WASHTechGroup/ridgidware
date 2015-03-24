@@ -1,5 +1,6 @@
 class Transaction < ActiveRecord::Base
 	belongs_to :cart
+	belongs_to :user
 
 	before_save :calculate_change
 
@@ -28,6 +29,14 @@ class Transaction < ActiveRecord::Base
 			part.on_hand = part.on_hand - in_cart.quantity_requested
 			part.save!
 		end
+	end
+
+	def cashier_username
+		user ? user.username : nil
+	end
+
+	def cashier_name
+		user ? user.full_name : nil
 	end
 
 	private

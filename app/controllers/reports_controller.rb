@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
     		format.pdf do
         	 	render pdf: "RigidWare - Daily - #{Time.zone.now.to_date}",
                		   template: 'reports/daily.pdf.html',
-               		   disposition: 'attachment',
+               		   disposition: 'inline',
                		   toc: { depth: 2, 
                				  header_text: 'TEXT', 
                				  disable_links: false }
@@ -27,7 +27,7 @@ class ReportsController < ApplicationController
     		format.pdf do
         	 	render pdf: "RigidWare - Weekly - #{Time.zone.now.to_date}",
                		   template: 'reports/daily.pdf.html',
-               		   disposition: 'attachment',
+               		   disposition: 'inline',
                		   toc: { depth: 2, 
                				  header_text: 'TEXT', 
                				  disable_links: false }
@@ -44,7 +44,7 @@ class ReportsController < ApplicationController
     		format.pdf do
         	 	render pdf: "RigidWare - Monthly - #{Time.zone.now.to_date}",
                		   template: 'reports/daily.pdf.html',
-               		   disposition: 'attachment',
+               		   disposition: 'inline',
                		   toc: { depth: 2, 
                				  header_text: 'TEXT', 
                				  disable_links: false }
@@ -61,7 +61,7 @@ class ReportsController < ApplicationController
     		format.pdf do
         	 	render pdf: "RigidWare - Quarterly - #{Time.zone.now.to_date}",
                		   template: 'reports/daily.pdf.html',
-               		   disposition: 'attachment',
+               		   disposition: 'inline',
                		   toc: { depth: 2, 
                				  header_text: 'TEXT', 
                				  disable_links: false }
@@ -78,7 +78,7 @@ class ReportsController < ApplicationController
     		format.pdf do
         	 	render pdf: "RigidWare - Daily - #{Time.zone.now.to_date}",
                		   template: 'reports/daily.pdf.html',
-               		   disposition: 'attachment',
+               		   disposition: 'inline',
                		   toc: { depth: 2, 
                				  header_text: 'TEXT', 
                				  disable_links: false }

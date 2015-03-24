@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
   protect_from_forgery except: [:get_totals,:get_cart]
-  before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_transaction, only: [:show, :destroy]
 
   # GET /transactions
   # GET /transactions.json
@@ -8,19 +8,15 @@ class TransactionsController < ApplicationController
     @transactions = Transaction.all
   end
 
-  # POST /transactions
-  # POST /transactions.json
-  def create
-    @transaction = Transaction.new(transaction_params)
+  def show
+  end
 
+  def destroy
+    @transaction.return
+    @transaction.destroy
     respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
-      else
-        format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 
@@ -43,11 +39,12 @@ class TransactionsController < ApplicationController
   def checkout
     @transaction = Transaction.new
     @transaction.cart_id = current_user.cart.id
-    @transaction.total = params[:transaction][:total]
-    @transaction.subtotal = params[:transaction][:subtotal]
-    @transaction.tax = params[:transaction][:tax]
-    @transaction.amount_given = params[:transaction][:amount_given]
-    @transaction.change = params[:transaction][:change]
+    @transaction.user = current_user
+    @transaction.total = params[:transaction][:total].to_f
+    @transaction.subtotal = params[:transaction][:subtotal].to_f
+    @transaction.tax = params[:transaction][:tax].to_f
+    @transaction.amount_given = params[:transaction][:amount_given].to_f
+    @transaction.change = params[:transaction][:change].to_f
     @transaction.save!
     @transaction.checkout
     @cart = current_user.cart
@@ -67,18 +64,19 @@ class TransactionsController < ApplicationController
   end
 
 
- ## basically get negative money totals, pulling up a cart
+  ## basically get negative money totals, pulling up a cart
   def return
     @transaction = Transaction.new
     @transaction.cart_id = current_user.cart.id
-    @transaction.total = params[:transaction][:total]
-    @transaction.subtotal = params[:transaction][:subtotal]
-    @transaction.tax = params[:transaction][:tax]
-    @transaction.amount_given = params[:transaction][:amount_given]
-    @transaction.change = params[:transaction][:change]
+    @transaction.user = current_user
+    @transaction.total = params[:transaction][:total].to_f
+    @transaction.subtotal = params[:transaction][:subtotal].to_f
+    @transaction.tax = params[:transaction][:tax].to_f
+    @transaction.amount_given = params[:transaction][:amount_given].to_f
+    @transaction.change = params[:transaction][:change].to_f
     @transaction.save!
     @transaction.return
-    @cart_retruning = Cart.find_by({owner: "#{current_user.username}_returns"})
+    @cart_retruning = Cart.find(session[:returns_cart])
     @cart_retruning.owner = ""
     @cart_retruning = Cart.new
     @cart_retruning.owner = "#{current_user.username}_returns"
@@ -95,26 +93,12 @@ class TransactionsController < ApplicationController
     end
   end
 
- def get_transaction_for_return
+  def get_transaction_for_return
     @transaction = Transaction.find_by(params[:transaction_id])
     @cart_id = @transaction.cart_id
     @parts_in_cart = Cart.find_by(@cart_id).parts_in_cart
     respond_to do |format|
       format.json{render :get_cart, status: 200}
-    end
- end
-
-  # PATCH/PUT /transactions/1
-  # PATCH/PUT /transactions/1.json
-  def update
-    respond_to do |format|
-      if @transaction.update(transaction_params)
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
-        format.json { render :show, status: :ok, location: @transaction }
-      else
-        format.html { render :edit }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
     end
   end
 

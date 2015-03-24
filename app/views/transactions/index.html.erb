@@ -5,15 +5,30 @@
 <table>
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th>Chasier</th>
+      <th>Date</th>
+      <th>Total</th>
+      <th>Sub Total</th>
+      <th>Taxes</th>
+      <th>Tendered</th>
+      <th>Change</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
+        <td><%= transaction.id %></td>
+        <td><%= transaction.cashier_username %></td>
+        <td><%= l transaction.created_at, format: :common %></td>
+        <td>$<%= transaction.total.round(2) %></td>
+        <td>$<%= transaction.subtotal.round(2) %></td>
+        <td>$<%= transaction.tax.round(2) %></td>
+        <td>$<%= transaction.amount_given.round(2) %></td>
+        <td>$<%= transaction.change.round(2) %></td>
         <td><%= link_to 'Show', transaction %></td>
-        <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
         <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

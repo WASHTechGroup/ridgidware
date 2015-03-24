@@ -40,9 +40,11 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   #Routing for transactions
+  resources :transactions, :only => [:show, :index, :destroy]
   match '/transactions/get_totals', to: 'transactions#get_totals', via: 'post', as: 'get_totals'
   match '/transactions/get_cart', to: 'transactions#get_cart', via: 'post', as: 'get_cart'
   match '/checkout', to: 'transactions#checkout', via: 'post', as: 'checkout'
+  match '/return', to: 'transactions#return', via: 'post', as: 'return'
 
   # Reporting APIs
   match '/reports/daily', to: 'reports#daily', via: 'get', as: 'daily_report'

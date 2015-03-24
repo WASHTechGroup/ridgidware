@@ -58,15 +58,14 @@ class PosController < ApplicationController
  		@transaction = Transaction.find(params[:transaction_id])
  		@cart = Cart.find(@transaction.cart_id)
  		@parts_in_cart = @cart.parts_in_cart
- 		respond_to do |format| 
-    		format.pdf do
-        	 	render pdf: "RigidWare - Weekly - #{Time.zone.now.to_date}",
-               		   template: 'reports/daily.pdf.html',
-               		   disposition: 'attachment',
-               		   toc: { depth: 2, 
-               				  header_text: 'TEXT', 
-               				  disable_links: false }
-      		end
+ 		respond_to do |format|
+    		if @transaction
+	    		format.pdf do
+	        	 	render pdf: "RigidWare - Recipt - #{Time.zone.now.to_date}",
+	               		   template: 'pos/recipt.pdf.html',
+	               		   disposition: 'inline'
+	      	end
+      	end
 		end
  	end
 

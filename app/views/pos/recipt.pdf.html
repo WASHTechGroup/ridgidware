@@ -1,12 +1,21 @@
-<h3>Recipt</h3>
+<h1>Recipt</h1>
+<% if @transaction %>
+<h2>transaction #: <%= @transaction.id %></h2>
+<br>
+<h3>Items:</h3>
 <table>
 	<thead>
 		<tr>
-			<th>
-			</th>
+			<th>Part #</th>
+			<th>Part Description</th>
+			<th>Price per</th>
+			<th>Count</th>
+			<th>Price</th>
 		</tr>
 	</thead>
 	<tbody>
+
 		<tr></tr>
 	</tbody>
 </table>
+<%end%>
