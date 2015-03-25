@@ -118,6 +118,7 @@ function switch_cart(add, cart_id, part_id, quant, max) {
 				$("#returns .cart table #part_" + part_id + " .amount").html("<b>"+rcur+"</b>");
 				$("#transaction .cart table #part_" + part_id + " .amount").html("<b>"+ccur+"</b>");
 			});
+			get_total(cart_id);
 	// If you made a mistake and added too many
 	} else {
 			rcur = rcur + quant;
@@ -128,6 +129,7 @@ function switch_cart(add, cart_id, part_id, quant, max) {
 				$("#returns .cart table #part_" + part_id + " .amount").html("<b>"+rcur+"</b>");
 				$("#transaction .cart table #part_" + part_id + " .amount").html("<b>"+ccur+"</b>");
 			});
+			get_total(cart_id);
 	}
 	get_total(cart_id);
 }

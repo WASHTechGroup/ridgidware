@@ -1,40 +1,39 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<h1>Listing Transactions</h1>
+  <h1>Transactions</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Chasier</th>
-      <th>Date</th>
-      <th>Total</th>
-      <th>Sub Total</th>
-      <th>Taxes</th>
-      <th>Tendered</th>
-      <th>Change</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @transactions.each do |transaction| %>
+  <table class="table table-hover table-responsive table-striped">
+    <thead>
       <tr>
-        <td><%= transaction.id %></td>
-        <td><%= transaction.cashier_username %></td>
-        <td><%= l transaction.created_at, format: :common %></td>
-        <td>$<%= transaction.total.round(2) %></td>
-        <td>$<%= transaction.subtotal.round(2) %></td>
-        <td>$<%= transaction.tax.round(2) %></td>
-        <td>$<%= transaction.amount_given.round(2) %></td>
-        <td>$<%= transaction.change.round(2) %></td>
-        <td><%= link_to 'Show', transaction %></td>
-        <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>ID</th>
+        <th>Chasier</th>
+        <th>Date</th>
+        <th>Total</th>
+        <th>Sub Total</th>
+        <th>Taxes</th>
+        <th>Tendered</th>
+        <th>Change</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'New Transaction', new_transaction_path %>
+    <tbody>
+      <% @transactions.each do |transaction| %>
+        <tr>
+          <td><%= transaction.id %></td>
+          <td><%= transaction.cashier_username %></td>
+          <td><%= l transaction.created_at, format: :common %></td>
+          <td>$<%= transaction.total.round(2) %></td>
+          <td>$<%= transaction.subtotal.round(2) %></td>
+          <td>$<%= transaction.tax.round(2) %></td>
+          <td>$<%= transaction.amount_given.round(2) %></td>
+          <td>$<%= transaction.change.round(2) %></td>
+          <td><%= link_to 'Show', transaction %></td>
+          <td><%= link_to 'Recipt', recipt_path(transaction.id, format: :pdf) %></td>
+          <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

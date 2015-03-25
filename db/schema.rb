@@ -153,14 +153,14 @@ ActiveRecord::Schema.define(version: 20150324170037) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer  "cart_id",      limit: 4,                null: false
-    t.decimal  "subtotal",               precision: 10
-    t.decimal  "tax",                    precision: 10
-    t.decimal  "total",                  precision: 10
-    t.decimal  "amount_given",           precision: 10
-    t.decimal  "change",                 precision: 10
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.integer  "cart_id",      limit: 4,  null: false
+    t.float    "subtotal",     limit: 24
+    t.float    "tax",          limit: 24
+    t.float    "total",        limit: 24
+    t.float    "amount_given", limit: 24
+    t.float    "change",       limit: 24
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "user_id",      limit: 4
   end
 

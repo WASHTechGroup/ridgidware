@@ -22,11 +22,12 @@
 		</div>
 	</div>-->
 		<!-- Only show this if the user is logged in-->
+	<div class="container">
 		<% if current_user %>
 			<h2>Profile</h2>
 			<!--add in error handling eg. email and phone number-->
 			<div class="container">
-		
+
 			<%=render "users/editProfile"%>
 		<% else %>
 			<center><%=image_tag("logo.png", size: "500x500")%>

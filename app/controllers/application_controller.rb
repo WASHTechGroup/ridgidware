@@ -5,6 +5,15 @@ class ApplicationController < ActionController::Base
   helper_method :sort_column, :sort_direction
 
 
+  after_filter :flash_to_headers
+
+	def flash_to_headers
+		return unless request.xhr?
+		response.headers['X-Message'] = flash_message
+		response.headers["X-Message-Type"] = flash_type.to_s
+		flash.discard # don't want the flash to appear when you reload page
+	end
+
   private
  		def sort_column 
  			%w[part_number description price].include?(params[:sort]) ? params[:sort] : "part_number"
@@ -13,4 +22,16 @@ class ApplicationController < ActionController::Base
  		def sort_direction
  			%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc" 
  		end
+
+ 		def flash_message
+			[:error, :warning, :notice].each do |type|
+				return flash[type] unless flash[type].blank?
+			end
+		end
+
+		def flash_type
+			[:error, :warning, :notice].each do |type|
+				return type unless flash[type].blank?
+			end
+		end
 end

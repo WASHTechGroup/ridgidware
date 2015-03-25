@@ -2,7 +2,7 @@ class AdminController < ApplicationController
 	before_filter :permision, only: :index
 
 	def index
-		@parts = Part.all
+		@parts = Part.joins(:inventory).order(sort_column + " " + sort_direction)
 	end
 
 	private
@@ -19,7 +19,7 @@ class AdminController < ApplicationController
 		end
 
  		def sort_column 
- 			%w[part_number description price].include?(params[:sort]) ? params[:sort] : "part_number"
+ 			%w[part_number description price on_hand on_order available].include?(params[:sort]) ? params[:sort] : "part_number"
  		end
 
  		def sort_direction

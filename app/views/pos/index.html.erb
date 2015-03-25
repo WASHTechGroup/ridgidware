@@ -1,80 +1,82 @@
 <!--This is the HTML for the POS system-->
-<div class="screen">
-	<div class "row">
-		<!--this is the left 1/2 of the screen-->
-		<div class="col-sm-6 container" >
-			<div class="cart_partial">
-				<%= hidden_field_tag :cart_id, @cart.id %>
-				<%=render "carts/cart"%>
+<div>
+	<div class="screen">
+		<div class "row">
+			<!--this is the left 1/2 of the screen-->
+			<div class="col-sm-6 container" >
+				<div class="cart_partial">
+					<%= hidden_field_tag :cart_id, @cart.id %>
+					<%=render "carts/cart"%>
+				</div>
+				<!--display the left side of the options below cart-->
+				<div class="complete transaction">
+					<table class="finish fit" cellspacing="10">
+						<tr class="finish">
+							<!--change back to text later-->
+							<td><button class = "btn2" id="total" onclick = "get_total(<%= @cart.id %>)">Total</button></td>
+							<td class="label" id="show_total"><div class="sizing">0.00</div></td>
+						</tr>
+						<tr class="finish">
+							<td><button  class = "btn2" onclick ="calc_change()">Tendered</button></td>
+							<td><input type="text" id="tendered" value="0.00"></td>
+						</tr>
+						<tr class="finish">
+							<td class="label">Change due</td>
+							<td class="label"  id="change">0.00</td>
+						</tr>
+						<tr class="finish">
+							<td class="label">Student</td>
+							<td><input type="text" id="watiam" value=""></td>
+						</tr>
+						<tr class="finish">
+							<!--td><button class = "btn2">Print Reciept</button></td-->
+							<td><button class = "btn2" onclick="checkout(<%= @cart.id %>)">Checkout</button></td>
+						</tr>
+					</table>
+				</div>
 			</div>
-			<!--display the left side of the options below cart-->
-			<div class="complete transaction">
-				<table class="finish fit" cellspacing="10">
-					<tr class="finish">
-						<!--change back to text later-->
-						<td><button class = "btn2" id="total" onclick = "get_total(<%= @cart.id %>)">Total</button></td>
-						<td class="label" id="show_total"><div class="sizing">0.00</div></td>
-					</tr>
-					<tr class="finish">
-						<td><button  class = "btn2" onclick ="calc_change()">Tendered</button></td>
-						<td><input type="text" id="tendered" value="0.00"></td>
-					</tr>
-					<tr class="finish">
-						<td class="label">Change due</td>
-						<td class="label"  id="change">0.00</td>
-					</tr>
-					<tr class="finish">
-						<td class="label">Student</td>
-						<td><input type="text" id="watiam" value=""></td>
-					</tr>
-					<tr class="finish">
-						<td><button class = "btn2">Print Reciept</button></td>
-						<td><button class = "btn2" onclick="checkout(<%= @cart.id %>)">Checkout</button></td>
-					</tr>
-				</table>
+			<!--this is the right 1/2 of the screen-->
+			<div class="col-sm-6 container">
+				<div class ="catalog_partial">
+					<%=render "shared/catalog"%>
+				</div>
+				<br>
+				<div class ="POS_admin_buttons">
+
+					<table class="centre fit">
+						<tr>
+							<td><button class = "btn1" onclick="goto('<%= orders_path %>')">Place Order</button></td>
+							<td><button class = "btn1" onclick="goto('<%= returns_path %>')">Return</button></td>
+							<td><button class = "btn1" onclick="goto('<%= transactions_path %>')">Transac.</button></td>
+							<td><button class = "btn1">Place holder</button></td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
-		<!--this is the right 1/2 of the screen-->
-		<div class="col-sm-6 container">
-			<div class ="catalog_partial">
-				<%=render "shared/catalog"%>
-			</div>
-			<br>
-			<div class ="POS_admin_buttons">
 
-				<table class="centre fit">
-					<tr>
-						<td><button class = "btn1" onclick="goto('<%= orders_path %>')">Place Order</button></td>
-						<td><button class = "btn1" onclick="goto('<%= returns_path %>')">Return</button></td>
-						<td><button class = "btn1">Place holder</button></td>
-						<td><button class = "btn1">Place holder</button></td>
-					</tr>
-				</table>
-			</div>
+
+		<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+		            <h4 class="modal-title" id="myModalLabel">Update Count</h4>
+		            </div>
+		            <div class="modal-body">
+		                <form>
+		                	Quantity:<br>
+							<input type="text" name="quantity" id = "quantity">
+							<input type="hidden" name="part_id" id="part_id">
+							<br>
+		                </form>
+
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="add_quantity_manually(<%=@cart.id%>, quantity, part_id)">Done</button>
+		        </div>
+		    </div>
+		  </div>
 		</div>
-	</div>
-
-
-	<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-	    <div class="modal-dialog">
-	        <div class="modal-content">
-	            <div class="modal-header">
-	            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-	            <h4 class="modal-title" id="myModalLabel">Update Count</h4>
-	            </div>
-	            <div class="modal-body">
-	                <form>
-	                	Quantity:<br>
-						<input type="text" name="quantity" id = "quantity">
-						<input type="hidden" name="part_id" id="part_id">
-						<br>
-	                </form>
-
-	            </div>
-	            <div class="modal-footer">
-	                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="add_quantity_manually(<%=@cart.id%>, quantity, part_id)">Done</button>
-	        </div>
-	    </div>
-	  </div>
 	</div>
 </div>

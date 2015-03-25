@@ -1,3 +1,5 @@
+# The priority is based upon order of creation: first created -> highest priority.
+# See how all your routes lay out with "rake routes".
 Rails.application.routes.draw do
   # Orders
   resources :orders
@@ -36,8 +38,7 @@ Rails.application.routes.draw do
   #Routing for POS
   match '/pos', to: 'pos#index', via: 'get', as: 'pos'
   match '/pos/returns', to: 'pos#returns', via: 'get', as: 'returns'
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  match '/pos/recipt/:id', to: 'pos#recipt', via: 'get', as: 'recipt'
 
   #Routing for transactions
   resources :transactions, :only => [:show, :index, :destroy]

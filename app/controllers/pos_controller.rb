@@ -9,7 +9,7 @@ class PosController < ApplicationController
 		end
 		@cart = current_user.cart
 		@parts_in_cart = @cart.parts_in_cart
-		@parts = Part.onSale.order(sort_column + " " + sort_direction)
+		@parts = Part.joins(:inventory).onSale.order(sort_column + " " + sort_direction)
 	end
 
 	def returns
@@ -21,8 +21,16 @@ class PosController < ApplicationController
 		# Getting the returning cart from the session 
 		@cart_retruning = nil
 		if session[:returns_cart]
-			@cart_retruning = Cart.find(session[:returns_cart])
-			puts "Parts In Cart : #{@cart_retruning.id}"
+			@cart_retruning = Cart.find_by(id: session[:returns_cart])
+			puts @cart_retruning
+			if !@cart_retruning
+				@cart_retruning = Cart.new
+				@cart_retruning.owner = "#{current_user.username}_returns"
+				@cart_retruning.save!
+				session[:returns_cart] = @cart_retruning.id
+			else 
+				@cart_retruning = Cart.find(session[:returns_cart])
+			end
 		else
 			@cart_retruning = Cart.find_by({owner: "#{current_user.username}_returns"})
 			if !@cart_retruning 
@@ -55,17 +63,17 @@ class PosController < ApplicationController
  	end
 
  	def recipt
- 		@transaction = Transaction.find(params[:transaction_id])
+ 		@transaction = Transaction.find(params[:id])
  		@cart = Cart.find(@transaction.cart_id)
  		@parts_in_cart = @cart.parts_in_cart
  		respond_to do |format|
-    		if @transaction
-	    		format.pdf do
-	        	 	render pdf: "RigidWare - Recipt - #{Time.zone.now.to_date}",
-	               		   template: 'pos/recipt.pdf.html',
-	               		   disposition: 'inline'
-	      	end
+  		if @transaction
+    		format.pdf do
+      	 	render pdf: "RigidWare - Recipt - #{Time.zone.now.to_date}",
+             		   template: 'pos/recipt.pdf.html',
+             		   disposition: 'inline'
       	end
+    	end
 		end
  	end
 

@@ -25,8 +25,18 @@ function checkout(cart_id) {
 					change: parseFloat($("#change").text())
 				  }
 				};
-		$.post("/checkout", json).done(function() {
+		$.post("/checkout.json", json).done(function(data) {
+			var win = window.open(window.location.host + "/pos/recipt/"+data["id"]+".pdf");
 			location.reload(true);
+
+			if(win){
+				//Browser has allowed it to be opened
+				win.focus();
+			}else{
+				//Broswer has blocked it
+				alert('Please allow popups for this site');
+			}
+			show_notice("checkout successful", "success");
 		});
 	});
 }
@@ -66,5 +76,11 @@ function get_trans_cart() {
 	if (id != null) {
 		window.location="/pos/returns?transaction_id="+id;
 	}
+}
+
+function show_notice(message, type) {
+	html = "<div id='item' class='alert alert-" + type + "'>"+ message +"</div>"
+	$('#alert').append(html);
+	setTimeout( "$('#alert #item').remove();",10000);
 }
 

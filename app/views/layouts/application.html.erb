@@ -12,6 +12,10 @@
 	<!-- The header for the main site -->
 	<%= render "layouts/header" %>
 
+	<% flash.each do |name, message| %>
+		<div class="alert alert-<%=name%>"><b><%= name %></b><p><%= message %></p></div>
+	<% end %>
+
 	<div> 
 		<%= yield %>
 	</div>
