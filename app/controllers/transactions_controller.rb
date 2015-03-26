@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   protect_from_forgery except: [:get_totals,:get_cart]
+  before_filter :tier_one, only: [:index, :show, :get_totals, :get_cart]
   before_action :set_transaction, only: [:show, :destroy]
 
   # GET /transactions
@@ -54,8 +55,9 @@ class TransactionsController < ApplicationController
     current_user.save!
     respond_to do |format|
       if @transaction.save
+        flash[:success] = "Success: Checkout \##{@transaction.id} was made" 
         format.html { redirect_to :back, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, flash: { success: "" } }
+        format.json { render :show, status: :created, json: flash }
       else
         format.html { render :new }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
@@ -84,8 +86,9 @@ class TransactionsController < ApplicationController
     session[:returns_cart] = @cart_retruning.id 
     respond_to do |format|
       if @transaction.save
+        flash[:success] = "Success: Return \##{@transaction.id} was made"
         format.html { redirect_to :back, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
+        format.json { render :show, status: :created, location: @transaction, flash: flash }
       else
         format.html { render :new }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }

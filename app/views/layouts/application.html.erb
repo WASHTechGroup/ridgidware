@@ -12,9 +12,11 @@
 	<!-- The header for the main site -->
 	<%= render "layouts/header" %>
 
-	<% flash.each do |name, message| %>
-		<div class="alert alert-<%=name%>"><b><%= name %></b><p><%= message %></p></div>
-	<% end %>
+	<div id="flash">
+		<% flash.each do |name, message| %>
+			<div class="alert alert-<%=name%>" onclick="$(this).remove();"><p><%= message %></p></div>
+		<% end %>
+	</div>
 
 	<div> 
 		<%= yield %>

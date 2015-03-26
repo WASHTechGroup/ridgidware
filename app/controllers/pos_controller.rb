@@ -1,5 +1,7 @@
 class PosController < ApplicationController
 	helper_method :sort_column, :sort_direction
+	before_filter :tier_one, only: [:index, :returns, :recipt]
+
 
 	def index
 		if !current_user.cart 
@@ -67,14 +69,14 @@ class PosController < ApplicationController
  		@cart = Cart.find(@transaction.cart_id)
  		@parts_in_cart = @cart.parts_in_cart
  		respond_to do |format|
-  		if @transaction
-    		format.pdf do
-      	 	render pdf: "RigidWare - Recipt - #{Time.zone.now.to_date}",
-             		   template: 'pos/recipt.pdf.html',
-             		   disposition: 'inline'
-      	end
-    	end
-		end
+	  		if @transaction
+	    		format.pdf do
+	      	 	render pdf: "RigidWare - Recipt - #{Time.zone.now.to_date}",
+	             		   template: 'pos/recipt.pdf.html',
+	             		   disposition: 'inline'
+	      		end
+	    	end
+	    end
  	end
 
  	private
@@ -85,4 +87,16 @@ class PosController < ApplicationController
  		def sort_direction
  			%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc" 
  		end
+
+ 		def permision
+			redirect_to(root_url) unless current_user.admin? || current_user.manager? || current_user.vpfin?
+		end
+
+		def admin
+			redirect_to(root_url) unless current_user.admin?
+		end
+
+		def manager 
+			redirect_to(root_url) unless current_user.manager?
+		end
 end

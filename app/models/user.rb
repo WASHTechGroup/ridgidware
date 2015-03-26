@@ -50,6 +50,18 @@ class User < ActiveRecord::Base
     self.role == Role.find_by_name('Manager')
   end
 
+  def tier_one?
+    admin? || staff? || vpfin? || manager? || ordering_officer?
+  end
+
+  def tier_two?
+    admin? || vpfin? || ordering_officer?
+  end
+
+  def tier_three?
+    admin? || vpfin?
+  end
+
   def full_name
     "#{firstname} #{lastname}"
   end

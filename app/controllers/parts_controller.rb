@@ -1,6 +1,7 @@
 class PartsController < ApplicationController
   before_action :set_part, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
+  before_filter :tier_one, only: [:index, :edit]
 
   # GET /parts
   # GET /parts.json
@@ -38,7 +39,7 @@ class PartsController < ApplicationController
 
     respond_to do |format|
       if @part.save
-        format.html { redirect_to @part, notice: 'Part was successfully created.' }
+        format.html { redirect_to @part, flash: { sucess: 'Part was successfully created.' } }
         format.json { render :show, status: :created, location: @part }
       else
         format.html { render :new }
@@ -52,7 +53,7 @@ class PartsController < ApplicationController
   def update
     respond_to do |format|
       if @part.update(part_params)
-        format.html { redirect_to @part, notice: 'Part was successfully updated.' }
+        format.html { redirect_to @part, flash: { sucess: 'Part was successfully updated.' } }
         format.json { render :show, status: :ok, location: @part }
       else
         format.html { render :edit }
@@ -66,7 +67,7 @@ class PartsController < ApplicationController
   def destroy
     @part.destroy
     respond_to do |format|
-      format.html { redirect_to parts_url, notice: 'Part was successfully destroyed.' }
+      format.html { redirect_to parts_url, flash: { sucess: 'Part was successfully destroyed.' } }
       format.json { head :no_content }
     end
   end

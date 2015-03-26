@@ -34,4 +34,20 @@ class ApplicationController < ActionController::Base
 				return type unless flash[type].blank?
 			end
 		end
+
+		def tier_one
+			redirect_to root_url, flash: {danger: "Permision Denied"} unless current_user.tier_one?
+		end
+
+		def tier_two
+			redirect_to root_url, flash: {danger: "Permision Denied"} unless current_user.tier_two?
+		end
+
+		def tier_three
+			redirect_to root_url, flash: {danger: "Permision Denied"} unless current_user.tier_three?
+		end
+
+		def admin
+			redirect_to root_url, flash: {danger: "Permision Denied"} unless current_user.admin?
+		end
 end
