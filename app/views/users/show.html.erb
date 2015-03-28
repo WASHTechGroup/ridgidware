@@ -1,8 +1,15 @@
-<div class="row">
-	<div class="col-md-6 col-md-offset-3">
-		<h1><%= @user.username %></h1>
-		<h2><%= @user.role.name %></h2>
-		<p><%= link_to 'Edit', edit_user_path %></p>
-		<p> </p>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<h1><%= @user.username %></h1>
+			<h2><b>Position: </b><%= @user.role.name %></h2>
+			<p><b>First Name:</b> <%= @user.firstname %></p>
+			<p><b>Last Name:</b> <%= @user.lastname %></p>
+			<p><b>Email:</b> <%= @user.email %></p>
+			<p><b>Phonenumber:</b> <%= @user.phonenumber %></p>
+			<p><b>Program:</b> <%= Program.find(@user.program).name %></p>
+			<p><b>Year of Graduation:</b> <%= @user.year %></p>
+			<p><%= link_to 'Edit', edit_user_path, class: "btn btn-primary" %></p>
+		</div>
 	</div>
 </div>

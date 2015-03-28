@@ -1,53 +1,55 @@
 <% provide(:title, "Edit User") %>
 <h1>Update your Profile</h1>
 
-<div class="row">
-	<div class="col-md-6 col-md-offset-3">
-		<%= form_for @user, html: {class: "form-horizontal"} do |f| %>
-			<%= render 'shared/error_messages', object: f.object %>
-				<div class="form-group">
-					<%= f.label :firstname, :class => "control-label" %>
-					<div class="controls">
-						<%= f.text_field :firstname, :value => @user.firstname %>
-					</div>
-
-					<%= f.label :lastname, :class => "control-label" %>
-					<div class="controls">
-						<%= f.text_field :lastname, :value => @user.firstname %>
-					</div>
-
-					<%= f.label :email, :class => "control-label" %>
-					<div class="controls">
-						<%= f.text_field :email, :value => @user.email %>
-					</div>
-
-					<%= f.label :phonenumber, :class => "control-label" %>
-					<div class="controls">
-						<%= f.text_field :phonenumber, :value => @user.phonenumber %>
-					</div>
-
-					<%= f.label :program, :class => "control-label" %>
-					<div class="controls">
-						<%= f.collection_select(:program, Program.all, :id, :name) %>
-					</div>
-
-					<%= f.label :term, :class => "control-label" %>
-					<div class="controls">
-						<%= f.select(:term, options_for_select(["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"], @user.term)) %>
-					</div>
-					
-					<%= f.label :year, :class => "control-label" %>
-					<div class="controls">
-						<%= f.select(:year, options_for_select(((Time.now.year - 20)..(Time.now.year + 20)).to_a, @user.year)) %>
-					</div>
-
-					<div class="control-group" style="padding: 10px;">
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<%= form_for @user, html: {class: "form-horizontal"} do |f| %>
+				<%= render 'shared/error_messages', object: f.object %>
+					<div class="form-group">
+						<%= f.label :firstname, :class => "control-label" %>
 						<div class="controls">
-							<%= f.submit "Save Changes", :class => "btn btn-large btn-primary" %>
-							<%= link_to 'Back', @user, :class => "btn btn-large btn-danger" %>
+							<%= f.text_field :firstname, :value => @user.firstname %>
+						</div>
+
+						<%= f.label :lastname, :class => "control-label" %>
+						<div class="controls">
+							<%= f.text_field :lastname, :value => @user.firstname %>
+						</div>
+
+						<%= f.label :email, :class => "control-label" %>
+						<div class="controls">
+							<%= f.text_field :email, :value => @user.email %>
+						</div>
+
+						<%= f.label :phonenumber, :class => "control-label" %>
+						<div class="controls">
+							<%= f.text_field :phonenumber, :value => @user.phonenumber %>
+						</div>
+
+						<%= f.label :program, :class => "control-label" %>
+						<div class="controls">
+							<%= f.collection_select(:program, Program.all, :id, :name) %>
+						</div>
+
+						<%= f.label :term, :class => "control-label" %>
+						<div class="controls">
+							<%= f.select(:term, options_for_select(["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"], @user.term)) %>
+						</div>
+						
+						<%= f.label :year, :class => "control-label" %>
+						<div class="controls">
+							<%= f.select(:year, options_for_select(((Time.now.year - 20)..(Time.now.year + 20)).to_a, @user.year)) %>
+						</div>
+
+						<div class="control-group" style="padding: 10px;">
+							<div class="controls">
+								<%= f.submit "Save Changes", :class => "btn btn-large btn-primary" %>
+								<%= link_to 'Back', @user, :class => "btn btn-large btn-primary" %>
+							</div>
 						</div>
 					</div>
-				</div>
-		<% end %>
+			<% end %>
+		</div>
 	</div>
 </div>

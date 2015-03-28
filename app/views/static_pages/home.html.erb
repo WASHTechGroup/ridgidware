@@ -23,14 +23,24 @@
 	</div>-->
 		<!-- Only show this if the user is logged in-->
 	<div class="container">
-		<% if current_user %>
-			<h2>Profile</h2>
-			<!--add in error handling eg. email and phone number-->
-			<div class="container">
+		<div class="row">
+			<div class="col-sm-6">
+				<% if current_user %>
+					<h2>Profile</h2>
+					<!--add in error handling eg. email and phone number-->
+					<div class="container">
 
-			<%=render "users/editProfile"%>
-		<% else %>
-			<center><%=image_tag("logo.png", size: "500x500")%>
-				<h1>Welcome</h1></center>
-		<%end %>
+					<%=render "users/editProfile"%>
+				<% else %>
+					<center><%=image_tag("logo.png", size: "500x500")%>
+						<h1>Welcome</h1></center>
+				<%end %>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="inventory_partial">
+				<%=render "inventories/inventory"%>
+			</div>
+		</div>
 	</div>
+</div>
