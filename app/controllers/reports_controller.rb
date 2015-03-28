@@ -2,7 +2,7 @@ class ReportsController < ApplicationController
 	require 'csv'
 
 	def daily
-		@transactions = Transaction.where("created_at >= ?", Time.zone.now.end_of_day)
+		@transactions = Transaction.where("created_at >= ?", Time.zone.yesterday.end_of_day)
 		respond_to do |format| 
 			format.html
 				format.csv { send_data @transactions.to_csv }
@@ -16,14 +16,14 @@ class ReportsController < ApplicationController
 	end
 
 	def weekly
-		@transactions = Transaction.where("created_at >= ?", Time.zone.now.end_of_week)
+		@transactions = Transaction.where("created_at <= ? AND created_at >= ?", Time.zone.now.end_of_week, Time.zone.now.beginning_of_week)
 		respond_to do |format| 
 			format.html
 				format.csv { send_data @transactions.to_csv }
 				format.xls
 				format.pdf do
 						render pdf: "RigidWare - Weekly - #{Time.zone.now.to_date}",
-										 template: 'reports/daily.pdf.html',
+										 template: 'reports/weekly.pdf.html',
 										 disposition: 'attachment'
 					end
 		end

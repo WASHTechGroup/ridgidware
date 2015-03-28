@@ -1,1 +1,73 @@
-<h1>Daily Report</h1>
+<!doctype html>
+<html>
+	<head>
+	<meta charset='utf-8' />
+	<!--%= wicked_pdf_stylesheet_link_tag "pdf" %-->
+	<!--%= wicked_pdf_javascript_include_tag "number_pages" % -->
+	</head>
+	<body onload='number_pages'>
+	<h1>Weekly Report</h1>
+		<% if @transactions %>
+			<% @transactions.each do |transaction| %>
+				<div class="container">
+					<h2>transaction #: <%= transaction.id %></h2>
+					<br>
+					<h3>Items:</h3>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Part #</th>
+								<th>Part Description</th>
+								<th>Price per</th>
+								<th>Count</th>
+								<th>Price</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% cart = Cart.find(transaction.cart_id) %>
+							<% parts_in_cart = cart.parts_in_cart %>
+							<% parts_in_cart.each do |item| %>
+								<tr>
+									<% part = Part.find(item.part_id) %>
+									<td><%= part.part_number %></td>
+									<td><%= part.description %></td>
+									<td>$<%= part.price.round(2) %></td>
+									<td><%= item.quantity_requested %></td>
+									<td>$<%= (item.quantity_requested * part.price.round(2)).round(2) %></td>
+								</tr>
+							<%end%>
+						</tbody>
+					</table>
+
+					<br>
+					<table>
+						<tbody>
+							<tr>
+								<td>Sub Total:</td>
+								<td><%= transaction.subtotal %></td>
+							</tr>
+							<tr>
+								<td>Tax:</td>
+								<td><%= transaction.tax %></td>
+							</tr>
+							<tr>
+								<td>Total:</td>
+								<td><%= transaction.total %></td>
+							</tr>
+							<tr>
+								<td>Paid:</td>
+								<td><%= transaction.amount_given %></td>
+							</tr>
+							<tr>
+								<td>Change:</td>
+								<td><%= transaction.change %></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			<% end %>
+		<% else %>
+			<h2>No transactions made today</h2>
+		<%end%>
+	</body>
+</html>
