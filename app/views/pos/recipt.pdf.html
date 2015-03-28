@@ -1,12 +1,12 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset='utf-8' />
-    <!--%= wicked_pdf_stylesheet_link_tag "pdf" %-->
-    <!--%= wicked_pdf_javascript_include_tag "number_pages" % -->
-  </head>
-  <body onload='number_pages'>
-    <h1>Recipt</h1>
+	<head>
+	<meta charset='utf-8' />
+	<!--%= wicked_pdf_stylesheet_link_tag "pdf" %-->
+	<!--%= wicked_pdf_javascript_include_tag "number_pages" % -->
+	</head>
+	<body onload='number_pages'>
+	<h1>Recipt</h1>
 		<% if @transaction %>
 			<div class="container">
 				<h2>transaction #: <%= @transaction.id %></h2>
@@ -51,11 +51,6 @@
 							<td>Total:</td>
 							<td><%= @transaction.total %></td>
 						</tr>
-					</tbody>
-				</table>
-				---------------------------------------------------------------------------------
-				<table>
-					<tbody>
 						<tr>
 							<td>Paid:</td>
 							<td><%= @transaction.amount_given %></td>
@@ -68,5 +63,5 @@
 				</table>
 			</div>
 		<%end%>
-  </body>
+	</body>
 </html>

@@ -5,13 +5,13 @@ class ReportsController < ApplicationController
 		@transactions = Transaction.where("created_at >= ?", Time.zone.now.end_of_day)
 		respond_to do |format| 
 			format.html
-    		format.csv { send_data @transactions.to_csv }
-    		format.xls
-    		format.pdf do
-        	 	render pdf: "RigidWare - Daily - #{Time.zone.now.to_date}",
-               		   template: 'reports/daily.pdf.html',
-               		   disposition: 'inline'
-      		end
+				format.csv { send_data @transactions.to_csv }
+				format.xls
+				format.pdf do
+						render pdf: "RigidWare - Daily - #{Time.zone.now.to_date}",
+										 template: 'reports/daily.pdf.html',
+										 disposition: 'attachment'
+					end
 		end
 	end
 
@@ -19,16 +19,13 @@ class ReportsController < ApplicationController
 		@transactions = Transaction.where("created_at >= ?", Time.zone.now.end_of_week)
 		respond_to do |format| 
 			format.html
-    		format.csv { send_data @transactions.to_csv }
-    		format.xls
-    		format.pdf do
-        	 	render pdf: "RigidWare - Weekly - #{Time.zone.now.to_date}",
-               		   template: 'reports/daily.pdf.html',
-               		   disposition: 'inline',
-               		   toc: { depth: 2, 
-               				  header_text: 'TEXT', 
-               				  disable_links: false }
-      		end
+				format.csv { send_data @transactions.to_csv }
+				format.xls
+				format.pdf do
+						render pdf: "RigidWare - Weekly - #{Time.zone.now.to_date}",
+										 template: 'reports/daily.pdf.html',
+										 disposition: 'attachment'
+					end
 		end
 	end
 
@@ -36,16 +33,13 @@ class ReportsController < ApplicationController
 		@transactions = Transaction.where("created_at >= ?", Time.zone.now.end_of_month)
 		respond_to do |format| 
 			format.html
-    		format.csv { send_data @transactions.to_csv }
-    		format.xls
-    		format.pdf do
-        	 	render pdf: "RigidWare - Monthly - #{Time.zone.now.to_date}",
-               		   template: 'reports/daily.pdf.html',
-               		   disposition: 'inline',
-               		   toc: { depth: 2, 
-               				  header_text: 'TEXT', 
-               				  disable_links: false }
-      		end
+				format.csv { send_data @transactions.to_csv }
+				format.xls
+				format.pdf do
+						render pdf: "RigidWare - Monthly - #{Time.zone.now.to_date}",
+										 template: 'reports/daily.pdf.html',
+										 disposition: 'attachment'
+					end
 		end
 	end
 
@@ -53,16 +47,13 @@ class ReportsController < ApplicationController
 		@transactions = Transaction.where("created_at >= ?", Time.zone.now.end_of_quarter)
 		respond_to do |format| 
 			format.html
-    		format.csv { send_data @transactions.to_csv }
-    		format.xls
-    		format.pdf do
-        	 	render pdf: "RigidWare - Quarterly - #{Time.zone.now.to_date}",
-               		   template: 'reports/daily.pdf.html',
-               		   disposition: 'inline',
-               		   toc: { depth: 2, 
-               				  header_text: 'TEXT', 
-               				  disable_links: false }
-      		end
+				format.csv { send_data @transactions.to_csv }
+				format.xls
+				format.pdf do
+						render pdf: "RigidWare - Quarterly - #{Time.zone.now.to_date}",
+										 template: 'reports/daily.pdf.html',
+										 disposition: 'attachment'
+					end
 		end
 	end
 
@@ -70,13 +61,13 @@ class ReportsController < ApplicationController
 		@transactions = Transaction.where("created_at >= ?", Time.zone.now.end_of_year)
 		respond_to do |format| 
 			format.html
-    		format.csv { send_data @transactions.to_csv }
-    		format.xls
-    		format.pdf do
-        	 	render pdf: "RigidWare - Daily - #{Time.zone.now.to_date}",
-               		   template: 'reports/daily.pdf.html',
-               		   disposition: 'inline'
-      		end
+				format.csv { send_data @transactions.to_csv }
+				format.xls
+				format.pdf do
+						render pdf: "RigidWare - Daily - #{Time.zone.now.to_date}",
+										 template: 'reports/daily.pdf.html',
+										 disposition: 'attachment'
+					end
 		end
 	end
 
@@ -87,19 +78,16 @@ class ReportsController < ApplicationController
 	end
 
 	def inventory
-		@parts = Part.all
+		@inv = Inventory.all 
 		respond_to do |format| 
 			format.html
-    		format.csv { send_data @transactions.to_csv }
-    		format.xls
-    		format.pdf do
-        	 	render pdf: "RigidWare - Daily - #{Time.zone.now.to_date}",
-               		   template: 'reports/daily.pdf.html',
-               		   disposition: 'attachment',
-               		   toc: { depth: 2, 
-               				  header_text: 'TEXT', 
-               				  disable_links: false }
-      		end
+				format.csv { send_data @transactions.to_csv }
+				format.xls
+				format.pdf do
+						render pdf: "RigidWare - Inventoryu - #{Time.zone.now.to_date}",
+										 template: 'reports/inventory.pdf.html',
+										 disposition: 'attachment'
+					end
 		end
 	end
 end

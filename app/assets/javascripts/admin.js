@@ -6,3 +6,7 @@ function goto(url)
 {
 	window.location=url;
 };
+
+function get_pdf(report) {
+	$.get("/reports/" + report + ".pdf")
+}
