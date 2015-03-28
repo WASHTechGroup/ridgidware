@@ -9,8 +9,7 @@ class Part < ActiveRecord::Base
 	has_many :inventory_history
 	has_many :parts_in_order
 	has_many :orders, through: :parts_in_order
-
-	# before_create :create_inventory
+	belongs_to :category
 
 	def self.search(search)
 		if search
@@ -61,6 +60,10 @@ class Part < ActiveRecord::Base
 		record_history
 		inventory.on_hand = value
 	end
+
+	#def description=(value)
+	#	description = value
+	#end
 
 	private 
 

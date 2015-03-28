@@ -20,10 +20,9 @@ ActiveRecord::Schema.define(version: 20150324170037) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.integer  "category_id",   limit: 4
-    t.string   "category_name", limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "costings", force: :cascade do |t|
@@ -98,7 +97,7 @@ ActiveRecord::Schema.define(version: 20150324170037) do
   create_table "parts", force: :cascade do |t|
     t.string   "part_number", limit: 255,   null: false
     t.text     "description", limit: 65535
-    t.string   "category",    limit: 255
+    t.string   "category_id", limit: 255
     t.float    "price",       limit: 24
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false

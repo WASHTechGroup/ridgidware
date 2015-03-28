@@ -2,25 +2,27 @@
 	<div class="col-sm-1">
 	</div>
 	<div class="col-sm-4 container"> 
-		<div class="table-responsive"> 
-			<table class="table">
-				<tr>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>WatIAM ID</th>
-					<th>Role</th>
-					<th>Email</th>
-				</tr>
-				<% @users.each do |user| %>
-					<tr class="user_row clickable-row onhover" id="user_<%= user.username %>" data="<%= user.username %>" onclick="inputusername('<%= user.username %>');">
-						<td><%= user.firstname %></td>
-						<td><%= user.lastname %></td>
-						<td><%= user.username %></td>
-						<td><%= user.role.name %></td>
-						<td><%= user.email %></td>
-					</tr>		
-				<% end %>
-			</table>
+		<div class ="catalog_partial">
+			<div class="table-responsive"> 
+				<table class="table">
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>WatIAM ID</th>
+						<th>Role</th>
+						<th>Email</th>
+					</tr>
+					<% @users.each do |user| %>
+						<tr class="user_row clickable-row onhover" id="user_<%= user.username %>" data="<%= user.username %>" onclick="inputusername('<%= user.username %>');">
+							<td><%= user.firstname %></td>
+							<td><%= user.lastname %></td>
+							<td><%= user.username %></td>
+							<td><%= user.role.name %></td>
+							<td><%= user.email %></td>
+						</tr>		
+					<% end %>
+				</table>
+			</div>
 		</div>
 	</div>
 	<div class="col-sm-4">

@@ -1,4 +1,5 @@
 namespace :inv do
+=begin
 	task :clean => :ennvironment do
 		# Get all parts
 		parts = Part.all
@@ -23,4 +24,5 @@ namespace :inv do
 			
 		end
 	end
+=end
 end

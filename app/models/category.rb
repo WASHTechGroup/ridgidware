@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
 	has_many :parts
-	validates :category_name, presence: true
+	validates :name, presence: true
 
 end
