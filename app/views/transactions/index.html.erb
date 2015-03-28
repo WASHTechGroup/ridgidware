@@ -29,11 +29,13 @@
           <td>$<%= transaction.tax.round(2) %></td>
           <td>$<%= transaction.amount_given.round(2) %></td>
           <td>$<%= transaction.change.round(2) %></td>
-          <td><%= link_to 'Show', transaction %></td>
-          <td><%= link_to 'Recipt', recipt_path(transaction.id, format: :pdf) %></td>
-          <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Show', transaction, class: "btn btn-primary" %></td>
+          <td><%= link_to 'Recipt', recipt_path(transaction.id, format: :pdf), class: "btn btn-primary"  %></td>
+          <td><%= link_to 'Destroy', transaction, class: "btn btn-primary" , method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+
+  <button class = "btn2" onclick="goto('<%= pos_path  %>')">POS</button>
 </div>

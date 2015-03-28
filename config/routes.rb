@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   match '/remove_part', to: 'carts#remove_part', via: 'post', as: 'remove_part'
   match '/update_part', to: 'carts#update_part', via: 'post', as: 'update_part'
   match '/update_part_keep', to: 'carts#update_part_keep', via: 'post', as: 'update_part_keep'
+  match '/item_count', to: 'carts#item_count', via: 'post', as: 'item_count'
 
   # User resources and 
   devise_for :users

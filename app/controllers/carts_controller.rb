@@ -108,6 +108,16 @@ class CartsController < ApplicationController
     end
   end
 
+  def item_count
+    cart = Cart.find(params[:cart_id])
+    inCart = cart.parts_in_cart
+    len = inCart.length
+    respond_to do |format|
+      msg = { count: len }
+      format.json { render json:msg }
+    end
+  end
+
   # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy

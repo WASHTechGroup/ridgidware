@@ -55,27 +55,26 @@
 			</div>
 		</div>
 
-
 		<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
 			<div class="modal-dialog">
-		    <div class="modal-content">
-		        <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-		        <h4 class="modal-title" id="myModalLabel">Update Count</h4>
-		        </div>
-		        <div class="modal-body">
-		            <form>
-		            	Quantity:<br>
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+				<h4 class="modal-title" id="myModalLabel">Update Count</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						Quantity:<br>
 					<input type="text" name="quantity" id = "quantity">
 					<input type="hidden" name="part_id" id="part_id">
 					<br>
-		            </form>
+					</form>
 
-		        </div>
-		        <div class="modal-footer">
-		            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="add_quantity_manually(<%=@cart.id%>, quantity, part_id)">Done</button>
-			    </div>
-		    </div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" onclick="add_quantity_manually(<%=@cart.id%>, quantity, part_id)">Done</button>
+				</div>
+			</div>
 		  </div>
 		</div>
 	</div>

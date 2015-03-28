@@ -1,6 +1,11 @@
 $(document).ready(function() {
-	var id = parseInt($("input[name='cart_id']").val());
+	var id = $("input[name='cart_id']").val();
 	get_total(id);
+
+	var url = window.location.href; 
+	if (url.indexOf("#co_success") > -1) {
+		show_notice("checkout successful", "success");
+	}
 });
 
 
@@ -14,30 +19,42 @@ function get_total(cart_id){
 
 function checkout(cart_id) {
 	calc_change();
-	$.post("/transactions/get_totals.json", {cart_id: cart_id}).done(function(data){
-		json = {owner: $('#watiam').val(),
-				transaction: {
-					cart_id: parseInt(cart_id), 
-					subtotal: parseFloat(data["subtotal"]), 
-					total: parseFloat(data["total"]), 
-					tax: parseFloat(data["tax"]), 
-					amount_given: parseFloat($("#tendered").val()), 
-					change: parseFloat($("#change").text())
-				  }
-				};
-		$.post("/checkout.json", json).done(function(data) {
-			var win = window.open(window.location.host + "/pos/recipt/"+data["id"]+".pdf");
-			location.reload(true);
-
-			if(win){
-				//Browser has allowed it to be opened
-				win.focus();
-			}else{
-				//Broswer has blocked it
-				alert('Please allow popups for this site');
+	var change = parseFloat($('#change').text());
+	$.post("/item_count.json", {cart_id: cart_id}).done(function(data) {
+		if (parseInt(data["count"]) > 0) {	
+			if (change > 0) {
+				$.post("/transactions/get_totals.json", {cart_id: cart_id}).done(function(data){
+					json = {owner: $('#watiam').val(),
+							transaction: {
+								cart_id: parseInt(cart_id), 
+								subtotal: parseFloat(data["subtotal"]), 
+								total: parseFloat(data["total"]), 
+								tax: parseFloat(data["tax"]), 
+								amount_given: parseFloat($("#tendered").val()), 
+								change: parseFloat($("#change").text())
+							  }
+							};
+					$.post("/checkout.json", json).done(function(data) {
+						var newtab = window.open( '', '_blank' );
+						var url = window.location.host + "/pos";
+						if(newtab){
+							//Browser has allowed it to be opened
+							newtab.location = window.location.host + "/pos/recipt/"+data["id"]+".pdf";
+							newtab.focus();
+						}else{
+							//Broswer has blocked it
+							alert('Please allow popups for this site');
+						}
+						window.location = url + "#co_success";
+					});
+				});
+			
+			} else {
+				show_notice("The amount tendered is less than the total needed", "danger");
 			}
-			show_notice("checkout successful", "success");
-		});
+		} else {
+			show_notice("The Cart is empty", "danger");
+		}
 	});
 }
 
@@ -79,8 +96,8 @@ function get_trans_cart() {
 }
 
 function show_notice(message, type) {
-	html = "<div id='item' class='alert alert-" + type + "'>"+ message +"</div>"
-	$('#alert').append(html);
-	setTimeout( "$('#alert #item').remove();",10000);
+	html = "<div id='item' class='alert alert-" + type + "' onclick='$(this).remove();'>"+ message +"</div>"
+	$('#flash').append(html);
+	// setTimeout( "$('#alert #item').remove();",10000);
 }
 

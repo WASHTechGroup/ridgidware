@@ -18,7 +18,7 @@
 					<%= f.collection_select(:program, Program.all, :id, :name) %><br>
 					<%= f.label :term, :class => "" %>
 					<%= f.select(:term, options_for_select(["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"], @user.term)) %><br>
-					<%= f.label :year, :class => "" %>
+					<%= f.label :year, "Year of Graduation",  :class => "" %>
 					<%= f.select(:year, options_for_select(((Time.now.year - 20)..(Time.now.year + 20)).to_a, @user.year)) %><br>
 					
 
