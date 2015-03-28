@@ -1,13 +1,12 @@
+<form>
+	<b>Trasaction ID:</b>
+	<input type="text" name="transaction_id" id="transaction_id" value="<%= @transaction.id unless @transaction == nil %>">
+	<a class="btn btn-primary btn-small" onclick="get_trans_cart()">Submit</a>
+</form>
+<br>
 <div class "row">
-
 	<!--this is the left 1/2 of the screen-->
 	<div class="col-sm-6">
-		<form>
-			Trasaction ID:
-			<input type="text" name="transaction_id" id="transaction_id" value="<%= @transaction.id unless @transaction == nil %>">
-			<a class="btn-default btn-small" onclick="get_trans_cart()">Submit</a>
-		</form>
-		<br>
 		<div id="transaction" class ="cart_partial  cart">
 			<% if @transaction %>
 				<%=render "carts/return_cart", f: @parts_in_cart, add: false %>
@@ -21,15 +20,19 @@
 			<input type="hidden" name="returning_id" id="returning_id" value="<%= @cart_retruning.id unless @cart_retruning == nil %>">
 			<%=render "carts/return_cart", f: @parts_returning_cart, add: true %>
 		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-offset-7">
 		<div>
 			<table>
 				<tr>
-					<td>Amount due to customer</td>
+					<td><h3>Amount due to customer:</h3></td>
 					<td class="label" id="show_total"><div class="sizing">0.00</div></td>
 				</tr>
 			</table>
 		</div>		<div>
-			<button class = "btn" onclick="returns('<%= @cart_retruning.id %>')">Complete Return</button>
+			<button class = "btn2" onclick="returns('<%= @cart_retruning.id %>')">Complete Return</button>
 		</div>
 	</div>
 </div>

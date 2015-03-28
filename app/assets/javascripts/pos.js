@@ -59,7 +59,6 @@ function checkout(cart_id) {
 }
 
 function returns(cart_id) {
-	calc_change();
 	$.post("/transactions/get_totals.json", {cart_id: cart_id}).done(function(data){
 		json = {owner: "",
 				transaction: {
