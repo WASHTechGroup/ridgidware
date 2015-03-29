@@ -40,7 +40,7 @@ gem 'friendly_id', '~> 5.1.0'
 # Converts HTML to PDF
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
-gem "wkhtmltopdf-heroku"
+gem "wkhtmltopdf-heroku", group: :production
 #
 gem 'rails_12factor'
 
