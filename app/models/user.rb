@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   before_create :set_default_role
   before_save :set_default_email
+  before_create :set_default_confrim
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   YEAR_REGEX = /\A[1-4][A-B]\Z/
@@ -50,6 +51,10 @@ class User < ActiveRecord::Base
     self.role == Role.find_by_name('Manager')
   end
 
+  def confirmed?
+    self.confirm
+  end
+
   def tier_one?
     tier_two? || staff? || manager?
   end
@@ -70,6 +75,10 @@ class User < ActiveRecord::Base
 
     def set_default_role 
     	self.role ||= Role.find_by_name('Student') 
+    end
+
+    def set_default_confrim
+      self.confirm ||= false
     end
 
     def set_default_email

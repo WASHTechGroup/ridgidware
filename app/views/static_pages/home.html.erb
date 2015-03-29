@@ -25,18 +25,15 @@
 	
 <% if current_user %>
 	<div class="container">
-		<div class="row">
-			<div class="col-sm-6">
-				<h2>Profile</h2>
-				<!--add in error handling eg. email and phone number-->
-					<%=render "users/editProfile"%>
+		<% if current_user.confirmed? %>
+			<div class="inventory_partial">
+				<%=render "inventories/inventory"%>
 			</div>
-			<div class="col-sm-6">
-				<div class="inventory_partial">
-					<%=render "inventories/inventory"%>
-				</div>
-			</div>
-		</div>
+		<% else %>
+			<h2>Profile</h2>
+			<!--add in error handling eg. email and phone number-->
+			<%=render "users/editProfile"%>
+		<% end %>
 	</div>
 <% else %>
 	<center><%=image_tag("logo.png", size: "500x500")%>

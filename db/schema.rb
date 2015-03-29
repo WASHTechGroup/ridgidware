@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324170037) do
+ActiveRecord::Schema.define(version: 20150329043130) do
 
   create_table "carts", force: :cascade do |t|
     t.string   "owner",      limit: 255
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(version: 20150324170037) do
     t.string  "term",        limit: 255
     t.integer "year",        limit: 4
     t.integer "cart_id",     limit: 4
+    t.boolean "confirm",     limit: 1
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree

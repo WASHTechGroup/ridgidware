@@ -9,7 +9,7 @@
 			<p><b>Phonenumber:</b> <%= @user.phonenumber %></p>
 			<p><b>Program:</b> <%= Program.find(@user.program).name unless @user.program == nil %></p>
 			<p><b>Year of Graduation:</b> <%= @user.year %></p>
-			<p><%= link_to 'Edit', edit_user_path, class: "btn btn-primary" %></p>
+			<p><%= link_to 'Edit', edit_user_path, class: "" %></p>
 			<h3>Functions</h3>
 			<table>
 				<% if @user.admin? || @user.vpfin?%>
