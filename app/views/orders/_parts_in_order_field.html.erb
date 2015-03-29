@@ -1,9 +1,28 @@
-<fieldset class="fields">
-	<%= f.label :part_id, "Part \#" %>
-	<%= f.collection_select(:part_id, Part.all, :id, :part_number , {}, {class: "part_select"}) %><br>
-	<%= f.label :quant_ordered, "Ordered" %>
-	<%= f.text_field :quant_ordered %><br>
-	<%= f.label :cost %>
-	<%= f.text_field :cost %><br>
-  	<%= link_to_remove_fields "remove", f %>
+<fieldset class="fields form-horizontal ">
+	<div class="form-group">
+		<%= f.label :part_id, "Part \#", :class => "col-sm-4 control-label" %>
+		<div class="col-sm-4"> 
+			<%= f.collection_select(:part_id, Part.all, :id, :part_number , {}, {class: "part_select form-control"}) %>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :quant_ordered, "Ordered", :class => "col-sm-4 control-label" %>
+		<div class="col-sm-4"> 
+			<%= f.text_field :quant_ordered, :class => "form-control" %>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :cost, :class => "col-sm-4 control-label" %>
+		<div class="col-sm-4"> 	
+			<%= f.text_field :cost, :class => "form-control" %>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-4 col-sm-4">
+  			<%= link_to_remove_fields "Remove", f %> 
+  		</div>
+  	</div>
 </fieldset>

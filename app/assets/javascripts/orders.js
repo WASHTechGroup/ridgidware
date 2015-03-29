@@ -1,17 +1,21 @@
 // JS to remove the field
 function remove_fields(link) {
-  var o_id = $("input[name='order_id']").val();
-	var p_id = $(link).siblings('.part_select').find('option:selected').val()
-	$.post("/remove_item.json", {part_id: p_id, order_id: o_id}).done(function() {
+	var o_id = $("input[name='order_id']").val();
+	var p_id = $(link).siblings('.part_select form-control').find('option:selected').val();
+	if (o_id.length > 0) {
+		$.post("/remove_item.json", {part_id: p_id, order_id: o_id}).done(function() {
+			$(link).closest('.fields').remove();
+		});
+	} else {
 		$(link).closest('.fields').remove();
-	});
+	}
 }
 
 // JS to add the field to orders list 
 function add_fields(link) {
   var time = new Date().getTime();
   var regexp = new RegExp($(link).data('id'), 'g');
-  $(link).before($(link).data('fields').replace(regexp, time));
+  $(".part_frame").append($(link).data('fields').replace(regexp, time));
 }
 
 function remove_item(part_id, order_id) {

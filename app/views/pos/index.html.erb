@@ -3,7 +3,8 @@
 	<div class="screen">
 		<div class "row">
 			<!--this is the left 1/2 of the screen-->
-			<div class="col-sm-6 container" >
+			<div class="col-sm-6" >
+				<h1>Cart</h1>
 				<div class="cart_partial">
 					<%= hidden_field_tag :cart_id, @cart.id %>
 					<%=render "carts/cart"%>
@@ -36,7 +37,8 @@
 				</div>
 			</div>
 			<!--this is the right 1/2 of the screen-->
-			<div class="col-sm-6 container">
+			<div class="col-sm-6">
+				<h1>Inventory</h1>
 				<div class ="catalog_partial">
 					<%=render "shared/catalog"%>
 				</div>

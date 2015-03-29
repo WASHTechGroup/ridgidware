@@ -1,38 +1,74 @@
+
 <input type="hidden" name="order_id" value="<%= @order.id %>">
-<%= form_for(@order) do |f| %>
-  <% if @order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+<%= form_for @order, :html => { :class => "form-horizontal"} do |f| %>
+	<% if @order.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
 
-      <ul>
-      <% @order.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+			<ul>
+			<% @order.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
 
-  <%= f.label :order_no %>
-  <%= f.text_field :order_no %></br>
-  <%= f.label :subtotal %>
-  <%= f.text_field :subtotal %></br>
-  <%= f.label :tax %>
-  <%= f.text_field :tax %></br>
-  <%= f.label :total %>
-  <%= f.text_field :total %></br>
-  <%= f.label :po_number, "PO \#" %>
-  <%= f.text_field :po_number %></br>
-  <%= f.label :comment %>
-  <%= f.text_area :comment %></br>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<%= f.label :order_no, :class => "col-sm-4 control-label" %>
+				<div class="col-sm-4"> 
+					<%= f.text_field :order_no, :class => "form-control" %>
+				</div>
+			</div>
 
-  <%= f.label :parts_in_order %>
-  <%= f.fields_for :parts_in_order do |builder| %>
-    <%= render "parts_in_order_field", :f => builder %>
-  <% end %>
+			<div class="form-group">
+				<%= f.label :subtotal, :class => "col-sm-4 control-label" %>
+				<div class="col-sm-4"> 
+					<%= f.text_field :subtotal, :class => "form-control" %>
+				</div>
+			</div>
 
-  <%= link_to_add_fields "Add part", f, :parts_in_order %>
+			<div class="form-group">
+				<%= f.label :tax, :class => "col-sm-4 control-label" %>
+				<div class="col-sm-4"> 
+					<%= f.text_field :tax, :class => "form-control" %>
+				</div>
+			</div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+			<div class="form-group">
+				<%= f.label :total, :class => "col-sm-4 control-label" %>
+				<div class="col-sm-4"> 
+					<%= f.text_field :total, :class => "form-control" %>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<%= f.label :po_number, "PO \#", :class => "col-sm-4 control-label" %>
+				<div class="col-sm-4"> 
+					<%= f.text_field :po_number, :class => "form-control" %>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<%= f.label :comment, :class => "col-sm-4 control-label" %>
+				<div class="col-sm-4"> 
+					<%= f.text_area :comment, :class => "form-control" %>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<%= f.label :parts_in_order %>
+				<div class="parts_frame">
+					<%= f.fields_for :parts_in_order do |builder| %>
+						<%= render "parts_in_order_field", :f => builder %>
+					<% end %>
+				</div>
+				<%= link_to_add_fields "Add part", f, :parts_in_order %>
+		</div>
+	</div>
+
+	<div class="actions">
+		<%= f.submit %>
+	</div>
 <% end %>
