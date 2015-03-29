@@ -1,17 +1,22 @@
 <div class="screen">
 	<div class ="row">
 		<div class="col-sm-4">
+			<h2 class="title">Sales Reports</h2>
+		</div>
+	</div>
+	<div class ="row">
+		<div class="col-sm-4">
 			<table class="finish centered">
 					<tr>
-						<td><button class = "btn1" onclick="goto('<%= daily_report_path(format: :pdf) %>')">Day Sales</button></td>
-						<td><button class = "btn1" onclick="goto('<%= weekly_report_path(format: :pdf) %>')">Week Sales</button></td>
+						<td><button class = "btn1" onclick="goto('<%= daily_report_path(format: :pdf) %>')">Day</button></td>
+						<td><button class = "btn1" onclick="goto('<%= weekly_report_path(format: :pdf) %>')">Week</button></td>
 					</tr>	
 					<tr>
-						<td><button class = "btn1">Month Sales</button></td>
-						<td><button class = "btn1">Quarter Sales</button></td>
+						<td><button class = "btn1">Month</button></td>
+						<td><button class = "btn1">Quarter</button></td>
 					</tr>	
 					<tr>
-						<td><button class = "btn1">Annual Sales</button></td>
+						<td><button class = "btn1">Year</button></td>
 						<td><button class = "btn1">Audit</button></td>
 					</tr>	
 					<tr>
@@ -23,13 +28,13 @@
 		<div class="col-sm-2">
 			<table class="finish centered">
 				<tr>
-					<td><button class = "btn1" onclick="goto('<%= parts_path%>')">Manage Inventory</button></td>
+					<td><button class = "btn1" onclick="goto('<%= parts_path%>')">Inventory</button></td>
 				</tr>	
 				<tr>
-					<td><button class = "btn1" onclick="goto('<%= orders_path%>')">Manage Orders</button></td>
+					<td><button class = "btn1" onclick="goto('<%= orders_path%>')">Orders</button></td>
 				</tr>
 				<tr>
-					<td><button class = "btn1" onclick="goto('<%= users_path%>')">Manage Users</button></td>
+					<td><button class = "btn1" onclick="goto('<%= users_path%>')">Users</button></td>
 				</tr>
 				<tr>
 					<td><button class = "btn1" onclick="goto('<%= pos_path%>')">POS</button></td>
