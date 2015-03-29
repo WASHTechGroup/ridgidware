@@ -11,7 +11,7 @@
 		<div class = "collapse navbar-collapse navHeaderCollapse">
 			<ul class = "nav navbar-nav navbar-right">
 				<% if signed_in? %>
-					<% if current_user.admin? || current_user.manager? %>
+					<% if current_user.tier_two? %>
 						<li><%= link_to "Admin", admin_path %></li>
 					<% end %>
 					<li id="fat-menu" class="dropdown">

@@ -7,9 +7,20 @@
 			<p><b>Last Name:</b> <%= @user.lastname %></p>
 			<p><b>Email:</b> <%= @user.email %></p>
 			<p><b>Phonenumber:</b> <%= @user.phonenumber %></p>
-			<p><b>Program:</b> <%= Program.find(@user.program).name %></p>
+			<p><b>Program:</b> <%= Program.find(@user.program).name unless @user.program == nil %></p>
 			<p><b>Year of Graduation:</b> <%= @user.year %></p>
 			<p><%= link_to 'Edit', edit_user_path, class: "btn btn-primary" %></p>
+			<h3>Functions</h3>
+			<table>
+				<% if @user.admin? || @user.vpfin?%>
+					<td><button class = "btn2" onclick="goto('<%= admin_path%>')">Admin</button></td>
+				<% elsif @user.ordering_officer? %>
+					<td><button class = "btn1" onclick="goto('<%= pos_path%>')">POS</button></td>
+					<td><button class = "btn1" onclick="goto('<%= orders_path%>')">POS</button></td>
+				<% elsif @user.staff? %>
+					<td><button class = "btn2" onclick="goto('<%= pos_path%>')">POS</button></td>
+				<% end %>
+			</table>
 		</div>
 	</div>
 </div>

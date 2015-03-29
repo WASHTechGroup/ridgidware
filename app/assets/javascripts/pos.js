@@ -45,7 +45,7 @@ function checkout(cart_id) {
 							//Broswer has blocked it
 							alert('Please allow popups for this site');
 						}
-						window.location = url + "#co_success";
+						window.location =  "/pos#co_success";
 					});
 				});
 			

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	before_action :correct_user, only: [:edit, :update, :show]
-	before_action :admin_user,   only: [:index, :update_role, :remove_user]
+	before_action :tier_three,   only: [:index, :update_role, :remove_user]
 
 	def index 
 		@users = User.all
@@ -29,11 +29,15 @@ class UsersController < ApplicationController
 			role = Role.find(params[:user][:role_id])
 			user = User.friendly.find(params[:user][:username])
 			if user !=  current_user
-				if user.update_attribute(:role, role)	
-					format.html { redirect_to :back, flash: {sucess: "#{user.username} role has been updated"} }
-					current_user.save
+				if !current_user.admin? && (role.name != "Admin" || role.name != "VPFin")
+					if user.update_attribute(:role, role)	
+						format.html { redirect_to :back, flash: {sucess: "#{user.username} role has been updated"} }
+						current_user.save
+					else
+						format.html { redirect_to :back, flash: {danger: "An error occured"} }
+					end
 				else
-					format.html { redirect_to :back, flash: {danger: "An error occured"} }
+					format.html { redirect_to :back, flash: {danger: "You do not have the ability to complete this action"} }
 				end
 			else
 				format.html { redirect_to :back, flash: {danger: "You can't change your own role"} }
@@ -45,16 +49,20 @@ class UsersController < ApplicationController
 		respond_to do |format|
 			if user = User.friendly.find(params[:user][:username])
 				if user != current_user
-					if user.destroy
-						format.html { redirect_to :back, flash: {sucess:"#{params[:user][:username]} has been removed" } }
+					if !current_user.admin? && (user.role.name != "Admin" || user.role.name != "VPFin")
+						if user.destroy
+							format.html { redirect_to :back, flash: {sucess:"#{params[:user][:username]} has been removed" } }
+						else
+							format.html { redirect_to :back, flash: {danger: "An error occured"} }
+						end
 					else
-						format.html { redirect_to :back, flash: {danger: "An error occured"} }
+						format.html { redirect_to :back, flash: {danger: "You do not have the ability to complete this action"} }
 					end
-				else
+				else 
 					format.html { redirect_to :back, flash: {danger: "You can't delete yourself"} }
 				end
 			else 
-				format.html { redirect_to :back, flash: {danger: "#{params[:user][:username]} could not be found"}}
+				format.html { redirect_to :back, flash: {danger: "#{params[:user][:username]} could not be found"}}	
 			end
 		end
 	end

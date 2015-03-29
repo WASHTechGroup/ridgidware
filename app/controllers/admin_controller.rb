@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-	before_filter :tier_one, only: :index
+	before_filter :tier_three, only: :index
 
 	def index
 		@parts = Part.joins(:inventory).order(sort_column + " " + sort_direction)

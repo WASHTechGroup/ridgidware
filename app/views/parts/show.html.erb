@@ -12,7 +12,7 @@
 		</tr>
 		<tr>
 			<td><b>Category</b></td>
-			<td><%= @part.category %></td>
+			<td><%= @part.category.name %></td>
 		</tr>
 		<tr>
 			<td><b>Price</b></td>
@@ -37,6 +37,6 @@
 		</tr>
 	</table>
 
-	<%= link_to 'Edit', edit_part_path(@part) %> |
-	<%= link_to 'Back', parts_path %>
+	<%= link_to 'Edit', edit_part_path(@part), class: "btn btn-primary" %>
+	<%= link_to 'Back', parts_path, class: "btn btn-primary" %>
 </div>

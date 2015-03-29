@@ -51,11 +51,11 @@ class User < ActiveRecord::Base
   end
 
   def tier_one?
-    admin? || staff? || vpfin? || manager? || ordering_officer?
+    tier_two? || staff? || manager?
   end
 
   def tier_two?
-    admin? || vpfin? || ordering_officer?
+    tier_three? || ordering_officer?
   end
 
   def tier_three?

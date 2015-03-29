@@ -1,7 +1,7 @@
 class PartsController < ApplicationController
   before_action :set_part, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
-  before_filter :tier_one, only: [:index, :edit]
+  before_filter :tier_one, only: [:index, :edit, :new, :create, :update, :destroy]
 
   # GET /parts
   # GET /parts.json
