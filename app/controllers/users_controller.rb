@@ -29,9 +29,9 @@ class UsersController < ApplicationController
 			role = Role.find(params[:user][:role_id])
 			user = User.friendly.find(params[:user][:username])
 			if user !=  current_user
-				if !current_user.admin? && (role.name != "Admin" || role.name != "VPFin")
+				if !current_user.admin? && ( !(user.role.name.eql? "Admin") && !(user.role.name.eql? "VPFin") ) || current_user.admin?
 					if user.update_attribute(:role, role)	
-						format.html { redirect_to :back, flash: {sucess: "#{user.username} role has been updated"} }
+						format.html { redirect_to :back, flash: {success: "#{user.username} role has been updated"} }
 						current_user.save
 					else
 						format.html { redirect_to :back, flash: {danger: "An error occured"} }
@@ -49,9 +49,12 @@ class UsersController < ApplicationController
 		respond_to do |format|
 			if user = User.friendly.find(params[:user][:username])
 				if user != current_user
-					if !current_user.admin? && (user.role.name != "Admin" || user.role.name != "VPFin")
+					puts user.role.name
+					puts !(user.role.name.eql? "Admin")
+					puts !(user.role.name.eql? "VPFin")
+					if !current_user.admin? && ( !(user.role.name.eql? "Admin") && !(user.role.name.eql? "VPFin") ) || current_user.admin?
 						if user.destroy
-							format.html { redirect_to :back, flash: {sucess:"#{params[:user][:username]} has been removed" } }
+							format.html { redirect_to :back, flash: {success:"#{params[:user][:username]} has been removed" } }
 						else
 							format.html { redirect_to :back, flash: {danger: "An error occured"} }
 						end
@@ -70,12 +73,16 @@ class UsersController < ApplicationController
 	def add_user
 		respond_to do |format|
 			if @user = User.new(user_params)
-				if @user.save 
-					format.html { redirect_to :back, flash: {sucess: "#{@user.username} has been added as a #{@user.role}"} }
-					format.json { render json: @user }
+				if !current_user.admin? && ( !(@user.role.name.eql? "Admin") && !(@user.role.name.eql? "VPFin") ) || current_user.admin?
+					if @user.save 
+						format.html { redirect_to :back, flash: {success: "#{@user.username} has been added as a #{@user.role.name}"} }
+						format.json { render json: @user }
+					else
+						format.html { redirect_to :back, {danger:  "#{@user.errors.count}" } }
+					end
 				else
-					format.html { redirect_to :back, {danger:  "#{@user.errors.count}" } }
-				end
+					format.html { redirect_to :back, flash: {danger: "You do not have the ability to complete this action"} }
+				end 
 			else
 			 format.html { redirect_to :back, {danger: "An error occured" } }
 			end

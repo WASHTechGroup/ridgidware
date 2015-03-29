@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   before_create :set_default_role
   before_save :set_default_email
-  before_create :set_default_confrim
+  # before_create :set_default_confrim
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   YEAR_REGEX = /\A[1-4][A-B]\Z/

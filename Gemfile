@@ -42,7 +42,8 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem "wkhtmltopdf-heroku", group: :production
 #
-gem 'rails_12factor'
+gem 'rails_12factor', group: :production
+gem 'state_machine'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
