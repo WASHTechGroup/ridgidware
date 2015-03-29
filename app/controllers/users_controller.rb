@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
 	def update
 		if @user.update_attributes(user_params)
+			@user.update_attribute(:confirm, true)
 			flash[:success] = "Profile updated"
 			redirect_to current_user 
 		else

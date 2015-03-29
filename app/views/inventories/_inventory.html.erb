@@ -11,11 +11,11 @@
 		<!-- Itterate through the parts in the databae -->
 		<% @parts.each do |part| %>
 			<tr class = "borders fit">
-				<td id="col1"><%= link_to part.part_number, part %></td>
-				<td id="col2"><%= part.description %></td>
-				<td id="col3">$<%= part.price.round(2) %></td>
-				<td id="col4"><%= part.on_hand%></td>
-				<td id="col5"><%= part.on_order%></td>
+				<td id="c1"><%= link_to part.part_number, part %></td>
+				<td id="c2"><%= part.description %></td>
+				<td id="c3">$<%= part.price.round(2) %></td>
+				<td id="c3"><%= part.on_hand%></td>
+				<td id="c3"><%= part.on_order%></td>
 			</tr>
 		<% end %>
 	</table>

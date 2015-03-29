@@ -26,8 +26,27 @@
 <% if current_user %>
 	<div class="container">
 		<% if current_user.confirmed? %>
-			<div class="inventory_partial">
-				<%=render "inventories/inventory"%>
+			<div class="row">
+				<div class="col-sm-3">
+					<h3><%= link_to 'Edit Profile', edit_user_path(current_user), class: "" %></h3>
+					<br>
+					<h3>Functions</h3>
+					<table>
+						<% if @user.admin? || @user.vpfin?%>
+							<td><button class = "btn1" onclick="goto('<%= admin_path%>')">Admin</button></td>
+						<% elsif @user.ordering_officer? %>
+							<tr><button class = "btn1" onclick="goto('<%= pos_path%>')">POS</button></tr>
+							<tr><button class = "btn1" onclick="goto('<%= orders_path%>')">Orders</button></tr>
+						<% elsif @user.staff? %>
+							<td><button class = "btn1" onclick="goto('<%= pos_path%>')">POS</button></td>
+						<% end %>
+					</table>
+				</div>
+				<div class="col-sm-9">
+					<div class="inventory_partial">
+						<%=render "inventories/inventory"%>
+					</div>
+				</div>
 			</div>
 		<% else %>
 			<h2>Profile</h2>
