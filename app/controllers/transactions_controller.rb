@@ -56,9 +56,10 @@ class TransactionsController < ApplicationController
     current_user.save!
     respond_to do |format|
       if @transaction.save
+        msg = {id: @transaction.id, message: "Success: Checkout \##{@transaction.id} was made" }
         flash[:success] = "Success: Checkout \##{@transaction.id} was made" 
         format.html { redirect_to :back, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, json: flash }
+        format.json { render :show, status: :created, json: msg }
       else
         format.html { render :new }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }

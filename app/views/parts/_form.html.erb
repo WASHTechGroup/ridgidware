@@ -1,4 +1,4 @@
-<%= form_for(@part) do |f| %>
+<%= form_for @part, :html => { :class => "form-horizontal"}  do |f| %>
   <% if @part.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@part.errors.count, "error") %> prohibited this part from being saved:</h2>
@@ -11,21 +11,43 @@
     </div>
   <% end %>
 
-  <%= f.label :part_number, "Supplier Part Number"%>
-  <%= f.text_field :part_number, :value => @part.part_number%><br>
-  <%= f.label :description, "Part Description"%>
-  <%= f.text_field :description, :value => @part.description%><br>
-  <%= f.label :price, "Retail Price" %>
-  <%= f.text_field :price, :value => @part.price %><br>
-  <%= form_for(@part.inventory) do |s| %>
-    <%= s.label :on_hand, "Part Quantity on hand" %>
-    <%= s.text_field :on_hand, :value => @part.inventory.on_hand %>
-    <%= s.label :on_order, "Part quantity on order from supplier" %>
-    <%= s.text_field :on_order, :value => @part.inventory.on_order %>
+  <div class="form-group">
+    <%= f.label :part_number, "Supplier Part Number", :class => "col-sm-4 control-label"%>
+    <div class="col-sm-4"> 
+      <%= f.text_field :part_number, :value => @part.part_number, :class => "form-control"%>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, "Part Description", :class => "col-sm-4 control-label"%>
+    <div class="col-sm-4"> 
+      <%= f.text_field :description, :value => @part.description, :class => "form-control"%>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :price, "Retail Price", :class => "col-sm-4 control-label" %>
+    <div class="col-sm-4"> 
+      <%= f.text_field :price, :value => @part.price, :class => "form-control" %>
+    </div>
+  </div>
 
+  <%= form_for @part.inventory, :html => { :class => "form-inline"}  do |s| %>
+    <div class="form-group">
+      <%= s.label :on_hand, "Part Quantity on hand", :class => "col-sm-4 control-label" %>
+      <div class="col-sm-4"> 
+        <%= s.text_field :on_hand, :value => @part.inventory.on_hand, :class => "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= s.label :on_order, "Part quantity on order from supplier", :class => "col-sm-4 control-label" %>
+      <div class="col-sm-4"> 
+        <%= s.text_field :on_order, :value => @part.inventory.on_order, :class => "form-control" %>
+      </div>
+    </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class="actions">
+      <%= f.submit %>
+    </div>
   </div>
 <% end %>

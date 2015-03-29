@@ -35,8 +35,7 @@ function checkout(cart_id) {
 							  }
 							};
 					$.post("/checkout.json", json).done(function(data) {
-						var newtab = window.open( '', '_blank' );
-						var url = window.location.host + "/pos";
+						var newtab = window.open( (window.location.host + "/pos/recipt/"+data["id"]+".pdf") , '_blank' );
 						if(newtab){
 							//Browser has allowed it to be opened
 							newtab.location = window.location.host + "/pos/recipt/"+data["id"]+".pdf";
@@ -46,6 +45,7 @@ function checkout(cart_id) {
 							alert('Please allow popups for this site');
 						}
 						window.location =  "/pos#co_success";
+						location.reload(true)
 					});
 				});
 			
@@ -94,8 +94,16 @@ function get_trans_cart() {
 	}
 }
 
+function remove_flash(link) {
+	var url = window.location.href;
+	if (url.indexOf("#co_success") > -1) {
+		window.location =  "/pos";
+	}
+	$(link).remove();
+}
+
 function show_notice(message, type) {
-	html = "<div id='item' class='alert alert-" + type + "' onclick='$(this).remove();'>"+ message +"</div>"
+	html = "<div id='item' class='alert alert-" + type + "' onclick='remove_flash(this)'>"+ message +"</div>"
 	$('#flash').append(html);
 	// setTimeout( "$('#alert #item').remove();",10000);
 }
