@@ -8,11 +8,11 @@
 				<div>
 					<%= f.label :firstname, "First Name"%>
 					<%= f.text_field :firstname, :value => @user.firstname %><br>
-					<%= f.label :lastname, :class => "" %>
+					<%= f.label :lastname, "Last Name", :class => "" %>
 					<%= f.text_field :lastname, :value => @user.lastname %><br>
 					<%= f.label :email, :class => "" %>
 					<%= f.text_field :email, :value => @user.email %><br>
-					<%= f.label :phonenumber%>
+					<%= f.label :phonenumber, "Phone Number"%>
 					<%= f.text_field :phonenumber, :value => @user.phonenumber %><br>
 					<%= f.label :program, :class => "" %>
 					<%= f.collection_select(:program, Program.all, :id, :name) %><br>

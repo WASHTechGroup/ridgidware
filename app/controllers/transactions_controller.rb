@@ -10,6 +10,8 @@ class TransactionsController < ApplicationController
   end
 
   def show
+    @cart = @transaction.cart
+    @inCart = @cart.parts_in_cart
   end
 
   def destroy

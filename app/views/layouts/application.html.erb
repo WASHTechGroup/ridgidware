@@ -14,7 +14,9 @@
 
 	<div id="flash">
 		<% flash.each do |name, message| %>
-			<div class="alert alert-<%=name%>" onclick="$(this).remove();"><p><%= message %></p></div>
+			<% if name != "alert" %>
+				<div class="alert alert-<%=name%>" onclick="$(this).remove();"><p><%= message %></p></div>
+			<% end %>
 		<% end %>
 	</div>
 

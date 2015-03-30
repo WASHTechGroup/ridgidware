@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_filter :teir_two, only: [:show, :edit, :update, :destroy]
+  before_filter :tier_two, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
   # GET /orders.json

@@ -1,3 +1,53 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<%= link_to 'Back', transactions_path %>
+	<h1>Transaction <%= @transaction.id %></h1>
+
+	<table class="table table-hover table-responsive">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Total</th>
+				<th>Sub Total</th>
+				<th>Taxes</th>
+				<th>Tendered</th>
+				<th>Change</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><%= l @transaction.created_at, format: :common %></td>
+				<td>$<%= @transaction.total.round(2) %></td>
+				<td>$<%= @transaction.subtotal.round(2) %></td>
+				<td>$<%= @transaction.tax.round(2) %></td>
+				<td>$<%= @transaction.amount_given.round(2) %></td>
+				<td>$<%= @transaction.change.round(2) %></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>Items Transacted</h2>
+
+	<div class ="parts_frame">
+		<table class="table table-hover table-responsive table-striped">
+			<thead>
+				<tr>
+					<th>Part #</th>
+					<th>Price</th>
+					<th>Quantity</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @inCart.each do |part| %>
+					<tr>
+						<td><%= Part.find(part.part_id).part_number %></td>
+						<td><%= Part.find(part.part_id).price %></td>
+						<td><%= part.quantity_requested %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+
+
+	<%= link_to 'Back', transactions_path %>
+</div>

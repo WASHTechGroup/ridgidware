@@ -8,6 +8,7 @@ class Order < ActiveRecord::Base
 
 	after_create :fill_part_list
 	before_save :fill_part_list
+	before_save :calculate
 
 	private
 		def fill_part_list
@@ -24,5 +25,14 @@ class Order < ActiveRecord::Base
 					part.save!
 				end
 			end
+		end
+
+		def calculate
+			self.subtotal = 0
+			parts_in_order.each do |part|
+				self.subtotal = subtotal + (part.quant_ordered * part.cost)
+			end
+			self.tax = subtotal * 0.13
+			self.total = subtotal + tax
 		end
 end

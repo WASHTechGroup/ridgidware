@@ -52,8 +52,14 @@
   border: 1px solid black;
 }
 
+
 .catalog_partial{
 	height: 63vh;
+  overflow: scroll;
+}
+
+.inventory_partial{
+  height: 74vh;
   overflow: scroll;
 }
 

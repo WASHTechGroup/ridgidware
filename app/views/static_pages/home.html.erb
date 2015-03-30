@@ -28,17 +28,15 @@
 		<% if current_user.confirmed? %>
 			<div class="row">
 				<div class="col-sm-3">
-					<h3><%= link_to 'Edit Profile', edit_user_path(current_user), class: "" %></h3>
-					<br>
-					<h3>Functions</h3>
 					<table>
+						<tr><button class = "btn1" onclick="goto('<%= edit_user_path(current_user) %>')">Edit Profile</button></tr>
 						<% if @user.admin? || @user.vpfin?%>
-							<td><button class = "btn1" onclick="goto('<%= admin_path%>')">Admin</button></td>
+							<tr><button class = "btn1" onclick="goto('<%= admin_path%>')">Admin</button></tr>
 						<% elsif @user.ordering_officer? %>
 							<tr><button class = "btn1" onclick="goto('<%= pos_path%>')">POS</button></tr>
 							<tr><button class = "btn1" onclick="goto('<%= orders_path%>')">Orders</button></tr>
 						<% elsif @user.staff? %>
-							<td><button class = "btn1" onclick="goto('<%= pos_path%>')">POS</button></td>
+							<tr><button class = "btn1" onclick="goto('<%= pos_path%>')">POS</button></tr>
 						<% end %>
 					</table>
 				</div>
