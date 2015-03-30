@@ -23,7 +23,7 @@
 				<tbody>
 					<% @inv.each do |inv| %>
 						<tr>
-							<td><%= Part.find(inv).part_number %></td>
+							<td><%= Part.find(inv.part_id).part_number %></td>
 							<td><%= inv.on_hand %></td>
 							<td><%= inv.on_hold %></td>
 							<td><%= inv.on_order %></td>
