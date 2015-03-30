@@ -39,6 +39,7 @@ class PartsController < ApplicationController
 
     respond_to do |format|
       if @part.save
+        Rake::Task['scrubber:all'].invoke
         format.html { redirect_to @part, flash: { sucess: 'Part was successfully created.' } }
         format.json { render :show, status: :created, location: @part }
       else
