@@ -85,9 +85,11 @@ class Part < ActiveRecord::Base
 		end
 
 		def save_inventory
-			inventory_attributes.each do |k, v|
-				on_hand = v[:on_hand]
-				on_order = v[:on_order]
-			end
+			if inventory_attributes 
+				inventory_attributes.each do |k, v|
+					on_hand = v[:on_hand]
+					on_order = v[:on_order]
+				end
+			end 
 		end 
 end
