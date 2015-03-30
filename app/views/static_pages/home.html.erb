@@ -35,7 +35,7 @@
 						<% elsif @user.ordering_officer? %>
 							<tr><button class = "btn1" onclick="goto('<%= pos_path%>')">POS</button></tr>
 							<tr><button class = "btn1" onclick="goto('<%= orders_path%>')">Orders</button></tr>
-							<td><button class = "btn1" onclick="goto('<%= parts_path%>')">Inventory</button></td>
+							<tr><button class = "btn1" onclick="goto('<%= parts_path%>')">Parts</button></tr>
 							<tr><button class = "btn1" onclick="goto('<%= inventory_report_path(format: :pdf) %>')">Inventory</button></tr>
 						<% elsif @user.staff? %>
 							<tr><button class = "btn1" onclick="goto('<%= pos_path%>')">POS</button></tr>
