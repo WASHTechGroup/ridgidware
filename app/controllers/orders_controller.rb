@@ -28,6 +28,20 @@ class OrdersController < ApplicationController
     @orders = Order.all
   end
 
+  def print
+    @order = Order.find(params[:id])
+    @inOrder = @order.parts_in_order
+    respond_to do |format|
+        if @order
+          format.pdf do
+            render pdf: "RigidWare - Recipt #{@order.id} - #{Time.zone.now.to_date}",
+                     template: 'orders/print.pdf.html',
+                     disposition: 'attachment'
+            end
+        end
+      end
+  end
+
   # POST /remove_item.json | Removes an item from the database
   def remove_item
     part = Part.find(params[:part_id])

@@ -52,6 +52,7 @@
 		</tr>
 	</table>
 
+	<%= link_to 'Print', print_order_path(@order.id, format: :pdf) %> | 
 	<%= link_to 'Edit', edit_order_path(@order) %> |
 	<%= link_to 'Back', orders_path %>
 </div>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<style type="text/css">
+			<%= Rails.application.assets.find_asset('pdf_print.css').to_s.html_safe %>
+		</style>
+	</head>
+	<body onload='number_pages'>
+	<h1>Order</h1>
+		<% if @order %>
+			<div class="container">
+				<table>
+					<tr>
+						<td><b>Sub Total</b></td>
+						<td><%= @order.subtotal %></td>
+					</tr>
+					<tr>
+						<td><b>Tax</b></td>
+						<td><%= @order.tax %></td>
+					</tr>
+					<tr>
+						<td><b>Total</b></td>
+						<td><%= @order.total %></td>
+					</tr>
+				</table>
+				<h3><%= l @order.created_at, format: :common %></h3>
+				<h3>Items:</h3>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Part #</th>
+							<th>Cost</th>
+							<th>Quantity</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @inOrder.each do |item| %>
+							<tr>
+								<% part = Part.find(item.part_id) %>
+								<td><%= part.part_number %></td>
+								<td>$<%= item.cost %></td>
+								<td><%= item.quant_ordered %></td>
+							</tr>
+						<%end%>
+					</tbody>
+				</table>
+		<%end%>
+	</body>
+</html>

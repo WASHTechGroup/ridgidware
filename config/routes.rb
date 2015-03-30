@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   match '/recieving', to: 'orders#recieving', via: 'get', as: 'recieving'
   match '/remove_item', to: 'orders#remove_item', via: 'post', as: 'remove_item'
   match '/update_values', to: 'orders#update_values', via: 'post', as: 'update_values'
+  match '/orders/print/:id', to: 'orders#print', via: 'get', as: 'print_order'
 
   # Inventores
   resources :inventories

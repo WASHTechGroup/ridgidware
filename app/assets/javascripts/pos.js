@@ -35,15 +35,8 @@ function checkout(cart_id) {
 							  }
 							};
 					$.post("/checkout.json", json).done(function(data) {
-						var newtab = window.open( (window.location.host + "/pos/recipt/"+data["id"]+".pdf") , '_blank' );
-						if(newtab){
-							//Browser has allowed it to be opened
-							newtab.location = window.location.host + "/pos/recipt/"+data["id"]+".pdf";
-							newtab.focus();
-						}else{
-							//Broswer has blocked it
-							alert('Please allow popups for this site');
-						}
+						var url = "http://" + window.location.host + "/pos/recipt/"+data["id"]+".pdf" 
+						window.open(url)
 						window.location =  "/pos#co_success";
 						location.reload(true)
 					});

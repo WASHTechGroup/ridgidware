@@ -71,9 +71,9 @@ class PosController < ApplicationController
  		respond_to do |format|
 	  		if @transaction
 	    		format.pdf do
-	      	 	render pdf: "RigidWare - Recipt - #{Time.zone.now.to_date}",
+	      	 	render pdf: "RigidWare - Recipt #{@transaction.id} - #{Time.zone.now.to_date}",
 	             		   template: 'pos/recipt.pdf.html',
-	             		   disposition: 'inline'
+	             		   disposition: 'attachment'
 	      		end
 	    	end
 	    end
