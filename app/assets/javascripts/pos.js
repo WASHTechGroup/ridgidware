@@ -65,7 +65,7 @@ function returns(cart_id) {
 				};
 		$.post("/return", json).done(function() {
 			// location.reload(true);
-			window.location="/pos/returns";
+			window.location="/pos";
 		});
 	});
 }

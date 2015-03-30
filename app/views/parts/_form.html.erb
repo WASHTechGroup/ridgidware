@@ -30,7 +30,9 @@
     </div>
   </div>
 
-  <%= form_for @part.inventory, :html => { :class => "form-inline"}  do |s| %>
+  
+
+  <%=  f.fields_for :inventory, :html => { :class => "form-inline"}  do |s| %>
     <div class="form-group">
       <%= s.label :on_hand, "Part Quantity on hand", :class => "col-sm-4 control-label" %>
       <div class="col-sm-4"> 
@@ -43,11 +45,10 @@
         <%= s.text_field :on_order, :value => @part.inventory.on_order, :class => "form-control" %>
       </div>
     </div>
+
+    <%= f.submit %>
   <% end %>
 
-  <div class="form-group">
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-  </div>
+
+
 <% end %>

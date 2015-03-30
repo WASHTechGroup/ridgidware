@@ -39,7 +39,7 @@ class PartsController < ApplicationController
 
     respond_to do |format|
       if @part.save
-        Rake::Task['scrubber:all'].invoke
+        # Rake::Task['scrubber:all'].invoke
         format.html { redirect_to @part, flash: { sucess: 'Part was successfully created.' } }
         format.json { render :show, status: :created, location: @part }
       else
@@ -81,7 +81,7 @@ class PartsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def part_params
-      params[:part]
+      params.require(:part).permit(:part_number, :description, :price, :inventory_attributes => [:on_hand, :on_order])
     end
 
     def sort_column 

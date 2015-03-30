@@ -10,6 +10,9 @@ class Part < ActiveRecord::Base
 	has_many :parts_in_order
 	has_many :orders, through: :parts_in_order
 	belongs_to :category
+	before_save :save_inventory 
+
+	attr_accessor :inventory_attributes
 
 	def self.search(search)
 		if search
@@ -80,4 +83,11 @@ class Part < ActiveRecord::Base
 			temp.save!
 			inventory_history << temp
 		end
+
+		def save_inventory
+			inventory_attributes.each do |k, v|
+				on_hand = v[:on_hand]
+				on_order = v[:on_order]
+			end
+		end 
 end
