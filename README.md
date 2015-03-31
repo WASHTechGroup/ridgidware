@@ -1,12 +1,12 @@
 # ridgidware
-THE MOTHER FUCKING PROJECT
+RidgidWare is a prototype for a Point of Sales and Invenory Management System. The system is built in Ruby on Rails.
 
 ## Production
 https://radiant-lake-3337.herokuapp.com/
 
-## Set up
+## First Time Set up
 ```
 rake db:migrate
-rake bootstrap:load_programs
-rake bootstrap:load_roles
+rake load:all
+rake scrubber:all
 ```
