@@ -6,6 +6,7 @@ https://radiant-lake-3337.herokuapp.com/
 
 ## First Time Set up
 ```
+bundle install 
 rake db:migrate
 rake load:all
 rake scrubber:all
